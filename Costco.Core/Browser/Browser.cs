@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace LabTAF.SeleniumWebDriver
+namespace Costco.Core.Browser
 {
     public class Browser
     {
