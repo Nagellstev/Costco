@@ -1,4 +1,4 @@
-namespace Tests
+namespace Costco.Tests
 {
     public class UnitTest1
     {

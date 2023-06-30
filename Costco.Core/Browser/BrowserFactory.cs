@@ -3,7 +3,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium;
 
-namespace LabTAF.SeleniumWebDriver
+namespace Costco.Core.Browser
 {
     public static class BrowserFactory
     {
