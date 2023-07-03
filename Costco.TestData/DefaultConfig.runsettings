@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <TestRunParameters>
+    <Browser>Chrome</Browser>
+    <BrowserParameters>
+      <value>--start-maximized</value>
+    </BrowserParameters>
+    <TestDataLocation></TestDataLocation>
+  </TestRunParameters>
+ </RunSettings>
