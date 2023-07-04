@@ -7,11 +7,11 @@ namespace Costco.Core.Browser
     {
         public IWebDriver GetDriver()
         {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("--start-maximized");
+            var options = new ChromeOptions();
+            options.AddArgument("--start-maximized");
             var service = ChromeDriverService.CreateDefaultService();
-            var chromeDriver = new ChromeDriver(service, chromeOptions, TimeSpan.FromMinutes(3));
-            return chromeDriver;
+            var driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(20));
+            return driver;
         }
     }
 }

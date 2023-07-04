@@ -6,17 +6,17 @@ namespace Costco.Core.Browser
     {
         public static IWebDriver GetWebDriver(BrowserType browserType)
         {
-            IWebDriver createdWebDriver;
             switch (browserType)
             {
                 case BrowserType.Chrome:
-                    createdWebDriver = new ChromeBrowser().GetDriver();
-                    break;
+                    return new ChromeBrowser().GetDriver();
+                case BrowserType.Firefox:
+                    return new FirefoxBrowser().GetDriver();
+                case BrowserType.Edge:
+                    return new EdgeBrowser().GetDriver();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(browserType));
             }
-
-            return createdWebDriver;
         }
     }
 }
