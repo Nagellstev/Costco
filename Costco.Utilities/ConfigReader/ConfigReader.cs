@@ -12,32 +12,32 @@
             IReadStrategy strategy;
             string? path = Environment.GetEnvironmentVariable("config");
 
-            if (File.Exists(path))
+            if (!File.Exists(path))
             {
-                switch (new FileInfo(path).Extension.ToLower())
-                {
-                    case ".runsettings":
-                    case ".xml":
-                        {
-                            strategy = new XmlReadStrategy();
-                            break;
-                        }
-                    case ".json":
-                        {
-                            strategy = new JsonReadStrategy();
-                            break;
-                        }
-                    default:
-                        {
-                            throw new NotSupportedException("Unsupported config file format.");
-                        }
-                }
-
-                strategy.Target = path;
-                return strategy.Execute();
+                throw new FileNotFoundException("Config file not found.");
             }
 
-            throw new FileNotFoundException("Config file not found.");
+            switch (new FileInfo(path).Extension.ToLower())
+            {
+                case ".runsettings":
+                case ".xml":
+                    {
+                        strategy = new XmlReadStrategy();
+                        break;
+                    }
+                case ".json":
+                    {
+                        strategy = new JsonReadStrategy();
+                        break;
+                    }
+                default:
+                    {
+                        throw new NotSupportedException("Unsupported config file format.");
+                    }
+            }
+
+            strategy.Target = path;
+            return strategy.Execute();            
         }
     }
 }
