@@ -2,6 +2,7 @@
 
 namespace Costco.Utilities.ConfigReader
 {
+    [XmlRoot("TestRunParameters")]
     public class ConfigModel
     {
         [XmlElement]
