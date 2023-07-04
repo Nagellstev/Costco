@@ -5,45 +5,44 @@ namespace Costco.Core.Browser
     public class Browser
     {
         private static Browser? instance;
-        private static IWebDriver? driver;
-        public Browser()
+        private static IWebDriver? _driver;
+        public Browser(IWebDriver driver)
         {
-            DriverInitialize();
+            _driver = driver;
         }
 
         private void DriverInitialize()
         {
-            driver = BrowserFactory.GetDriver("Chrome");
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            _driver.Manage().Window.Maximize();
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         public static void ScrollToElement(IWebElement element)
         {
-            ((IJavaScriptExecutor)driver).
+            ((IJavaScriptExecutor)_driver).
                 ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
 
         public static void GoToURL(string url)
         {
-            driver.Navigate().GoToUrl(url);
+            _driver.Navigate().GoToUrl(url);
         }
 
         public static void GoToUrlIgnoreException(string url)
         {
-            driver.Navigate().GoToUrl(url);
+            _driver.Navigate().GoToUrl(url);
         }
         public static void BackIgnoreException()
         {
-            driver.Navigate().Back();
+            _driver.Navigate().Back();
         }
         public static void Refresh()
         {
-            driver.Navigate().Refresh();
+            _driver.Navigate().Refresh();
         }
         public static IWebElement FindElement(By locator)
         {
-            return driver.FindElement(locator);
+            return _driver.FindElement(locator);
         }
 
         public static IWebDriver Driver()
@@ -51,17 +50,17 @@ namespace Costco.Core.Browser
             if (instance == null)
             {
                 instance = new Browser();
-                return driver;
+                return _driver;
             }
-            return driver;
+            return _driver;
         }
 
 
 
         public static void CleanUp()
         {
-            driver.Close();
-            driver.Quit();
+            _driver.Close();
+            _driver.Quit();
             instance = null;
         }
     }
