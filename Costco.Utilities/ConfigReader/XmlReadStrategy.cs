@@ -3,27 +3,27 @@ using System.Xml.Serialization;
 
 namespace Costco.Utilities.ConfigReader
 {
-    internal class XmlReadStrategy: IReadStrategy
+    internal class XmlReadStrategy<TModel>: IReadStrategy<TModel>
     {
         public string? Target { get; set; }
         public string? TargetNode { get; set; } = "TestRunParameters";
 
-        public ConfigModel Execute()
+        public TModel Execute()
         {
             using(Stream fileStream = new FileStream(Target, FileMode.Open))
             {
                 using (XmlReader reader = XmlReader.Create(fileStream))
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
-                        if(reader.Name == TargetNode) 
+                        if (reader.Name == TargetNode)
                         {
                             XmlSerializer serializer = new(typeof(ConfigModel));
-                            return (ConfigModel)serializer.Deserialize(reader);
+                            return (TModel)serializer.Deserialize(reader);
                         }
                     }
 
-                    return null;
+                    return default(TModel);
                 }
             }
         }

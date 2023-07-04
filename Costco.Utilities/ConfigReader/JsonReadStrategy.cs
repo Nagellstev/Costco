@@ -2,13 +2,14 @@
 
 namespace Costco.Utilities.ConfigReader
 {
-    internal class JsonReadStrategy: IReadStrategy
+    internal class JsonReadStrategy<TModel>: IReadStrategy<TModel>
     {
         public string? Target { get; set; }
 
-        public ConfigModel Execute()
-        {
-            return JsonSerializer.Deserialize<ConfigModel>(File.ReadAllText(Target));
+        public TModel Execute()
+        {            
+            return JsonSerializer.Deserialize<TModel>(File.ReadAllText(Target));
+
         }
     }
 }

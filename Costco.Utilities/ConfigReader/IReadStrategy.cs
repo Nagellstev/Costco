@@ -1,8 +1,8 @@
 ﻿namespace Costco.Utilities.ConfigReader
 {
-    internal interface IReadStrategy
+    internal interface IReadStrategy<TModel>
     {
         public string? Target { get; set; }
-        public ConfigModel Execute();
+        public TModel Execute();
     }
 }
