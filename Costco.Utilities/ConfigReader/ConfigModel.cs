@@ -5,13 +5,16 @@ namespace Costco.Utilities.ConfigReader
     public class ConfigModel
     {
         [XmlElement]
-        public string Browser { get; set; }
+        public string Browser { get; init; }
 
         [XmlArray("BrowserParameters")]
         [XmlArrayItem("value")]
-        public string[] BrowserParameters { get; set; }
+        public string[] BrowserParameters { get; init; }
 
         [XmlElement]
-        public string TestDataLocation { get; set; }
+        public string BrowserTimeoutSeconds { get; init; }
+
+        [XmlElement]
+        public string TestDataLocation { get; init; }
     }
 }

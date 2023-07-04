@@ -1,5 +1,4 @@
-﻿
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.Serialization;
 
 namespace Costco.Utilities.ConfigReader
@@ -7,6 +6,7 @@ namespace Costco.Utilities.ConfigReader
     internal class XmlReadStrategy: IReadStrategy
     {
         public string? Target { get; set; }
+        public string? TargetNode { get; set; } = "TestRunParameters";
 
         public ConfigModel Execute()
         {
@@ -16,9 +16,9 @@ namespace Costco.Utilities.ConfigReader
                 {
                     while(reader.Read())
                     {
-                        if(reader.Name == "TestRunParameters") 
+                        if(reader.Name == TargetNode) 
                         {
-                            XmlSerializer serializer = new XmlSerializer(typeof(ConfigModel));
+                            XmlSerializer serializer = new(typeof(ConfigModel));
                             return (ConfigModel)serializer.Deserialize(reader);
                         }
                     }

@@ -5,6 +5,7 @@
     <BrowserParameters>
       <value>--start-maximized</value>
     </BrowserParameters>
+    <BrowserTimeoutSeconds>20</BrowserTimeoutSeconds>
     <TestDataLocation></TestDataLocation>
   </TestRunParameters>
  </RunSettings>
