@@ -9,7 +9,10 @@ namespace Costco.Utilities.Screenshotter
         public static void Init(string path)
         {
             filePath = path;
-            Directory.CreateDirectory(filePath);
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
         }
 
         public static void TakeScreenshot(IWebDriver driver)

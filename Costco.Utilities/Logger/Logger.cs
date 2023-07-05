@@ -8,7 +8,10 @@ namespace Costco.Utilities.Logger
 
         public static void Init(string loggerName, string filePath)
         {
-            Directory.CreateDirectory(filePath);
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
             logger = new LoggerConfiguration()
                 .WriteTo.File($"{filePath}/{loggerName}.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
