@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Costco.Core.Browser
+﻿namespace Costco.Core.Browser
 {
-    internal class BrowserFactory
+    public class BrowserFactory
     {
+        private static ThreadLocal<Browser> _driver;
+
+        static BrowserFactory()
+        {
+            _driver= new ThreadLocal<Browser>(() => new Browser(DriverFactory.GetWebDriver(BrowserType)));
+        }
+
+        public static Browser Browser 
+        {
+            get
+            {
+                _driver.Value = _driver.Value ??= new Browser(DriverFactory.GetWebDriver(BrowserType));
+                return _driver.Value;
+            }
+        }
+
+        public static void CleanUp()
+        {
+            _driver.Value.Quit();
+            _driver.Value = null;
+        }
     }
 }
