@@ -5,6 +5,7 @@ namespace Costco.Core.Browser
     public class Browser
     {
         private static IWebDriver? _driver;
+
         public Browser(IWebDriver driver)
         {
             _driver = driver;
@@ -25,19 +26,17 @@ namespace Costco.Core.Browser
         {
             _driver.Navigate().GoToUrl(url);
         }
-
-        public static void GoToUrl(string url)
-        {
-            _driver.Navigate().GoToUrl(url);
-        }
+        
         public static void Back()
         {
             _driver.Navigate().Back();
         }
+
         public static void Refresh()
         {
             _driver.Navigate().Refresh();
         }
+
         public static IWebElement FindElement(By locator)
         {
             return _driver.FindElement(locator);
