@@ -26,7 +26,7 @@ namespace Costco.Core.Browser
         {
             _driver.Navigate().GoToUrl(url);
         }
-        
+
         public void Back()
         {
             _driver.Navigate().Back();

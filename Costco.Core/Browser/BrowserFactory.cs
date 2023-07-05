@@ -13,8 +13,7 @@
         {
             get
             {
-                _driver.Value = _driver.Value ??= new Browser(DriverFactory.GetWebDriver(BrowserType));
-                return _driver.Value;
+                return _driver.Value ??= new Browser(DriverFactory.GetWebDriver(BrowserType));
             }
         }
 
