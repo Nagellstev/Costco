@@ -26,11 +26,11 @@ namespace Costco.Core.Browser
             _driver.Navigate().GoToUrl(url);
         }
 
-        public static void GoToUrlIgnoreException(string url)
+        public static void GoToUrl(string url)
         {
             _driver.Navigate().GoToUrl(url);
         }
-        public static void BackIgnoreException()
+        public static void Back()
         {
             _driver.Navigate().Back();
         }
