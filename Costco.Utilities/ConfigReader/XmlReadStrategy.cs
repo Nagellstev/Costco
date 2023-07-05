@@ -20,7 +20,7 @@ namespace Costco.Utilities.ConfigReader
                         {
                             XmlRootAttribute root = new();
                             root.ElementName = TargetNode;
-                            XmlSerializer serializer = new(typeof(ConfigModel), root);
+                            XmlSerializer serializer = new(typeof(TModel), root);
                             return (TModel)serializer.Deserialize(reader);
                         }
                     }
