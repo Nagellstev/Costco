@@ -2,25 +2,25 @@
 {
     public static class BrowserFactory
     {
-        private static ThreadLocal<Browser> _driver;
+        private static ThreadLocal<Browser> _browser;
 
         static BrowserFactory()
         {
-            _driver = new ThreadLocal<Browser>(() => new Browser(DriverFactory.GetWebDriver(BrowserType)));
+            _browser = new ThreadLocal<Browser>(() => new Browser(DriverFactory.GetWebDriver(BrowserType)));
         }
 
         public static Browser Browser
         {
             get
             {
-                return _driver.Value ??= new Browser(DriverFactory.GetWebDriver(BrowserType));
+                return _browser.Value ??= new Browser(DriverFactory.GetWebDriver(BrowserType));
             }
         }
 
         public static void CleanUp()
         {
-            _driver.Value.Quit();
-            _driver.Value = null;
+            _browser.Value.Quit();
+            _browser.Value = null;
         }
     }
 }
