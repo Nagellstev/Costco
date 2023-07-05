@@ -1,6 +1,5 @@
 {
+
   "Browser": "Chrome",
-  "BrowserParameters": [ "--start-maximized" ],
-  "BrowserTimeoutSeconds":  "20",
   "TestDataLocation": ""
 }
