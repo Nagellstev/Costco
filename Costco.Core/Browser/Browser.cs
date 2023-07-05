@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace Costco.Core.Browser
 {
@@ -22,29 +23,33 @@ namespace Costco.Core.Browser
                 ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
 
-        public static void GoToURL(string url)
+        public void GoToURL(string url)
         {
             _driver.Navigate().GoToUrl(url);
         }
         
-        public static void Back()
+        public void Back()
         {
             _driver.Navigate().Back();
         }
 
-        public static void Refresh()
+        public void Refresh()
         {
             _driver.Navigate().Refresh();
         }
 
-        public static IWebElement FindElement(By locator)
+        public IWebElement FindElement(By locator)
         {
             return _driver.FindElement(locator);
         }
 
-        public static void CleanUp()
+        public void Close()
         {
             _driver.Close();
+        }
+
+        public void Quit()
+        {
             _driver.Quit();
         }
     }
