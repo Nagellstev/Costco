@@ -2,7 +2,7 @@
 
 namespace Costco.Utilities.ConfigReader
 {
-    internal class JsonReadStrategy<TModel>: IReadStrategy<TModel>
+    public class JsonReadStrategy<TModel>: IReadStrategy<TModel>
     {
         public string? Target { get; set; }
 

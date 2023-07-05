@@ -1,13 +1,15 @@
 ﻿namespace Costco.Utilities.ConfigReader
 {
-    public static class FileReader<TModel>
+    public class FileReader<TModel>
     {
+        public string TargetXmlNode { get; set; } = "TestRunParameters";
+
         /// <summary>
         /// Checks location provided in path and deserializes the specified file.
-        /// Supports xml and json.
+        /// Supports xml and json. If working with xml pass the name of the desired node to TargetXmlNode property.  
         /// </summary>
         /// <returns>Contents of the specified file as TModel object.</returns>
-        public static TModel Read(string path)
+        public TModel Read(string path)
         {
             IReadStrategy<TModel> strategy;
 
@@ -22,6 +24,7 @@
                 case ".xml":
                     {
                         strategy = new XmlReadStrategy<TModel>();
+                        ((XmlReadStrategy<TModel>)strategy).TargetNode = TargetXmlNode;
                         break;
                     }
                 case ".json":

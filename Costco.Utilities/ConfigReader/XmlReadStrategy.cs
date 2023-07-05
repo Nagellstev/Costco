@@ -3,10 +3,10 @@ using System.Xml.Serialization;
 
 namespace Costco.Utilities.ConfigReader
 {
-    internal class XmlReadStrategy<TModel>: IReadStrategy<TModel>
+    public class XmlReadStrategy<TModel>: IReadStrategy<TModel>
     {
         public string? Target { get; set; }
-        public string? TargetNode { get; set; } = "TestRunParameters";
+        public string? TargetNode { get; set; }
 
         public TModel Execute()
         {
@@ -18,7 +18,9 @@ namespace Costco.Utilities.ConfigReader
                     {
                         if (reader.Name == TargetNode)
                         {
-                            XmlSerializer serializer = new(typeof(ConfigModel));
+                            XmlRootAttribute root = new();
+                            root.ElementName = TargetNode;
+                            XmlSerializer serializer = new(typeof(ConfigModel), root);
                             return (TModel)serializer.Deserialize(reader);
                         }
                     }
