@@ -1,19 +1,24 @@
-﻿namespace Costco.Core.Browser
+﻿using Costco.Utilities.FileReader;
+
+namespace Costco.Core.Browser
 {
     public static class BrowserFactory
     {
         private static ThreadLocal<Browser> _browser;
+        private static ConfigModel _model;
 
         static BrowserFactory()
         {
-            _browser = new ThreadLocal<Browser>(() => new Browser(DriverFactory.GetWebDriver(BrowserType.Chrome)));//Should take browser type from configuration. Fix it after adding congig reader
+            FileReader<ConfigModel> reader = new();
+            _model = reader.Read(Environment.GetEnvironmentVariable("Config"));
+            _browser = new ThreadLocal<Browser>(() => new Browser(DriverFactory.GetWebDriver((BrowserType)Enum.Parse(typeof(BrowserType), _model.Browser))));
         }
 
         public static Browser Browser
         {
             get
             {
-                return _browser.Value ??= new Browser(DriverFactory.GetWebDriver(BrowserType.Chrome));//Should take browser type from configuration. Fix it after adding congig reader
+                return _browser.Value ??= new Browser(DriverFactory.GetWebDriver((BrowserType)Enum.Parse(typeof(BrowserType), _model.Browser)));
             }
         }
 
