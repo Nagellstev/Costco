@@ -20,7 +20,6 @@
 
             switch (new FileInfo(path).Extension.ToLower())
             {
-                case ".runsettings":
                 case ".xml":
                     {
                         strategy = new XmlReadStrategy<TModel>();
