@@ -4,60 +4,52 @@ namespace Costco.Core.Browser
 {
     public class Browser
     {
-        private static Browser? instance;
-        private static IWebDriver? driver;
-        public Browser()
+        private static IWebDriver? _driver;
+
+        public Browser(IWebDriver driver)
         {
-            DriverInitialize();
+            _driver = driver;
         }
 
-        private void DriverInitialize()
+        public void Maximize()
         {
-            driver = BrowserFactory.GetDriver("Chrome");
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            _driver.Manage().Window.Maximize();
         }
 
         public static void ScrollToElement(IWebElement element)
         {
-            ((IJavaScriptExecutor)driver).
+            ((IJavaScriptExecutor)_driver).
                 ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
 
-        public void GoToUrl(string url)
+        public void GoToURL(string url)
         {
-            driver.Navigate().GoToUrl(url);
+            _driver.Navigate().GoToUrl(url);
         }
+
         public void Back()
         {
-            driver.Navigate().Back();
+            _driver.Navigate().Back();
         }
+
         public void Refresh()
         {
-            driver.Navigate().Refresh();
+            _driver.Navigate().Refresh();
         }
+
         public IWebElement FindElement(By locator)
         {
-            return driver.FindElement(locator);
+            return _driver.FindElement(locator);
         }
 
-        public static IWebDriver Driver()
+        public void Close()
         {
-            if (instance == null)
-            {
-                instance = new Browser();
-                return driver;
-            }
-            return driver;
+            _driver.Close();
         }
 
-
-
-        public void CleanUp()
+        public void Quit()
         {
-            driver.Close();
-            driver.Quit();
-            instance = null;
+            _driver.Quit();
         }
     }
 }
