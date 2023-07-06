@@ -5,13 +5,13 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Costco.Core", "Costco.Core\Costco.Core.csproj", "{EA6F1D83-DA16-4545-B480-803601167196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Costco.TestData", "Costco.TestData\Costco.TestData.csproj", "{05743FF1-C396-420A-9AE3-C24D08E6502E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Costco.TestData", "Costco.TestData\Costco.TestData.csproj", "{05743FF1-C396-420A-9AE3-C24D08E6502E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Costco.Tests", "Costco.Tests\Costco.Tests.csproj", "{B331B53F-89E2-42A2-9745-45B9F89E602E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Costco.Tests", "Costco.Tests\Costco.Tests.csproj", "{B331B53F-89E2-42A2-9745-45B9F89E602E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Costco.Utilities", "Costco.Utilities\Costco.Utilities.csproj", "{F1DED99B-B719-4DEA-8B32-FE1D7F393140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Costco.Utilities", "Costco.Utilities\Costco.Utilities.csproj", "{F1DED99B-B719-4DEA-8B32-FE1D7F393140}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Costco.Web", "Costco.Web\Costco.Web.csproj", "{54939078-77C7-4589-80EE-F922AECA8B5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Costco.Web", "Costco.Web\Costco.Web.csproj", "{54939078-77C7-4589-80EE-F922AECA8B5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

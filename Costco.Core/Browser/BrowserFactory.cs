@@ -1,40 +1,26 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium;
-
-namespace Costco.Core.Browser
+﻿namespace Costco.Core.Browser
 {
     public static class BrowserFactory
     {
-        private static IWebDriver? driver;
-        public static IWebDriver GetDriver(string browserName)
+        private static ThreadLocal<Browser> _browser;
+
+        static BrowserFactory()
         {
-            switch (browserName.ToUpper())
+            _browser = new ThreadLocal<Browser>(() => new Browser(DriverFactory.GetWebDriver(BrowserType.Chrome)));//Should take browser type from configuration. Fix it after adding congig reader
+        }
+
+        public static Browser Browser
+        {
+            get
             {
-                case "CHROME":
-                    {
-                        driver = new ChromeDriver();
-                        break;
-                    }
-
-                case "FIREFOX":
-                    {
-                        driver = new FirefoxDriver();
-                        break;
-                    }
-
-                case "EDGE":
-                    {
-                        driver = new EdgeDriver();
-                        break;
-                    }
-                default:
-                    {
-                        throw new Exception($"Given driver name '{browserName}' is not valid.");
-                    }
+                return _browser.Value ??= new Browser(DriverFactory.GetWebDriver(BrowserType.Chrome));//Should take browser type from configuration. Fix it after adding congig reader
             }
-            return driver;
+        }
+
+        public static void CleanUp()
+        {
+            _browser.Value.Quit();
+            _browser.Value = null;
         }
     }
 }
