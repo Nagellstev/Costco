@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Costco.Utilities.ConfigReader
+namespace Costco.Utilities.FileReader
 {
     public class JsonReadStrategy<TModel>: IReadStrategy<TModel>
     {

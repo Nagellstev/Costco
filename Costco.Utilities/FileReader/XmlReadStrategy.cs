@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 using System.Xml.Serialization;
 
-namespace Costco.Utilities.ConfigReader
+namespace Costco.Utilities.FileReader
 {
     public class XmlReadStrategy<TModel>: IReadStrategy<TModel>
     {

@@ -1,4 +1,4 @@
-﻿namespace Costco.Utilities.ConfigReader
+﻿namespace Costco.Utilities.FileReader
 {
     public class FileReader<TModel>
     {
