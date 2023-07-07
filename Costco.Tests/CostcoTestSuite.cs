@@ -1,9 +1,9 @@
-using System.Diagnostics;
-
 namespace Costco.Tests
 {
-    public class UnitTest1: IClassFixture<TestFixture>
+    public class CostcoTestSuite: IClassFixture<TestFixture>
     {
+
+
         [Fact]
         public void Test1()
         {
