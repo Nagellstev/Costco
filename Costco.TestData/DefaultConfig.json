@@ -1,0 +1,8 @@
+{
+  "Browser": "Chrome",
+  "TimeOuts": "60",
+  "ApplicationUrl": "https://www.costco.com",
+  "TestDataPath": "",
+  "ScreenshotPath": "",
+  "LoggerPath": ""
+}
