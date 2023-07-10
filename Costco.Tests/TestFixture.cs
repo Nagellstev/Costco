@@ -6,19 +6,19 @@ namespace Costco.Tests
 {
     public class TestFixture : IDisposable
     {
-        public Browser browser;
+        //shared test data goes here 
 
         public TestFixture()
         {
-            browser = BrowserFactory.Browser;
             Logger.Init(DateTime.Now.ToString("MM.dd.yyyy"), TestSettings.LoggerPath);
             Screenshotter.Init(TestSettings.ScreenshotPath);
-            browser.GoToURL(TestSettings.ApplicationUrl);
+            BrowserFactory.Browser.GoToURL(TestSettings.ApplicationUrl);
             //put a waiter here?
         }
 
         public void Dispose() 
         {
+            GC.SuppressFinalize(this);
             BrowserFactory.CleanUp();
         }
     }

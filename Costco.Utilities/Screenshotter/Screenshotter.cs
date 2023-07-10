@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Costco.Utilities.Logger;
 
 namespace Costco.Utilities.Screenshotter
 {
@@ -17,9 +18,16 @@ namespace Costco.Utilities.Screenshotter
 
         public static void TakeScreenshot(IWebDriver driver)
         {
-            DateTime dateTime = DateTime.Now;
-            var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
-            screenshot.SaveAsFile(Path.Combine(filePath, $"{GetTimeStamp(dateTime)}.jpeg"));
+            try
+            {
+                DateTime dateTime = DateTime.Now;
+                var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+                screenshot.SaveAsFile(Path.Combine(filePath, $"{GetTimeStamp(dateTime)}.jpeg"));
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.Error($"Failed to take screenshot. Exception {ex.Message}");
+            }
         }
 
         private static string GetTimeStamp(DateTime dateTime) => dateTime.ToString("yyyy-MM-dd_HH-mm-ss");
