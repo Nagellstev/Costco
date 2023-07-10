@@ -17,13 +17,13 @@ namespace Costco.Tests
         public void Test1()
         {
             try 
-            { 
+            {
                 //test goes here
             }
             catch (Exception ex)
             {
                 Logger.Error($"Test failed, exception {ex.Message}");
-                //Screenshotter.TakeScreenshot(BrowserFactory.Browser.); 
+                Screenshotter.TakeScreenshot(Browser.Driver); 
                 throw;
             }
         }
