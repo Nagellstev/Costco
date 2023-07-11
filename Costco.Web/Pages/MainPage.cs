@@ -8,6 +8,6 @@ namespace Costco.Web.Pages
     {
         public override string Url => "https://www.costco.com/";
         public Button SignInButton => new Button(By.CssSelector("#header_sign_in.myaccount"));
-        public Button AccountButton => new Button(By.CssSelector("#myaccount-react-d"));
+        public Button HiddenSignInButton => new Button(By.XPath("//a[@class='myaccount'][@style='display: none;']"));
     }
 }
