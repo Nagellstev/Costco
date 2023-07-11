@@ -1,5 +1,6 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Costco.Utilities.Logger;
 
 namespace Costco.Core.Browser
 {
@@ -12,29 +13,45 @@ namespace Costco.Core.Browser
             _driver = driver;
         }
 
+        public static IWebDriver? Driver => _driver;
+
         public void Maximize()
         {
+            Logger.Information("Window maximize");
             _driver.Manage().Window.Maximize();
         }
 
         public static void ScrollToElement(IWebElement element)
         {
+            Logger.Information("Scrolling to element");
             ((IJavaScriptExecutor)_driver).
                 ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
 
-        public void GoToURL(string url)
+        public void GoToUrl(string url)
         {
             _driver.Navigate().GoToUrl(url);
         }
 
+        public string GetUrl()
+        {
+            return _driver.Url;
+        }
+
+        public string GetText(By locator)
+        {
+            return _driver.FindElement(locator).Text;
+        }
+
         public void Back()
         {
+            Logger.Information("Navigate back");
             _driver.Navigate().Back();
         }
 
         public void Refresh()
         {
+            Logger.Information("Refresh page");
             _driver.Navigate().Refresh();
         }
 
@@ -52,11 +69,13 @@ namespace Costco.Core.Browser
 
         public void Close()
         {
+            Logger.Information("Close page");
             _driver.Close();
         }
 
         public void Quit()
         {
+            Logger.Information("Quit browser");
             _driver.Quit();
         }
     }
