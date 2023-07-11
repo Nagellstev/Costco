@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Costco.Core.Browser;
 
 namespace Costco.Web.Elements
 {
@@ -8,7 +9,7 @@ namespace Costco.Web.Elements
 
         protected BaseElement(By locator)
         {
-            //_element = BrowserFactory.Browser.FindElement(locator);
+            _element = BrowserFactory.Browser.FindElement(locator);
         }
 
         protected BaseElement(IWebElement element)
