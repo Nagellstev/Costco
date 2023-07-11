@@ -6,15 +6,13 @@ namespace Costco.Core.BasePage
 {
     public class BasePage
     {
-
-        private IWebDriver _driver;
-        public string Url { get; }
+        public virtual string Url { get; }
 
         public bool IsElementVisible(By locator)
         {
             try
             {
-                return _driver.FindElement(locator).Displayed;
+                return BrowserFactory.Browser.FindElement(locator).Displayed;
             }
             catch (NoSuchElementException)
             {
