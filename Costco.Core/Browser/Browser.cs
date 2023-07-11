@@ -12,6 +12,8 @@ namespace Costco.Core.Browser
             _driver = driver;
         }
 
+        public static IWebDriver? Driver => _driver;
+
         public void Maximize()
         {
             Logger.Information("Window maximize");
