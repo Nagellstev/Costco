@@ -1,5 +1,6 @@
-﻿using Costco.Utilities.Logger;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using Costco.Utilities.Logger;
 
 namespace Costco.Core.Browser
 {
@@ -57,6 +58,13 @@ namespace Costco.Core.Browser
         public IWebElement FindElement(By locator)
         {
             return _driver.FindElement(locator);
+        }
+
+        public WebDriverWait Waiter(int seconds) => new WebDriverWait(_driver, TimeSpan.FromSeconds(seconds));
+
+        public object ExecuteScript(string script, params object[] args)
+        {
+            return ((IJavaScriptExecutor)_driver).ExecuteScript(script, args);
         }
 
         public void Close()
