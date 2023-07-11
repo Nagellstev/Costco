@@ -1,6 +1,4 @@
-﻿using Costco.Core.Browser;
-
-namespace Costco.Utilities.Waiters
+﻿namespace Costco.Core.Browser
 {
     public static class Waiters
     {
