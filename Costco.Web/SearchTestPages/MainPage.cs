@@ -6,11 +6,12 @@ namespace Costco.Web.SearchTestPages
 {
     public class MainPage : BasePage
     {
-        public InputField SearchField => new InputField(By.Id("search-field"));
+        public By SearchFieldLocator => By.Id("search-field");
+        public InputField SearchField => new InputField(SearchFieldLocator);
 
-        public void Search(string searchText)
-        {
-            SearchField.SendKeys(searchText);
-        }
+        //public void Search(string searchText)
+        //{
+        //    SearchField.SendKeys(searchText);
+        //}
     }
 }
