@@ -1,5 +1,4 @@
-﻿using Costco.Core.BasePage;
-using Costco.Web.Elements;
+﻿using Costco.Web.Elements;
 using OpenQA.Selenium;
 
 namespace Costco.Web.Pages
