@@ -1,6 +1,4 @@
-﻿using Costco.Utilities.FileReader;
-
-namespace Costco.Core.Browser
+﻿namespace Costco.Core.Browser
 {
     public static class BrowserFactory
     {
