@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Costco.Utilities\Costco.Utilities.csproj" />
+    <ProjectReference Include="..\Costco.Web\Costco.Web.csproj" />
   </ItemGroup>
 
 </Project>
