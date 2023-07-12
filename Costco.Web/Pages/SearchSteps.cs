@@ -15,8 +15,8 @@ namespace Costco.Web.Pages
 
         public void SearchFieldInput(string input)
         {
-            mainPage.SearchField.SendKeys(input);
-            mainPage.SearchField.Submit();
+            mainPage.SearchBlock.SearchField.SendKeys(input);
+            mainPage.SearchBlock.SearchField.Submit();
         }
 
         public string ReadSearchResultsMessage()
@@ -26,7 +26,7 @@ namespace Costco.Web.Pages
 
         public void FilterByPrice0to25()
         {
-            searchResultsPage.PriceCheckBox0to25.Click();
+            searchResultsPage.FilterBlock.PriceCheckBox0to25.Click();
         }
 
         public int CheckTotalQuantity()
