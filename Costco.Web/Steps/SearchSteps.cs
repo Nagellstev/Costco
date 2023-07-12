@@ -1,15 +1,16 @@
 ﻿using System.Text.RegularExpressions;
+using Costco.Web.Pages;
 
-namespace Costco.Web.Pages
+namespace Costco.Web.Steps
 {
     public class SearchSteps
     {
         private SearchResultsPage searchResultsPage;
         private MainPage mainPage;
 
-        public SearchSteps() 
-        { 
-            mainPage = new MainPage(); 
+        public SearchSteps()
+        {
+            mainPage = new MainPage();
             searchResultsPage = new SearchResultsPage();
         }
 
