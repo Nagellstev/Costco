@@ -1,8 +1,8 @@
 ﻿namespace Costco.Utilities.FileReader
 {
-    public interface IReadStrategy<TModel>
+    public interface IReadStrategy
     {
         public string? Target { get; set; }
-        public TModel Execute();
+        public object Execute(Type returnType);
     }
 }

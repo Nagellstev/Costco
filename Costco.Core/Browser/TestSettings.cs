@@ -8,8 +8,8 @@ namespace Costco.Core.Browser
         private static ConfigModel _config;
         static TestSettings()
         {
-            FileReader<ConfigModel> reader = new();
-            _config = reader.Read(Environment.GetEnvironmentVariable("Config"));
+            FileReader reader = new();
+            _config = (ConfigModel)reader.Read(Environment.GetEnvironmentVariable("Config"), typeof(ConfigModel));
         }
 
         public static BrowserType Browser => (BrowserType)Enum.Parse(typeof(BrowserType), _config.Browser);

@@ -7,21 +7,18 @@ namespace Costco.Tests
 {
     public class TestFixture : IDisposable
     {
-        object reader;
+        public object testData;
 
         public TestFixture()
         {
             Logger.Init(DateTime.Now.ToString("MM.dd.yyyy"), TestSettings.LoggerPath);
             Screenshotter.Init(TestSettings.ScreenshotPath);
 
-            Type testDataModel = Type.GetType(TestSettings.TestDataModel);
-            Type fileReader = typeof(FileReader<>);
-            Type constructedFileReader = fileReader.MakeGenericType(testDataModel);
-            reader = Activator.CreateInstance(constructedFileReader);
-
-
-            BrowserFactory.Browser.GoToURL(TestSettings.ApplicationUrl);
-            //put a waiter here?
+            string name = $"Costco.Utilities.FileReader.Models.{TestSettings.TestDataModel}, " +  //hack
+                $"Costco.Utilities, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"; //maybe find proper assembly name later
+            FileReader reader = new();
+            testData = reader.Read(TestSettings.TestDataPath, Type.GetType(name));
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
         }
 
         public void Dispose() 

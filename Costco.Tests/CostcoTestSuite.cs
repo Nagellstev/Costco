@@ -1,6 +1,8 @@
 using Costco.Core.Browser;
+using Costco.Utilities.FileReader.Models;
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshotter;
+using Costco.Web.Pages;
 
 namespace Costco.Tests
 {

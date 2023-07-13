@@ -3,12 +3,12 @@ using System.Xml.Serialization;
 
 namespace Costco.Utilities.FileReader
 {
-    public class XmlReadStrategy<TModel>: IReadStrategy<TModel>
+    public class XmlReadStrategy: IReadStrategy
     {
         public string? Target { get; set; }
         public string? TargetNode { get; set; }
 
-        public TModel Execute()
+        public object Execute(Type returnType)
         {
             using(Stream fileStream = new FileStream(Target, FileMode.Open))
             {
@@ -20,12 +20,12 @@ namespace Costco.Utilities.FileReader
                         {
                             XmlRootAttribute root = new();
                             root.ElementName = TargetNode;
-                            XmlSerializer serializer = new(typeof(TModel), root);
-                            return (TModel)serializer.Deserialize(reader);
+                            XmlSerializer serializer = new(returnType, root);
+                            return serializer.Deserialize(reader);
                         }
                     }
 
-                    return default(TModel);
+                    return null;
                 }
             }
         }
