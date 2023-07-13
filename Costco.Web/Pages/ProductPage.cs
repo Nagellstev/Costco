@@ -20,6 +20,7 @@ namespace Costco.Web.Pages
         public By PlusStepperPath => By.Id("plusQty");
         public By AddToCartButtonPath => By.Id("add-to-cart-btn");
         public By InputErrorPath => By.Id("minQtyText-error");
+        public By ItemNumberPath => By.XPath("//*[@automation-id = 'itemNumber']");
 
         public TextBox PromotionalText => new TextBox(PromotionalTextPath);
         public InputField QuantityInput => new InputField(QuantityInputPath);
@@ -28,5 +29,12 @@ namespace Costco.Web.Pages
         public Button AddToCartButton => new Button(AddToCartButtonPath);
         public TextBox ProductError => new TextBox(ProductErrorPath);
         public TextBox InputError => new TextBox(InputErrorPath);
+        public TextBox ItemNumber => new TextBox(ItemNumberPath);
+
+        public void InputProductAmount(string amount)
+        {
+            QuantityInput.Clear();
+            QuantityInput.SendKeys(amount);
+        }
     }
 }
