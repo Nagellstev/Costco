@@ -9,10 +9,32 @@ namespace Costco.Web.Blocks
 
         public By MyWarehouseLocator = By.XPath("//button[contains(@aria-label, 'current warehouse')]");
         public By DeliveryLocationLocator = By.XPath("//button[contains(@aria-label, 'ZIP Code')]");
+        public By ZipCodeInputLocator = By.Id("//input[@id='zipCode']");
+        public By ChangeDeliveryLocationButtonLocator = By.XPath("//button[text()='Change Delivery Location']");
 
         public Button MyWarehouseButton => new(MyWarehouseLocator);
         public Button DeliveryLocationButton => new(DeliveryLocationLocator);
+        public InputField ZipCodeInput => new(ZipCodeInputLocator);
+        public Button ChangeDeliveryLocationButton => new(ChangeDeliveryLocationButtonLocator);
 
         public LocationsBlock() : base(locationsBlockLocator) { }
+
+        public void SetDeliveryLocation(string deliveryLocation)
+        {
+            DeliveryLocationButton.Click();
+            ZipCodeInput.Clear();
+            ZipCodeInput.SendKeys(deliveryLocation);
+            ChangeDeliveryLocationButton.Click();
+        }
+
+        public bool IsWarehouseSet(string warehouse)
+        {
+            return MyWarehouseButton.Text.Equals(warehouse);
+        }
+
+        public bool IsDeliveryLocationSet(string deliveryLocation)
+        {
+            return DeliveryLocationButton.Text.Equals(deliveryLocation);
+        }
     }
 }
