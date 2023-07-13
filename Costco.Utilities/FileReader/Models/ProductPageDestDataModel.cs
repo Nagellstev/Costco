@@ -2,6 +2,6 @@
 {
     internal class ProductPageDestDataModel
     {
-        public List<string> PruductPageUrl { get; init; }
+        public List<string> ProductPageUrl { get; init; }
     }
 }
