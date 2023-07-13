@@ -1,6 +1,6 @@
 ﻿namespace Costco.Utilities.FileReader.Models
 {
-    internal class ProductPageDestDataModel
+    internal class ProductPageTestDataModel
     {
         public List<string> ProductPageUrl { get; init; }
     }
