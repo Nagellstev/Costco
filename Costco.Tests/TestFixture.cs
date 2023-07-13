@@ -14,10 +14,14 @@ namespace Costco.Tests
             Logger.Init(DateTime.Now.ToString("MM.dd.yyyy"), TestSettings.LoggerPath);
             Screenshotter.Init(TestSettings.ScreenshotPath);
 
-            string name = $"Costco.Utilities.FileReader.Models.{TestSettings.TestDataModel}, " +  //hack
-                $"Costco.Utilities, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"; //maybe find proper assembly name later
-            FileReader reader = new();
-            testData = reader.Read(TestSettings.TestDataPath, Type.GetType(name));
+            if (TestSettings.TestDataPath != null && TestSettings.TestDataPath != string.Empty)
+            {
+                string assemblyName = $"Costco.Utilities.FileReader.Models.{TestSettings.TestDataModel}, " +  //hack
+                    $"Costco.Utilities, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"; //maybe find proper assembly name later
+                FileReader reader = new();
+                testData = reader.Read(TestSettings.TestDataPath, Type.GetType(assemblyName));
+            }
+
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
         }
 
