@@ -7,14 +7,19 @@ namespace Costco.Tests
 {
     public class TestFixture : IDisposable
     {
-        //TestData testData;
+        object reader;
 
         public TestFixture()
         {
             Logger.Init(DateTime.Now.ToString("MM.dd.yyyy"), TestSettings.LoggerPath);
             Screenshotter.Init(TestSettings.ScreenshotPath);
-            //FileReader<TestData> reader = new();
-            //testData = reader<TestData>.Read(TestSettings.TestDataPath);
+
+            Type testDataModel = Type.GetType(TestSettings.TestDataModel);
+            Type fileReader = typeof(FileReader<>);
+            Type constructedFileReader = fileReader.MakeGenericType(testDataModel);
+            reader = Activator.CreateInstance(constructedFileReader);
+
+
             BrowserFactory.Browser.GoToURL(TestSettings.ApplicationUrl);
             //put a waiter here?
         }

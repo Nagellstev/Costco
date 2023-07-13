@@ -15,6 +15,7 @@ namespace Costco.Core.Browser
         public static int TimeOuts => int.Parse(_config.TimeOuts);
         public static string ApplicationUrl => _config.ApplicationUrl;
         public static string TestDataPath => _config.TestDataPath;
+        public static string TestDataModel => _config.TestDataModel;
         public static string ScreenshotPath => _config.ScreenshotPath;
         public static string LoggerPath => _config.LoggerPath;
 
