@@ -8,14 +8,15 @@ namespace Costco.Core.Browser
         private static ConfigModel _config;
         static TestSettings()
         {
-            FileReader<ConfigModel> reader = new();
-            _config = reader.Read(Environment.GetEnvironmentVariable("Config"));
+            FileReader reader = new();
+            _config = (ConfigModel)reader.Read(Environment.GetEnvironmentVariable("Config"), typeof(ConfigModel));
         }
 
         public static BrowserType Browser => (BrowserType)Enum.Parse(typeof(BrowserType), _config.Browser);
         public static int TimeOuts => int.Parse(_config.TimeOuts);
         public static string ApplicationUrl => _config.ApplicationUrl;
         public static string TestDataPath => _config.TestDataPath;
+        public static string TestDataModel => _config.TestDataModel;
         public static string ScreenshotPath => _config.ScreenshotPath;
         public static string LoggerPath => _config.LoggerPath;
 

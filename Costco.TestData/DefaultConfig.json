@@ -3,6 +3,7 @@
   "TimeOuts": "60",
   "ApplicationUrl": "https://www.costco.com",
   "TestDataPath": "",
-  "ScreenshotPath": "",
-  "LoggerPath": ""
+  "TestDataModel": "",
+  "ScreenshotPath": "logs\\screenshots\\",
+  "LoggerPath": "logs\\"
 }

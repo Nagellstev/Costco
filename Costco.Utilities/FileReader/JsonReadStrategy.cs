@@ -2,13 +2,13 @@
 
 namespace Costco.Utilities.FileReader
 {
-    public class JsonReadStrategy<TModel>: IReadStrategy<TModel>
+    public class JsonReadStrategy: IReadStrategy
     {
         public string? Target { get; set; }
 
-        public TModel Execute()
+        public object Execute(Type returnType)
         {            
-            return JsonSerializer.Deserialize<TModel>(File.ReadAllText(Target));
+            return JsonSerializer.Deserialize(File.ReadAllText(Target), returnType);
 
         }
     }

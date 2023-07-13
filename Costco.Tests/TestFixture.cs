@@ -1,0 +1,30 @@
+﻿using Costco.Core.Browser;
+using Costco.Utilities.FileReader;
+using Costco.Utilities.Logger;
+using Costco.Utilities.Screenshotter;
+
+namespace Costco.Tests
+{
+    public class TestFixture : IDisposable
+    {
+        public object testData;
+
+        public TestFixture()
+        {
+            Logger.Init(DateTime.Now.ToString("MM.dd.yyyy"), TestSettings.LoggerPath);
+            Screenshotter.Init(TestSettings.ScreenshotPath);
+
+            string name = $"Costco.Utilities.FileReader.Models.{TestSettings.TestDataModel}, " +  //hack
+                $"Costco.Utilities, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"; //maybe find proper assembly name later
+            FileReader reader = new();
+            testData = reader.Read(TestSettings.TestDataPath, Type.GetType(name));
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
+        }
+
+        public void Dispose() 
+        {
+            GC.SuppressFinalize(this);
+            BrowserFactory.CleanUp();
+        }
+    }
+}
