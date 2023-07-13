@@ -12,5 +12,13 @@ namespace Costco.Web.Pages
         public Button SignInButton => new Button(SignInButtonLocator);
         public Button DisabledSignInButton => new Button(DisabledSignInButtonLocator);
         public SearchBlock SearchBlock => new SearchBlock();
+
+        #region Search Tests Steps
+        public void SearchFieldInput(string input)
+        {
+            SearchBlock.SearchField.SendKeys(input);
+            SearchBlock.SearchField.Submit();
+        }
+        #endregion
     }
 }
