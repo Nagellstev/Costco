@@ -1,3 +1,5 @@
+using Costco.Web.Pages;
+
 namespace Costco.Tests
 {
     public class UnitTest1
@@ -5,7 +7,6 @@ namespace Costco.Tests
         [Fact]
         public void Test1()
         {
-
         }
     }
 }

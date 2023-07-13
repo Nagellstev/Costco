@@ -1,4 +1,5 @@
-﻿using Costco.Web.Elements;
+﻿using Costco.Web.Blocks;
+using Costco.Web.Elements;
 using OpenQA.Selenium;
 
 namespace Costco.Web.Pages
@@ -11,6 +12,15 @@ namespace Costco.Web.Pages
         public By DisabledSignInButtonLocator = By.XPath("//a[@class='myaccount'][@style='display: none;']");
         public Button SignInButton => new Button(SignInButtonLocator);
         public Button DisabledSignInButton => new Button(DisabledSignInButtonLocator);
+        public SearchBlock SearchBlock => new SearchBlock();
+
+        #region Search Tests Steps
+        public void SearchFieldInput(string input)
+        {
+            SearchBlock.SearchField.SendKeys(input);
+            SearchBlock.SearchField.Submit();
+        }
+        #endregion
 
         public void NavigateToLoginPage()
         {
