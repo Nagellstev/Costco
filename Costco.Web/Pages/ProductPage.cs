@@ -5,6 +5,14 @@ namespace Costco.Web.Pages
 {
     public class ProductPage: BasePage
     {
+        private string url;
+        public override string Url => url;
+
+        public ProductPage(string url)
+        {
+             this.url = url;
+        }
+
         public By PromotionalTextPath => By.CssSelector(".marketing-container > p.PromotionalText");
         public By QuantityInputPath => By.CssSelector(".quantity-selector-v2 input");
         public By ProductErrorPath => By.CssSelector(".product-error");
