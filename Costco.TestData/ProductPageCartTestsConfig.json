@@ -1,0 +1,9 @@
+{
+  "Browser": "Chrome",
+  "TimeOuts": "60",
+  "ApplicationUrl": "https://www.costco.com",
+  "TestDataPath": "C:\\epam-at-lab-2023cw36-dotnet\\Costco.TestData\\ProductPageTestData.json",
+  "TestDataModel": "ProductPageTestDataModel",
+  "ScreenshotPath": "logs\\screenshots\\",
+  "LoggerPath": "logs\\"
+}
