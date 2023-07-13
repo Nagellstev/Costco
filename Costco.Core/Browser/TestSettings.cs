@@ -1,4 +1,5 @@
 ﻿using Costco.Utilities.FileReader;
+using Costco.Utilities.FileReader.Models;
 
 namespace Costco.Core.Browser
 {
