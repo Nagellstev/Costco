@@ -34,7 +34,7 @@ namespace Costco.Tests
             if(theExceptionThrownByTest!= null) 
             {
                 Logger.Error($"Test '{testDisplayName}' failed, exception {theExceptionThrownByTest}");
-                Screenshoter.TakeScreenshot(Browser.Driver);
+                Screenshoter.TakeScreenshot(Browser.Driver, testDisplayName);
             }
             GC.SuppressFinalize(this);
             BrowserFactory.CleanUp();
