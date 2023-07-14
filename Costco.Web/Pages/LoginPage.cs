@@ -6,6 +6,7 @@ namespace Costco.Web.Pages
 {
     public class LoginPage : BasePage
     {
+        public override string? Url => "https://www.costco.com/LogonForm";
         public By UsernameInputFieldLocator = By.CssSelector("#signInName");
         public By PasswordInputFieldLocator = By.XPath("//input[@id='password']");
         public By LoginButtonLocator = By.XPath("//button[@type='submit']");
@@ -24,6 +25,11 @@ namespace Costco.Web.Pages
             PasswordInputField.SendKeys(password);
             LoginButton.Click();
             Waiters.WaitForPageLoad();
+        }
+
+        public void GoToPage()
+        {
+            BrowserFactory.Browser.GoToUrl(Url);
         }
 
         public bool VerifyPasswordIsRequiredErrorIsDisplayed()

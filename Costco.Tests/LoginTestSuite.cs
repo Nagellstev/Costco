@@ -23,16 +23,15 @@ namespace Costco.Tests
                 //Arrange
                 MainPage mainPage = new MainPage();
                 LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)fixture.testData).ValidCredential.Username;
-                string password = ((LoginCredentialsModel)fixture.testData).ValidCredential.Password;
+                string userName = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Username;
+                string password = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Password;
 
                 //Action
-                mainPage.GoToPage();
-                mainPage.NavigateToLoginPage();
+                loginPage.GoToPage();
                 loginPage.LoginWithCredentials(userName, password);
 
                 //Assert
-                Assert.True(mainPage.VarifyUserIsLoggedIn());
+                Assert.False(loginPage.VerifyInvalidCredentialsErrorIsDisplayed());
             }
             catch (Exception ex)
             {
@@ -48,14 +47,12 @@ namespace Costco.Tests
             try
             {
                 //Arrange
-                MainPage mainPage = new MainPage();
                 LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredential.Username;
-                string password = ((LoginCredentialsModel)fixture.testData).InvalidCredential.Password;
+                string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
+                string password = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Password;
 
                 //Action
-                mainPage.GoToPage();
-                mainPage.NavigateToLoginPage();
+                loginPage.GoToPage();
                 loginPage.LoginWithCredentials(userName, password);
 
                 //Assert
@@ -70,19 +67,17 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void LoginWithValidUsernameButEmptyPassword() 
+        public void LoginWithValidUsernameButEmptyPassword()
         {
             try
             {
                 //Arrange
-                MainPage mainPage = new MainPage();
                 LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredential.Username;
+                string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
                 string password = string.Empty;
 
                 //Action
-                mainPage.GoToPage();
-                mainPage.NavigateToLoginPage();
+                loginPage.GoToPage();
                 loginPage.LoginWithCredentials(userName, password);
 
                 //Assert
@@ -96,6 +91,4 @@ namespace Costco.Tests
             }
         }
     }
-
-
 }

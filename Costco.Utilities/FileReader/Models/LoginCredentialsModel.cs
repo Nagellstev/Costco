@@ -2,8 +2,9 @@
 {
     public class LoginCredentialsModel
     {
-            public ValidCredentials ValidCredential { get; set; }
-            public InvalidCredentials InvalidCredential { get; set; }
+        public ValidCredentials ValidCredentials { get; set; }
+        public InvalidCredentials InvalidCredentials { get; set; }
+    }
 
         public class InvalidCredentials
         {
@@ -17,4 +18,4 @@
             public string Password { get; set; }
         }
     }
-}
+
