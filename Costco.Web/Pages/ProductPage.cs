@@ -15,11 +15,11 @@ namespace Costco.Web.Pages
 
         public By PromotionalTextPath => By.CssSelector(".marketing-container > p.PromotionalText");
         public By QuantityInputPath => By.CssSelector(".quantity-selector-v2 input");
-        public By ErrorMessageBelowInputPath => By.CssSelector(".product-error");
         public By MinusStepperPath => By.Id("minusQty");
         public By PlusStepperPath => By.Id("plusQty");
         public By AddToCartButtonPath => By.Id("add-to-cart-btn");
         public By ErrorMessageInsideInputPath => By.Id("minQtyText-error");
+        public By ErrorMessageBelowInputPath => By.XPath("//*[@id = 'product-error']/span");
         public By ItemNumberPath => By.XPath("//*[@automation-id = 'itemNumber']");
 
         public TextBox PromotionalText => new TextBox(PromotionalTextPath);
