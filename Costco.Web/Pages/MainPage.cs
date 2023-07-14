@@ -22,7 +22,7 @@ namespace Costco.Web.Pages
 
         public bool VarifyUserIsLoggedIn()
         {
-            return DisabledSignInButton.IsEnabled;
+            return DisabledSignInButton.IsEnabled();
         }
 
         public void GoToPage()
