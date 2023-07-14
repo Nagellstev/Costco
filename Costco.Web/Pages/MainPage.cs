@@ -20,7 +20,7 @@ namespace Costco.Web.Pages
 
         public bool VarifyUserIsLoggedIn()
         {
-            return DisabledSignInButton.IsEnabled;
+            return DisabledSignInButton.IsEnabled();
         }
 
         public SearchBlock SearchBlock => new SearchBlock();

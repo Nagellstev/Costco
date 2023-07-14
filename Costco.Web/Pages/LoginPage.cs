@@ -26,11 +26,11 @@ namespace Costco.Web.Pages
 
         public bool VerifyPasswordIsRequiredErrorIsDisplayed()
         {
-            return PasswordIsRequiredError.IsDisplayed;
+            return PasswordIsRequiredError.IsDisplayed();
         }
         public bool VerifyInvalidCredentialsErrorIsDisplayed()
         {
-            return InvalidCredentialsError.IsDisplayed;
+            return InvalidCredentialsError.IsDisplayed();
         }
     }
 }
