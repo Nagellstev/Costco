@@ -30,6 +30,7 @@ namespace Costco.Web.Pages
         public void GoToPage()
         {
             BrowserFactory.Browser.GoToUrl(Url);
+
         }
 
         public bool VerifyPasswordIsRequiredErrorIsDisplayed()
