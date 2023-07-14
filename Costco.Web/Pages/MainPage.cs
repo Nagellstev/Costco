@@ -17,6 +17,7 @@ namespace Costco.Web.Pages
         public void NavigateToLoginPage()
         {
             SignInButton.Click();
+            Waiters.WaitForPageLoad();
         }
 
         public bool VarifyUserIsLoggedIn()
@@ -27,6 +28,7 @@ namespace Costco.Web.Pages
         public void GoToPage()
         {
             BrowserFactory.Browser.GoToUrl(Url);
+            Waiters.WaitForPageLoad();
         }
 
         public SearchBlock SearchBlock => new SearchBlock();

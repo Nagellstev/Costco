@@ -1,4 +1,5 @@
-﻿using Costco.Web.Elements;
+﻿using Costco.Core.Browser;
+using Costco.Web.Elements;
 using OpenQA.Selenium;
 
 namespace Costco.Web.Pages
@@ -22,6 +23,7 @@ namespace Costco.Web.Pages
             UsernameInputField.SendKeys(username);
             PasswordInputField.SendKeys(password);
             LoginButton.Click();
+            Waiters.WaitForPageLoad();
         }
 
         public bool VerifyPasswordIsRequiredErrorIsDisplayed()
