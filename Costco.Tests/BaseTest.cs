@@ -1,7 +1,7 @@
 ﻿using Costco.Core.Browser;
 using Costco.Utilities.FileReader;
 using Costco.Utilities.Logger;
-using Costco.Utilities.Screenshotter;
+using Costco.Utilities.Screenshoter;
 using System.Runtime.CompilerServices;
 
 
