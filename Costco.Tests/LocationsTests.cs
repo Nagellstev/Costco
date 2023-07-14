@@ -22,10 +22,9 @@ namespace Costco.Tests
             LocationsPage locationsPage = new();
             BrowserFactory.Browser.GoToUrl(locationsPage.Url);
             locationsPage.SearchForWarehouse(warehouse);
-            //Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsDisplayed(), 5);
+            Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsDisplayed(), 5);
             locationsPage.SetAsMyWarehouse();
 
-            Thread.Sleep(2000);
             Assert.True(locationsPage.IsWarehouseSet(warehouse));
         }
 
