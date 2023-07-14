@@ -16,9 +16,17 @@ namespace Costco.Tests
         [Fact]
         public void SetWarehouseAsMyWarehouseTest()
         {
+            Thread.Sleep(1000);
+            string warehouse = ((LocationsModel)fixture.testData).Warehouse;
+
             LocationsPage locationsPage = new();
             BrowserFactory.Browser.GoToUrl(locationsPage.Url);
-            //locationsPage.SearchForWarehouse();
+            locationsPage.SearchForWarehouse(warehouse);
+            //Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsDisplayed(), 5);
+            locationsPage.SetAsMyWarehouse();
+
+            Thread.Sleep(2000);
+            Assert.True(locationsPage.IsWarehouseSet(warehouse));
         }
 
         [Fact]
