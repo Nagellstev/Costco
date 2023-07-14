@@ -1,4 +1,5 @@
-﻿using Costco.Web.Blocks;
+﻿using Costco.Core.Browser;
+using Costco.Web.Blocks;
 using Costco.Web.Elements;
 using OpenQA.Selenium;
 
@@ -21,6 +22,11 @@ namespace Costco.Web.Pages
         public bool VarifyUserIsLoggedIn()
         {
             return DisabledSignInButton.IsEnabled;
+        }
+
+        public void GoToPage()
+        {
+            BrowserFactory.Browser.GoToUrl(Url);
         }
 
         public SearchBlock SearchBlock => new SearchBlock();

@@ -1,23 +1,20 @@
-﻿namespace Costco.TestData.Models
+﻿namespace Costco.Utilities.FileReader.Models
 {
     public class LoginCredentialsModel
     {
-        public class Root
-        {
-            public ValidCredentials ValidCredentials { get; init; }
-            public InvalidCredentials InvalidCredentials { get; init; }
-        }
+            public ValidCredentials ValidCredential { get; set; }
+            public InvalidCredentials InvalidCredential { get; set; }
 
         public class InvalidCredentials
         {
-            public string Username { get; init; }
-            public string Password { get; init; }
+            public string Username { get; set; }
+            public string Password { get; set; }
         }
 
         public class ValidCredentials
         {
-            public string Username { get; init; }
-            public string Password { get; init; }
+            public string Username { get; set; }
+            public string Password { get; set; }
         }
     }
 }
