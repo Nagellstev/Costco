@@ -3,7 +3,7 @@ using Costco.Utilities.Logger;
 
 namespace Costco.Utilities.Screenshotter
 {
-    public static class Screenshotter
+    public static class Screenshoter
     {
         private static string? filePath;
 
@@ -16,13 +16,13 @@ namespace Costco.Utilities.Screenshotter
             }
         }
 
-        public static void TakeScreenshot(IWebDriver driver)
+        public static void TakeScreenshot(IWebDriver driver, string testName)
         {
             try
             {
                 DateTime dateTime = DateTime.Now;
                 var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
-                screenshot.SaveAsFile(Path.Combine(filePath, $"{GetTimeStamp(dateTime)}.jpeg"));
+                screenshot.SaveAsFile(Path.Combine(filePath, $"{testName}_{GetTimeStamp(dateTime)}.jpeg"));
             }
             catch (Exception ex)
             {

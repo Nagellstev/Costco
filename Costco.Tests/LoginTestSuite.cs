@@ -3,28 +3,25 @@ using Costco.Utilities.Screenshotter;
 using Costco.Utilities.Logger;
 using Costco.Web.Pages;
 using Costco.Utilities.FileReader.Models;
+using System.Runtime.CompilerServices;
 
 namespace Costco.Tests
 {
-    public class LoginTestSuite : IClassFixture<TestFixture>
+    public class LoginTestSuite : BaseTest
     {
-        TestFixture fixture;
-
-        public LoginTestSuite(TestFixture fixture)
+        public LoginTestSuite(ITestOutputHelper output) : base(output)
         {
-            this.fixture = fixture;
+            
         }
 
         [Fact]
-        public void LoginWithValidCredentials()
+        public void LoginWithValidCredentials() 
         {
-            try
-            {
                 //Arrange
                 MainPage mainPage = new MainPage();
                 LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Username;
-                string password = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Password;
+                string userName = ((LoginCredentialsModel)testData).ValidCredentials.Username;
+                string password = ((LoginCredentialsModel)testData).ValidCredentials.Password;
 
                 //Action
                 loginPage.GoToPage();
@@ -32,13 +29,6 @@ namespace Costco.Tests
 
                 //Assert
                 Assert.False(loginPage.VerifyInvalidCredentialsErrorIsDisplayed());
-            }
-            catch (Exception ex)
-            {
-                Logger.Error($"Test failed, exception {ex.Message}");
-                Screenshotter.TakeScreenshot(Browser.Driver);
-                throw;
-            }
         }
 
         [Fact]
@@ -48,8 +38,8 @@ namespace Costco.Tests
             {
                 //Arrange
                 LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
-                string password = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Password;
+                string userName = ((LoginCredentialsModel)testData).InvalidCredentials.Username;
+                string password = ((LoginCredentialsModel)testData).InvalidCredentials.Password;
 
                 //Action
                 loginPage.GoToPage();
@@ -61,7 +51,7 @@ namespace Costco.Tests
             catch (Exception ex)
             {
                 Logger.Error($"Test failed, exception {ex.Message}");
-                Screenshotter.TakeScreenshot(Browser.Driver);
+                Screenshoter.TakeScreenshot(Browser.Driver);
                 throw;
             }
         }
@@ -73,7 +63,7 @@ namespace Costco.Tests
             {
                 //Arrange
                 LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
+                string userName = ((LoginCredentialsModel)testData).InvalidCredentials.Username;
                 string password = string.Empty;
 
                 //Action
@@ -86,7 +76,7 @@ namespace Costco.Tests
             catch (Exception ex)
             {
                 Logger.Error($"Test failed, exception {ex.Message}");
-                Screenshotter.TakeScreenshot(Browser.Driver);
+                Screenshoter.TakeScreenshot(Browser.Driver);
                 throw;
             }
         }

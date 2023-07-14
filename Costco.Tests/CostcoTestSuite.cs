@@ -25,7 +25,7 @@ namespace Costco.Tests
             catch (Exception ex)
             {
                 Logger.Error($"Test failed, exception {ex.Message}");
-                Screenshotter.TakeScreenshot(Browser.Driver); 
+                Screenshoter.TakeScreenshot(Browser.Driver); 
                 throw;
             }
         }
