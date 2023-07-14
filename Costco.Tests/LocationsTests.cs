@@ -16,7 +16,6 @@ namespace Costco.Tests
         [Fact]
         public void SetWarehouseAsMyWarehouseTest()
         {
-            Thread.Sleep(1000);
             string warehouse = ((LocationsModel)fixture.testData).Warehouse;
 
             LocationsPage locationsPage = new();
@@ -24,6 +23,7 @@ namespace Costco.Tests
             locationsPage.SearchForWarehouse(warehouse);
             Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsDisplayed(), 5);
             locationsPage.SetAsMyWarehouse();
+            Waiters.WaitForCondition(() => locationsPage.IsWarehouseSet(warehouse), 5);
 
             Assert.True(locationsPage.IsWarehouseSet(warehouse));
         }
