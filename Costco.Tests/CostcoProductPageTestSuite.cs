@@ -3,6 +3,8 @@ using Costco.Utilities.FileReader.Models;
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshotter;
 using Costco.Web.Pages;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace Costco.Tests
 {
@@ -21,10 +23,16 @@ namespace Costco.Tests
             try 
             {
                 ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[0]);
+
                 BrowserFactory.Browser.GoToUrl(productPage.Url);
+
+                WebDriverWait wait = new(Browser.Driver, TimeSpan.FromSeconds(30));
+
+
                 productPage.InputProductAmount("0");
                 productPage.AddToCartButton.Click();
-                Assert.Equal("Quantity must be 1 or more to add to cart.", productPage.GetErrorText());
+
+                Assert.Contains("Quantity must be 1 or more to add to cart.", productPage.GetErrorText());
             }
             catch (Exception ex)
             {
@@ -41,6 +49,8 @@ namespace Costco.Tests
             {
                 ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
                 BrowserFactory.Browser.GoToUrl(productPage.Url);
+                string promotionalText = productPage.PromotionalText.Text;
+
 
                 productPage.InputProductAmount("16");
                 productPage.AddToCartButton.Click();

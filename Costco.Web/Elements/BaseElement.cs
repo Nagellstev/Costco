@@ -39,9 +39,9 @@ namespace Costco.Web.Elements
 
         public IWebElement OriginalWebElement => _element;
         public string Text => OriginalWebElement.Text;
-        public bool IsDisplayed => OriginalWebElement.Displayed;
-        public bool IsEnabled => OriginalWebElement.Enabled;
-        public bool IsSelected => OriginalWebElement.Selected;
+        public bool IsDisplayed() => OriginalWebElement.Displayed;
+        public bool IsEnabled() => OriginalWebElement.Enabled;
+        public bool IsSelected() => OriginalWebElement.Selected;
         public IWebElement FindElement(By by) => OriginalWebElement.FindElement(by);
     }
 }
