@@ -3,11 +3,12 @@ using Costco.Utilities.FileReader.Models;
 
 namespace Costco.Tests
 {
-    public class LoginTestSuite : BaseTest
+    public class LoginTestSuite : BaseTest, IClassFixture<TestFixture>
     {
-        public LoginTestSuite(ITestOutputHelper output) : base(output)
+        TestFixture fixture;
+        public LoginTestSuite(TestFixture fixture, ITestOutputHelper output) : base(output)
         {
-
+            this.fixture= fixture;
         }
 
         [Fact]
@@ -16,8 +17,8 @@ namespace Costco.Tests
             //Arrange
             MainPage mainPage = new MainPage();
             LoginPage loginPage = new LoginPage();
-            string userName = ((LoginCredentialsModel)testData).ValidCredentials.Username;
-            string password = ((LoginCredentialsModel)testData).ValidCredentials.Password;
+            string userName = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Username;
+            string password = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Password;
 
             //Action
             mainPage.NavigateToLoginPage();
@@ -33,8 +34,8 @@ namespace Costco.Tests
             //Arrange
             MainPage mainPage = new MainPage();
             LoginPage loginPage = new LoginPage();
-            string userName = ((LoginCredentialsModel)testData).InvalidCredentials.Username;
-            string password = ((LoginCredentialsModel)testData).InvalidCredentials.Password;
+            string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
+            string password = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Password;
 
             //Action
             mainPage.NavigateToLoginPage();
@@ -50,7 +51,7 @@ namespace Costco.Tests
             //Arrange
             MainPage mainPage = new MainPage();
             LoginPage loginPage = new LoginPage();
-            string userName = ((LoginCredentialsModel)testData).InvalidCredentials.Username;
+            string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
             string password = string.Empty;
 
             //Action

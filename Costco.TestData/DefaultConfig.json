@@ -2,8 +2,8 @@
   "Browser": "Chrome",
   "TimeOuts": "60",
   "ApplicationUrl": "https://www.costco.com",
-  "TestDataPath": "",
-  "TestDataModel": "",
-  "ScreenshotPath": "",
-  "LoggerPath": ""
+  "TestDataPath": "C:\\Users\\Lenovo\\source\\repos\\Costco\\Costco.TestData\\LoginCredentialsTestData.json",
+  "TestDataModel": "LoginCredentialsModel",
+  "ScreenshotPath": "C:\\Screenshots\\",
+  "LoggerPath": "C:\\Loggs\\"
 }
