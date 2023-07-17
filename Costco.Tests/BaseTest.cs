@@ -1,15 +1,12 @@
 ﻿using Costco.Core.Browser;
-using Costco.Utilities.FileReader;
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshoter;
-using System.Runtime.CompilerServices;
 
 
 namespace Costco.Tests
 {
     public class BaseTest : XunitContextBase
     {
-        public object testData;
         public BaseTest(ITestOutputHelper output) : base(output) { }
         public override void Dispose()
         {
