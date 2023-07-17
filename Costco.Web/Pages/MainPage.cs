@@ -11,19 +11,23 @@ namespace Costco.Web.Pages
 
         public By SignInButtonLocator = By.CssSelector("#header_sign_in.myaccount");
         public By DisabledSignInButtonLocator = By.XPath("//a[@class='myaccount'][@style='display: none;']");
+        public By AccountButtonLocator = By.CssSelector("#myaccount-react-d");
         public Button SignInButton => new Button(SignInButtonLocator);
         public Button DisabledSignInButton => new Button(DisabledSignInButtonLocator);
+        public Button AccountButton => new Button(AccountButtonLocator);
 
         public void NavigateToLoginPage()
         {
+            Waiters.WaitForCondition(() => SignInButton.IsDisplayed(), 5);
+            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(SignInButtonLocator));
             SignInButton.Click();
             Waiters.WaitForCondition(() => new LoginPage().PasswordInputField.IsDisplayed(), 10);
         }
 
         public bool VarifyUserIsLoggedIn()
         {
-            Waiters.WaitForCondition(() => DisabledSignInButton.IsDisplayed(), 10);
-            return DisabledSignInButton.IsDisplayed();
+            Waiters.WaitForCondition(() => AccountButton.IsDisplayed(), 10);
+            return AccountButton.IsDisplayed();
         }
 
         public override void GoToPage()

@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Costco.Utilities.Logger;
+using OpenQA.Selenium.Interactions;
 
 namespace Costco.Core.Browser
 {
@@ -11,6 +12,12 @@ namespace Costco.Core.Browser
         public Browser(IWebDriver driver)
         {
             _driver = driver;
+        }
+
+        public void MoveMouseToElement(IWebElement element)
+        {
+            Actions act = new Actions(_driver);
+            act.MoveToElement(element);
         }
 
         public static IWebDriver? Driver => _driver;

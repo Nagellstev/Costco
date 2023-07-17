@@ -1,5 +1,6 @@
 ﻿using Costco.Web.Pages;
 using Costco.Utilities.FileReader.Models;
+using Costco.Core.Browser;
 
 namespace Costco.Tests
 {
@@ -25,7 +26,7 @@ namespace Costco.Tests
             loginPage.LoginWithCredentials(userName, password);
 
             //Assert
-            Assert.False(mainPage.SignInButton.IsDisplayed());
+            Assert.True(mainPage.VarifyUserIsLoggedIn());
         }
 
         [Fact]

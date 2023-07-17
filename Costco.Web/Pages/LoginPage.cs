@@ -23,6 +23,7 @@ namespace Costco.Web.Pages
         {
             UsernameInputField.SendKeys(username);
             PasswordInputField.SendKeys(password);
+            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(LoginButtonLocator));
             LoginButton.Click();
         }
 
