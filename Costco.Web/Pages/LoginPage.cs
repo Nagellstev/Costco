@@ -27,14 +27,6 @@ namespace Costco.Web.Pages
             LoginButton.Click();
         }
 
-        public override void GoToPage()
-        {
-            BrowserFactory.Browser.GoToUrl(Url);
-            Waiters.WaitForPageLoad();
-            Waiters.WaitForCondition(() => UsernameInputField.IsDisplayed(), 12);
-
-        }
-
         public bool VerifyPasswordIsRequiredErrorIsDisplayed()
         {
             return PasswordIsRequiredError.IsDisplayed();

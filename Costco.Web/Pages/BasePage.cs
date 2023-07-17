@@ -7,6 +7,8 @@ namespace Costco.Web.Pages
         public virtual string Url { get; }
         public virtual void GoToPage()
         {
+            BrowserFactory.Browser.GoToUrl(Url);
+            Waiters.WaitForPageLoad();
         }
     }
 }

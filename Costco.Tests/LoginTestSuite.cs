@@ -39,6 +39,7 @@ namespace Costco.Tests
             string password = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Password;
 
             //Action
+            mainPage.GoToPage();
             mainPage.NavigateToLoginPage();
             loginPage.LoginWithCredentials(userName, password);
 

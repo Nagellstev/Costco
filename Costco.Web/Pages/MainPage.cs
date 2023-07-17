@@ -30,12 +30,6 @@ namespace Costco.Web.Pages
             return AccountButton.IsDisplayed();
         }
 
-        public override void GoToPage()
-        {
-            BrowserFactory.Browser.GoToUrl(Url);
-            Waiters.WaitForPageLoad();
-        }
-
         public SearchBlock SearchBlock => new SearchBlock();
 
         #region Search Tests Steps
