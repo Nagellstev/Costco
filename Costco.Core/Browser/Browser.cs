@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Costco.Utilities.Logger;
+using OpenQA.Selenium.Interactions;
 
 namespace Costco.Core.Browser
 {
@@ -13,13 +14,13 @@ namespace Costco.Core.Browser
             _driver = driver;
         }
 
-        public static IWebDriver? Driver => _driver;
-
-        public void Maximize()
+        public void MoveMouseToElement(IWebElement element)
         {
-            Logger.Information("Window maximize");
-            _driver.Manage().Window.Maximize();
+            Actions act = new Actions(_driver);
+            act.MoveToElement(element);
         }
+
+        public static IWebDriver? Driver => _driver;
 
         public static void ScrollToElement(IWebElement element)
         {
