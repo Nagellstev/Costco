@@ -10,7 +10,6 @@ namespace Costco.Tests
         public BaseTest(ITestOutputHelper output) : base(output) { }
         public override void Dispose()
         {
-            
             var theExceptionThrownByTest = Context.TestException;
             var testDisplayName = Context.Test.DisplayName;
 

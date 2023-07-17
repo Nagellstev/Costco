@@ -4,6 +4,6 @@
   "ApplicationUrl": "https://www.costco.com",
   "TestDataPath": "",
   "TestDataModel": "",
-  "ScreenshotPath": "",
-  "LoggerPath": ""
+  "ScreenshotPath": "logs\\screenshots\\",
+  "LoggerPath": "logs\\"
 }
