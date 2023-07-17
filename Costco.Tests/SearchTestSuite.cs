@@ -1,16 +1,16 @@
 using Costco.Core.Browser;
 using Costco.Utilities.FileReader.Models;
 using Costco.Utilities.Logger;
-using Costco.Utilities.Screenshotter;
+using Costco.Utilities.Screenshoter;
 using Costco.Web.Pages;
 
 namespace Costco.Tests
 {
-    public class SearchTestSuite : IClassFixture<TestFixture>
+    public class SearchTestSuite : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
 
-        public SearchTestSuite(TestFixture fixture)
+        public SearchTestSuite(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {
             this.fixture = fixture;
         }
@@ -22,26 +22,18 @@ namespace Costco.Tests
         ///result. Header of search results contains substring «vitamin»
         /// </summary>
         [Fact]
-        public void SearchExistingItem()
+        public void SearchExistingItemTest()
         {
-            try
-            {
-                MainPage mainPage = new MainPage();
-                SearchResultsPage searchResultsPage = new SearchResultsPage();
+            MainPage mainPage = new MainPage();
+            SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-                string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
-                mainPage.SearchFieldInput(searchString);
-                Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);                
-                string searchResult = searchResultsPage.ReadSearchResultsMessage();
+            string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
+            mainPage.GoToPage();
+            mainPage.SearchFieldInput(searchString);
+            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
+            string searchResult = searchResultsPage.ReadSearchResultsMessage();
 
-                Assert.Contains(searchString.ToLower(), searchResult.ToLower());
-            }
-            catch (Exception ex)
-            {
-                Logger.Error($"Test failed, exception {ex.Message}");
-                Screenshotter.TakeScreenshot(Browser.Driver);
-                throw;
-            }
+            Assert.Contains(searchString.ToLower(), searchResult.ToLower());
 
         }
 
@@ -55,30 +47,22 @@ namespace Costco.Tests
         ///result. Total quantity is updated
         /// </summary>
         [Fact]
-        public void SearchExistingItemAndSortByParameters()
+        public void SearchExistingItemAndSortByParametersTest()
         {
-            try
-            {
-                MainPage mainPage = new MainPage();
-                SearchResultsPage searchResultsPage = new SearchResultsPage();
+            MainPage mainPage = new MainPage();
+            SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-                string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
-                mainPage.SearchFieldInput(searchString);
-                Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
-                int totalQuantity = searchResultsPage.CheckTotalQuantity();
-                searchResultsPage.FilterByPrice0to25();
-                Waiters.WaitForPageLoad();
-                Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
-                int totalQuantityFiltered = searchResultsPage.CheckTotalQuantity();
+            string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
+            mainPage.GoToPage();
+            mainPage.SearchFieldInput(searchString);
+            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
+            int totalQuantity = searchResultsPage.CheckTotalQuantity();
+            searchResultsPage.FilterByPrice0to25();
+            Waiters.WaitForPageLoad();
+            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
+            int totalQuantityFiltered = searchResultsPage.CheckTotalQuantity();
 
-                Assert.NotEqual(totalQuantityFiltered, totalQuantity);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error($"Test failed, exception {ex.Message}");
-                Screenshotter.TakeScreenshot(Browser.Driver);
-                throw;
-            }
+            Assert.NotEqual(totalQuantityFiltered, totalQuantity);
         }
 
         /// <summary>
@@ -88,26 +72,18 @@ namespace Costco.Tests
         ///result. Header of search results contains substring «we were not able to find a match»
         /// </summary>
         [Fact]
-        public void SearchSenselessLine()
+        public void SearchSenselessLineTest()
         {
-            try
-            {
-                MainPage mainPage = new MainPage();
-                SearchResultsPage searchResultsPage = new SearchResultsPage();
+            MainPage mainPage = new MainPage();
+            SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-                string searchString = ((SearchStringModel)fixture.testData).SearchString[1];
-                mainPage.SearchFieldInput(searchString);
-                Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
-                string searchResult = searchResultsPage.ReadSearchResultsMessage();
+            string searchString = ((SearchStringModel)fixture.testData).SearchString[1];
+            mainPage.GoToPage();
+            mainPage.SearchFieldInput(searchString);
+            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
+            string searchResult = searchResultsPage.ReadSearchResultsMessage();
 
-                Assert.Contains("we were not able to find a match", searchResult.ToLower());
-            }
-            catch (Exception ex)
-            {
-                Logger.Error($"Test failed, exception {ex.Message}");
-                Screenshotter.TakeScreenshot(Browser.Driver);
-                throw;
-            }
+            Assert.Contains("we were not able to find a match", searchResult.ToLower());
         }
     }
 }
