@@ -1,4 +1,7 @@
-﻿namespace Costco.Core.Browser
+﻿using OpenQA.Selenium;
+using SeleniumExtras.WaitHelpers;
+
+namespace Costco.Core.Browser
 {
     public static class Waiters
     {

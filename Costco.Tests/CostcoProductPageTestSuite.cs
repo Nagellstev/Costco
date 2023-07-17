@@ -45,18 +45,25 @@ namespace Costco.Tests
             try
             {
                 ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
+                string lowCutoff = "Limit ";
+                string highCutoff = " per member";
 
                 BrowserFactory.Browser.GoToUrl(productPage.Url);
                 Waiters.WaitForCondition(productPage.PromotionalText.IsDisplayed, 30);
-                string promoTextQuantity = productPage.PromotionalText.Text;
-                promoTextQuantity = promoTextQuantity.Substring(promoTextQuantity.IndexOf("Limit ")+6,
-                    promoTextQuantity.IndexOf(" per member")- promoTextQuantity.IndexOf("Limit ")-6);
+                string promoTextMaxQuantity = productPage.PromotionalText.Text;
+
+                promoTextMaxQuantity = promoTextMaxQuantity.Substring(
+                    promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
+                    promoTextMaxQuantity.IndexOf(highCutoff) - promoTextMaxQuantity.IndexOf(lowCutoff) - lowCutoff.Length);
+
                 Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed, 30);
-                productPage.InputProductAmount((Int32.Parse(promoTextQuantity) + 1).ToString());
+
+                productPage.InputProductAmount((Int32.Parse(promoTextMaxQuantity) + 1).ToString());
+
                 productPage.AddToCartButton.Click();
                 Waiters.WaitForCondition(productPage.ErrorMessageBelowInput.IsEnabled, 30);
 
-                Assert.Contains($"Item {productPage.ItemNumber} has a maximum order quantity of {promoTextQuantity}", 
+                Assert.Contains($"Item {productPage.ItemNumber} has a maximum order quantity of {promoTextMaxQuantity}", 
                     productPage.GetErrorText());
             }
             catch (Exception ex)
@@ -81,7 +88,7 @@ namespace Costco.Tests
                 productPage.AddToCartButton.Click();
                 Waiters.WaitForCondition(productPage.ErrorMessageInsideInput.IsDisplayed, 30);
 
-                Assert.Equal("Please enter no more than 3 characters", productPage.GetInputFieldErrorText());
+                Assert.Equal("Please enter no more than 3 characters.", productPage.GetInputFieldErrorText());
             }
             catch (Exception ex)
             {
