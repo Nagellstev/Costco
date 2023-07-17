@@ -24,7 +24,7 @@ namespace Costco.Web.Pages
             Waiters.WaitForCondition(() => new LoginPage().PasswordInputField.IsDisplayed(), 10);
         }
 
-        public bool VarifyUserIsLoggedIn()
+        public bool VerifyUserIsLoggedIn()
         {
             Waiters.WaitForCondition(() => AccountButton.IsDisplayed(), 10);
             return AccountButton.IsDisplayed();

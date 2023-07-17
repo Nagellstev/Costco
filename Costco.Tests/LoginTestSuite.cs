@@ -26,7 +26,7 @@ namespace Costco.Tests
             loginPage.LoginWithCredentials(userName, password);
 
             //Assert
-            Assert.True(mainPage.VarifyUserIsLoggedIn());
+            Assert.True(mainPage.VerifyUserIsLoggedIn());
         }
 
         [Fact]
