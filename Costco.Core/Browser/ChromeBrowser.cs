@@ -7,7 +7,14 @@ namespace Costco.Core.Browser
     {
         public IWebDriver GetDriver()
         {
+            List<string> ls = new List<string>();
+            ls.Add("excludeSwitches");
+            ls.Add("enable-automation");
             var options = new ChromeOptions();
+            options.AddArgument("--disable-blink-features=AutomationControlled");
+            options.AddArgument("--disable-extensions");
+            options.AddAdditionalChromeOption("useAutomationExtension", false);
+            options.AddExcludedArguments(ls);
             options.AddArgument("--start-maximized");
             var service = ChromeDriverService.CreateDefaultService();
             var driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(20));

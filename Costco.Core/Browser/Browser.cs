@@ -15,12 +15,6 @@ namespace Costco.Core.Browser
 
         public static IWebDriver? Driver => _driver;
 
-        public void Maximize()
-        {
-            Logger.Information("Window maximize");
-            _driver.Manage().Window.Maximize();
-        }
-
         public static void ScrollToElement(IWebElement element)
         {
             Logger.Information("Scrolling to element");

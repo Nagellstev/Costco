@@ -27,7 +27,6 @@ namespace Costco.Tests
         }
         public override void Dispose()
         {
-            
             var theExceptionThrownByTest = Context.TestException;
             var testDisplayName = Context.Test.DisplayName;
 

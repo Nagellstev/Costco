@@ -21,6 +21,7 @@ namespace Costco.Tests
 
                 //Action
                 loginPage.GoToPage();
+            Thread.Sleep(10000);
                 loginPage.LoginWithCredentials(userName, password);
 
                 //Assert
@@ -37,7 +38,8 @@ namespace Costco.Tests
 
                 //Action
                 loginPage.GoToPage();
-                loginPage.LoginWithCredentials(userName, password);
+          //Thread.Sleep(10000);
+            loginPage.LoginWithCredentials(userName, password);
 
                 //Assert
                 Assert.True(loginPage.VerifyInvalidCredentialsErrorIsDisplayed());
