@@ -6,10 +6,11 @@ namespace Costco.Core.Browser
     public static class TestSettings
     {
         private static ConfigModel _config;
+
         static TestSettings()
         {
             FileReader reader = new();
-            _config = (ConfigModel)reader.Read(Environment.GetEnvironmentVariable("ProjectDataCostco") + "SearchTestConfig.json", typeof(ConfigModel));
+            _config = (ConfigModel)reader.Read(Environment.GetEnvironmentVariable("Config"), typeof(ConfigModel));
         }
 
         public static BrowserType Browser => (BrowserType)Enum.Parse(typeof(BrowserType), _config.Browser);

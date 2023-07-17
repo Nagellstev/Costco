@@ -2,8 +2,8 @@
   "Browser": "Chrome",
   "TimeOuts": "60",
   "ApplicationUrl": "https://www.costco.com",
-  "TestDataPath": "D:\\projects\\epam\\lab\\Costco.TestData\\LocationsTestData.json",
-  "TestDataModel": "LocationsModel",
+  "TestDataPath": "Costco.TestData\\TestData\\LoginCredentialsTestData.json",
+  "TestDataModel": "LoginCredentialsModel",
   "ScreenshotPath": "logs\\screenshots\\",
   "LoggerPath": "logs\\"
 }

@@ -6,6 +6,7 @@ using Costco.Web.Pages;
 
 namespace Costco.Tests
 {
+    [Trait("Target", "Search")]
     public class SearchTestSuite : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;

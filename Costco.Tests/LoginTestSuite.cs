@@ -4,6 +4,7 @@ using Costco.Core.Browser;
 
 namespace Costco.Tests
 {
+    [Trait("Target", "Login")]
     public class LoginTestSuite : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
