@@ -1,7 +1,7 @@
 ﻿using Costco.Core.Browser;
 using Costco.Utilities.FileReader;
 using Costco.Utilities.Logger;
-using Costco.Utilities.Screenshotter;
+using Costco.Utilities.Screenshoter;
 
 namespace Costco.Tests
 {
@@ -11,8 +11,8 @@ namespace Costco.Tests
 
         public TestFixture()
         {
-            Logger.Init(DateTime.Now.ToString("MM.dd.yyyy"), TestSettings.LoggerPath);
-            Screenshotter.Init(TestSettings.ScreenshotPath);
+            Logger.Init(DateTime.Now.ToString("dd.MM.yyyy"), TestSettings.LoggerPath);
+            Screenshoter.Init(TestSettings.ScreenshotPath);
 
             if (TestSettings.TestDataPath != null && TestSettings.TestDataPath != string.Empty)
             {
@@ -25,7 +25,7 @@ namespace Costco.Tests
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
         }
 
-        public void Dispose() 
+        public void Dispose()
         {
             GC.SuppressFinalize(this);
             BrowserFactory.CleanUp();
