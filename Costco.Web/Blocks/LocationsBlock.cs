@@ -9,7 +9,7 @@ namespace Costco.Web.Blocks
 
         public By MyWarehouseLocator = By.XPath("//button[contains(@aria-label, 'current warehouse')]");
         public By DeliveryLocationLocator = By.XPath("//button[contains(@aria-label, 'ZIP Code')]");
-        public By ZipCodeInputLocator = By.Id("//input[@id='zipCode']");
+        public By ZipCodeInputLocator = By.Id("zipCode");
         public By ChangeDeliveryLocationButtonLocator = By.XPath("//button[text()='Change Delivery Location']");
 
         public Button MyWarehouseButton => new(MyWarehouseLocator);

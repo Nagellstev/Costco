@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Costco.Web.Elements;
 using OpenQA.Selenium.DevTools.V112.Tracing;
+using System.Net;
 
 namespace Costco.Web.Pages
 {
@@ -14,7 +15,7 @@ namespace Costco.Web.Pages
 
         public string GetName()
         {
-            return Name.Text;
+            return Name.Text[..Name.Text.IndexOf(" ")];
         }
 
         public string GetAddress()
