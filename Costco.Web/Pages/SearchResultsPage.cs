@@ -1,4 +1,5 @@
-﻿using Costco.Web.Blocks;
+﻿using Costco.Core.Browser;
+using Costco.Web.Blocks;
 using Costco.Web.Elements;
 using OpenQA.Selenium;
 using System.Text.RegularExpressions;
@@ -7,7 +8,7 @@ namespace Costco.Web.Pages
 {
     public class SearchResultsPage : BasePage
     {
-        public By SearchResultsMessageLocator => By.Id("rsltCntMsg");
+        public By SearchResultsMessageLocator => By.XPath("//div[@id = 'search-results']//div[@class = 'toolbar']");
         public TextBox SearchResultsMessage => new TextBox(SearchResultsMessageLocator);
         public By TotalProductsShowingQuantityLocator => By.CssSelector("span[automation-id='totalProductsOutputText']");
         public TextBox TotalProductsShowingQuantity => new TextBox(TotalProductsShowingQuantityLocator);
