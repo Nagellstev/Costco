@@ -17,15 +17,16 @@ namespace Costco.Web.Pages
         public void NavigateToLoginPage()
         {
             SignInButton.Click();
-            //Waiters.WaitForPageLoad();
+            Waiters.WaitForCondition(() => new LoginPage().PasswordInputField.IsDisplayed(), 10);
         }
 
         public bool VarifyUserIsLoggedIn()
         {
-            return DisabledSignInButton.IsEnabled();
+            Waiters.WaitForCondition(() => DisabledSignInButton.IsDisplayed(), 10);
+            return DisabledSignInButton.IsDisplayed();
         }
 
-        public void GoToPage()
+        public override void GoToPage()
         {
             BrowserFactory.Browser.GoToUrl(Url);
             Waiters.WaitForPageLoad();

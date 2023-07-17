@@ -24,12 +24,13 @@ namespace Costco.Web.Pages
             UsernameInputField.SendKeys(username);
             PasswordInputField.SendKeys(password);
             LoginButton.Click();
-            Waiters.WaitForPageLoad();
         }
 
-        public void GoToPage()
+        public override void GoToPage()
         {
             BrowserFactory.Browser.GoToUrl(Url);
+            Waiters.WaitForPageLoad();
+            Waiters.WaitForCondition(() => UsernameInputField.IsDisplayed(), 12);
 
         }
 
@@ -39,6 +40,7 @@ namespace Costco.Web.Pages
         }
         public bool VerifyInvalidCredentialsErrorIsDisplayed()
         {
+            Waiters.WaitForCondition(() => InvalidCredentialsError.IsDisplayed(), 10);
             return InvalidCredentialsError.IsDisplayed();
         }
     }

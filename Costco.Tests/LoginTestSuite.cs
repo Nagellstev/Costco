@@ -7,58 +7,58 @@ namespace Costco.Tests
     {
         public LoginTestSuite(ITestOutputHelper output) : base(output)
         {
-            
+
         }
 
         [Fact]
-        public void LoginWithValidCredentials() 
+        public void LoginWithValidCredentials()
         {
-                //Arrange
-                MainPage mainPage = new MainPage();
-                LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)testData).ValidCredentials.Username;
-                string password = ((LoginCredentialsModel)testData).ValidCredentials.Password;
+            //Arrange
+            MainPage mainPage = new MainPage();
+            LoginPage loginPage = new LoginPage();
+            string userName = ((LoginCredentialsModel)testData).ValidCredentials.Username;
+            string password = ((LoginCredentialsModel)testData).ValidCredentials.Password;
 
-                //Action
-                loginPage.GoToPage();
-            Thread.Sleep(10000);
-                loginPage.LoginWithCredentials(userName, password);
+            //Action
+            mainPage.NavigateToLoginPage();
+            loginPage.LoginWithCredentials(userName, password);
 
-                //Assert
-                Assert.False(loginPage.VerifyInvalidCredentialsErrorIsDisplayed());
+            //Assert
+            Assert.False(mainPage.SignInButton.IsDisplayed());
         }
 
         [Fact]
         public void LoginWithInvalidCredentials()
         {
-                //Arrange
-                LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)testData).InvalidCredentials.Username;
-                string password = ((LoginCredentialsModel)testData).InvalidCredentials.Password;
+            //Arrange
+            MainPage mainPage = new MainPage();
+            LoginPage loginPage = new LoginPage();
+            string userName = ((LoginCredentialsModel)testData).InvalidCredentials.Username;
+            string password = ((LoginCredentialsModel)testData).InvalidCredentials.Password;
 
-                //Action
-                loginPage.GoToPage();
-          //Thread.Sleep(10000);
+            //Action
+            mainPage.NavigateToLoginPage();
             loginPage.LoginWithCredentials(userName, password);
 
-                //Assert
-                Assert.True(loginPage.VerifyInvalidCredentialsErrorIsDisplayed());
+            //Assert
+            Assert.True(loginPage.VerifyInvalidCredentialsErrorIsDisplayed());
         }
 
         [Fact]
         public void LoginWithValidUsernameButEmptyPassword()
         {
-                //Arrange
-                LoginPage loginPage = new LoginPage();
-                string userName = ((LoginCredentialsModel)testData).InvalidCredentials.Username;
-                string password = string.Empty;
+            //Arrange
+            MainPage mainPage = new MainPage();
+            LoginPage loginPage = new LoginPage();
+            string userName = ((LoginCredentialsModel)testData).InvalidCredentials.Username;
+            string password = string.Empty;
 
-                //Action
-                loginPage.GoToPage();
-                loginPage.LoginWithCredentials(userName, password);
+            //Action
+            mainPage.NavigateToLoginPage();
+            loginPage.LoginWithCredentials(userName, password);
 
-                //Assert
-                Assert.True(loginPage.VerifyPasswordIsRequiredErrorIsDisplayed());
+            //Assert
+            Assert.True(loginPage.VerifyPasswordIsRequiredErrorIsDisplayed());
         }
     }
 }
