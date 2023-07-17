@@ -54,5 +54,15 @@ namespace Costco.Web.Pages
         {
             return LocationsBlock.IsWarehouseSet(warehouse);
         }
+
+        public bool IsDeliveryLocationSet(string location)
+        {
+            return LocationsBlock.IsDeliveryLocationSet(location);
+        }
+
+        public bool IsResultFound(string result)
+        {
+            return WarehouseName.Text.Equals(result);
+        }
     }
 }
