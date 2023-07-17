@@ -5,11 +5,11 @@ using Costco.Web.Pages;
 
 namespace Costco.Tests
 {
-    public class LocationsTests : IClassFixture<TestFixture>
+    public class LocationsTests : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
 
-        public LocationsTests(TestFixture fixture)
+        public LocationsTests(TestFixture fixture, ITestOutputHelper testOutputHelper): base(testOutputHelper)
         {
             this.fixture = fixture;
         }
