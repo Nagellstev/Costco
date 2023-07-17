@@ -4,6 +4,7 @@ using Costco.Web.Pages;
 
 namespace Costco.Tests
 {
+    [Trait("Target", "ProductPage")]
     public class CostcoProductPageTestSuite : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;

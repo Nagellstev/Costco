@@ -7,22 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="LocationsConfig.json">
+    <None Update="Config\LocationsConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ProductPageCartTestsConfig.json">
+    <None Update="Config\ProductPageCartTestsConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LoginCredentialsTestData.json">
+    <None Update="TestData\LoginCredentialsTestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LoginConfig.json">
+    <None Update="Config\LoginConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="SearchPageTestData.json">
+    <None Update="TestData\SearchPageTestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="ProductPageTestData.json">
+    <None Update="TestData\ProductPageTestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -19,7 +19,9 @@ namespace Costco.Tests
                 string assemblyName = $"Costco.Utilities.FileReader.Models.{TestSettings.TestDataModel}, " +  //hack
                     $"Costco.Utilities, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"; //maybe find proper assembly name later
                 FileReader reader = new();
-                testData = reader.Read(TestSettings.TestDataPath, Type.GetType(assemblyName));
+                
+                testData = reader.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", TestSettings.TestDataPath), 
+                    Type.GetType(assemblyName));
             }
 
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);

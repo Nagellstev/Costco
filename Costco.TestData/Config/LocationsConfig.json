@@ -1,0 +1,9 @@
+{
+  "Browser": "Chrome",
+  "TimeOuts": "60",
+  "ApplicationUrl": "https://www.costco.com",
+  "TestDataPath": "Costco.TestData\\TestData\\LocationsTestData.json",
+  "TestDataModel": "LocationsModel",
+  "ScreenshotPath": "logs\\screenshots\\",
+  "LoggerPath": "logs\\"
+}
