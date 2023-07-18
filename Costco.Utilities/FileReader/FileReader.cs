@@ -9,7 +9,7 @@
         /// Supports xml and json. When working with xml pass the name of the desired node to TargetXmlNode property.  
         /// </summary>
         /// <returns>Contents of the specified file as returnType object.</returns>
-        public object Read(string path, Type returnType)
+        public object Read(string path)
         {
             IReadStrategy strategy;
 
@@ -20,12 +20,6 @@
 
             switch (new FileInfo(path).Extension.ToLower())
             {
-                case ".xml":
-                    {
-                        strategy = new XmlReadStrategy();
-                        ((XmlReadStrategy)strategy).TargetNode = TargetXmlNode;
-                        break;
-                    }
                 case ".json":
                     {
                         strategy = new JsonReadStrategy();
@@ -38,7 +32,7 @@
             }
 
             strategy.Target = path;
-            return strategy.Execute(returnType);
+            return strategy.Execute();
         }
     }
 }

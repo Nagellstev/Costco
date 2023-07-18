@@ -1,9 +1,8 @@
 {
-  "Browser": "Chrome",
+  "DataModel": "ConfigModel",
+  "Browser": "Firefox",
   "TimeOuts": "60",
   "ApplicationUrl": "https://www.costco.com",
-  "TestDataPath": "Costco.TestData\\TestData\\SearchPageTestData.json",
-  "TestDataModel": "SearchStringModel",
   "ScreenshotPath": "logs\\screenshots\\",
   "LoggerPath": "logs\\"
 }

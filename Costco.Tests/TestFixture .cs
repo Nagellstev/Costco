@@ -13,15 +13,12 @@ namespace Costco.Tests
         {
             Logger.Init(DateTime.Now.ToString("dd.MM.yyyy"), TestSettings.LoggerPath);
             Screenshoter.Init(TestSettings.ScreenshotPath);
+            string testDataPath = Environment.GetEnvironmentVariable("TestData");
 
-            if (TestSettings.TestDataPath != null && TestSettings.TestDataPath != string.Empty)
+            if (testDataPath!= null)
             {
-                string assemblyName = $"Costco.Utilities.FileReader.Models.{TestSettings.TestDataModel}, " +  //hack
-                    $"Costco.Utilities, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null"; //maybe find proper assembly name later
                 FileReader reader = new();
-                
-                testData = reader.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", TestSettings.TestDataPath), 
-                    Type.GetType(assemblyName));
+                testData = reader.Read(testDataPath);
             }
 
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
