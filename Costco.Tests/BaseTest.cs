@@ -2,7 +2,6 @@
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshoter;
 
-
 namespace Costco.Tests
 {
     public class BaseTest : XunitContextBase

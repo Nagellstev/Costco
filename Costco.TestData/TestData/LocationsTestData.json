@@ -1,4 +1,5 @@
 {
+  "DataModel": "LocationsModel",
   "Warehouse": "Louisville",
   "DeliveryLocation": "12345"
 }
