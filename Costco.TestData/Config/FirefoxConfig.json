@@ -1,0 +1,8 @@
+{
+  "DataModel": "ConfigModel",
+  "Browser": "Firefox",
+  "TimeOuts": "60",
+  "ApplicationUrl": "https://www.costco.com",
+  "ScreenshotPath": "logs\\screenshots\\",
+  "LoggerPath": "logs\\"
+}
