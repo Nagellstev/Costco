@@ -19,15 +19,18 @@ namespace Costco.Tests
             {
                 FileReader reader = new();
                 testData = reader.Read(testDataPath);
+                Logger.Information($"Reading test data {testDataPath}.");
             }
 
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
+            Logger.Information("Setup complete.");
         }
 
         public void Dispose()
         {
             GC.SuppressFinalize(this);
             BrowserFactory.CleanUp();
+            Logger.Information("Disposing of fixture.");
         }
     }
 }
