@@ -1,8 +1,5 @@
 pipeline {
     agent any
-        parameters {
-        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-    }
 
     stages {
         stage('Build') {
@@ -10,9 +7,48 @@ pipeline {
                 echo 'Building'
             }
         }
-        stage('Test') {
+        stage('TestSetup') {
             steps {
                 echo 'Testing'
+                checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[credentialsId: '7f522695-e5e9-408c-acfa-8521b0bd0bc0', url: 'https://git.epam.com/filipp_protopopov/epam-at-lab-2023cw36-dotnet/']])
+                bat 'msbuild Costco.sln -t:restore,build -p:RestorePackagesConfig=true'
+            }
+        }
+        stage("Test"){
+            parallel {
+                stage('ProductPage') {
+                    steps {
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\ProductPageTestData.json --filter Target=ProductPage  --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
+                stage('Delivery') {
+                    steps {
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LocationsTestData.json --filter Target=Delivery --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
+                stage('SearchPage') {
+                    steps {
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\SearchPageTestData.json --filter Target=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
             }
         }
         stage('Deploy') {
@@ -21,4 +57,10 @@ pipeline {
             }
         }
     }
+    post{
+    always{
+        cleanWs()
+    }
+    }
 }
+

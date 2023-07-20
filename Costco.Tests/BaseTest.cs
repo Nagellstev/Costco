@@ -20,6 +20,7 @@ namespace Costco.Tests
 
             GC.SuppressFinalize(this);
             base.Dispose();
+            Logger.Information($"Disposing of {testDisplayName}");
         }
     }
 }
