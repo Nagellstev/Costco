@@ -11,7 +11,7 @@ namespace Costco.Tests
 
         public TestFixture()
         {
-            Logger.Init(DateTime.Now.ToString("dd.MM.yyyy"), TestSettings.LoggerPath);
+            Logger.Init("Costco", TestSettings.LoggerPath);
             Screenshoter.Init(TestSettings.ScreenshotPath);
             string testDataPath = Environment.GetEnvironmentVariable("TestData");
 

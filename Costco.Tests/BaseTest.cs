@@ -6,21 +6,26 @@ namespace Costco.Tests
 {
     public class BaseTest : XunitContextBase
     {
-        public BaseTest(ITestOutputHelper output) : base(output) { }
+        string testDisplayName;
+
+        public BaseTest(ITestOutputHelper output) : base(output) 
+        {
+            testDisplayName = Context.Test.DisplayName;
+            Logger.Information($"Initializing {testDisplayName}.");
+        }
         public override void Dispose()
         {
             var theExceptionThrownByTest = Context.TestException;
-            var testDisplayName = Context.Test.DisplayName;
 
             if(theExceptionThrownByTest!= null) 
             {
-                Logger.Error($"Test '{testDisplayName}' failed, exception {theExceptionThrownByTest}");
+                Logger.Error($"Test '{testDisplayName}' failed, exception {theExceptionThrownByTest}.");
                 Screenshoter.TakeScreenshot(Browser.Driver, testDisplayName);
             }
 
             GC.SuppressFinalize(this);
             base.Dispose();
-            Logger.Information($"Disposing of {testDisplayName}");
+            Logger.Information($"Disposing of {testDisplayName}.");
         }
     }
 }
