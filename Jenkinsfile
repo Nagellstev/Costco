@@ -21,7 +21,7 @@ pipeline {
             }
         }
         stage('Test'){
-            stages{
+            parallel{
                 stage('ProductPage') {
                     when {
                         expression { return params.ProductPage }
