@@ -1,5 +1,11 @@
 pipeline {
     agent any
+        parameters {
+            booleanParam(name: 'ProductPage', defaultValue: true)
+            booleanParam(name: 'Delivery', defaultValue: true)
+            booleanParam(name: 'SearchPage', defaultValue: true)
+            booleanParam(name: 'Login', defaultValue: true)
+    }
 
     stages {
         stage('Build') {
@@ -14,59 +20,84 @@ pipeline {
                 bat 'msbuild Costco.sln -t:restore,build -p:RestorePackagesConfig=true'
             }
         }
-        stage('ProductPage') {
-            steps {
-                bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\ProductPageTestData.json --filter Target=ProductPage  --logger:"xunit;LogFileName=TestResults.xml" --no-build'
-            }
-            post{
-                always {
-                    xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+        stage('Test'){
+            stages{
+                stage('ProductPage') {
+                    when {
+                        expression { return params.ProductPage }
+                    }
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\ProductPageTestData.json --filter Target=ProductPage  --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
                 }
-            }
-        }
-        stage('Delivery') {
-            steps {
-                bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LocationsTestData.json --filter Target=Delivery --logger:"xunit;LogFileName=TestResults.xml" --no-build'
-            }
-            post{
-                always {
-                    xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                stage('Delivery') {
+                    when {
+                        expression { return params.Delivery }
+                    }
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LocationsTestData.json --filter Target=Delivery --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
                 }
-            }
-        }
-        stage('SearchPage') {
-            steps {
-                bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\SearchPageTestData.json --filter Target=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
-            }
-            post{
-                always {
-                    xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                stage('SearchPage') {
+                    when {
+                        expression { return params.SearchPage }
+                    }
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\SearchPageTestData.json --filter Target=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
                 }
-            }
-        }
-        stage('Login') {
-            steps {
-                bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LoginCredentialsTestData.json --filter Target=Login --logger:"xunit;LogFileName=TestResults.xml" --no-build'
-            }
-            post{
-                always {
-                    xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                stage('Login') {
+                    when {
+                        expression { return params.Login }
+                    }
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LoginCredentialsTestData.json --filter Target=Login --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
                 }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying'
             }
         }
     }
     post{
-    always{
-        cleanWs()
-    }
+        always{
+            cleanWs()
+        }
+        success{
+            echo 'Deploying'
+        }
+        unstable{
+            echo 'Not deploying'
+        }
     }
 }
