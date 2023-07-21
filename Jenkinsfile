@@ -1,5 +1,11 @@
 pipeline {
     agent any
+        parameters {
+            booleanParam(name: 'ProductPage', defaultValue: true)
+            booleanParam(name: 'Delivery', defaultValue: true)
+            booleanParam(name: 'SearchPage', defaultValue: true)
+            booleanParam(name: 'Login', defaultValue: true)
+    }
 
     stages {
         stage('Build') {
@@ -15,6 +21,9 @@ pipeline {
             }
         }
         stage('ProductPage') {
+            when {
+                expression { return params.ProductPage }
+            }
             steps {
                 bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\ProductPageTestData.json --filter Target=ProductPage  --logger:"xunit;LogFileName=TestResults.xml" --no-build'
             }
@@ -26,6 +35,9 @@ pipeline {
             }
         }
         stage('Delivery') {
+            when {
+                expression { return params.Delivery }
+            }
             steps {
                 bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LocationsTestData.json --filter Target=Delivery --logger:"xunit;LogFileName=TestResults.xml" --no-build'
             }
@@ -37,6 +49,9 @@ pipeline {
             }
         }
         stage('SearchPage') {
+            when {
+                expression { return params.SearchPage }
+            }
             steps {
                 bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\SearchPageTestData.json --filter Target=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
             }
@@ -48,6 +63,9 @@ pipeline {
             }
         }
         stage('Login') {
+            when {
+                expression { return params.Login }
+            }
             steps {
                 bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\DefaultConfig.json -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LoginCredentialsTestData.json --filter Target=Login --logger:"xunit;LogFileName=TestResults.xml" --no-build'
             }
