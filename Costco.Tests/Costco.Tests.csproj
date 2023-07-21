@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+    <PackageReference Include="ReportPortal.XUnit" Version="2.4.5" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="114.0.5735.9000" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.33.0" />
     <PackageReference Include="xunit" Version="2.5.0" />
@@ -29,6 +30,12 @@
     <ProjectReference Include="..\Costco.Core\Costco.Core.csproj" />
     <ProjectReference Include="..\Costco.Utilities\Costco.Utilities.csproj" />
     <ProjectReference Include="..\Costco.Web\Costco.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ReportPortal.config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
