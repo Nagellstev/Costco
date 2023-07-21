@@ -10,7 +10,7 @@ namespace Costco.Core.Browser
             var options = new EdgeOptions();
             options.AddArgument("--start-maximized");
             var service = EdgeDriverService.CreateDefaultService();
-            var driver = new EdgeDriver(service, options, TimeSpan.FromSeconds(20));
+            var driver = new EdgeDriver(service, options, TimeSpan.FromSeconds(TestSettings.TimeOuts));
             return driver;
         }
     }
