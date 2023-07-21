@@ -16,7 +16,7 @@ pipeline {
         stage('TestSetup') {
             steps {
                 echo 'Testing'
-                checkout scmGit(branches: [[name: '*/Timeouts']], extensions: [], userRemoteConfigs: [[credentialsId: '7f522695-e5e9-408c-acfa-8521b0bd0bc0', url: 'https://git.epam.com/filipp_protopopov/epam-at-lab-2023cw36-dotnet/']])
+                checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[credentialsId: '7f522695-e5e9-408c-acfa-8521b0bd0bc0', url: 'https://git.epam.com/filipp_protopopov/epam-at-lab-2023cw36-dotnet/']])
                 bat 'msbuild Costco.sln -t:restore,build -p:RestorePackagesConfig=true'
             }
         }
