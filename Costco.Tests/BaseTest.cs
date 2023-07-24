@@ -8,14 +8,13 @@ namespace Costco.Tests
     public class BaseTest : XunitContextBase
     {
         string testDisplayName;
-        ITestOutputHelper output;
+        public ITestOutputHelper output;
 
         public BaseTest(ITestOutputHelper output) : base(output) 
         {
+            this.output = output.WithReportPortal();
             testDisplayName = Context.Test.DisplayName;
             Logger.Information($"Initializing {testDisplayName}.");
-            this.output = output.WithReportPortal();
-            this.output.WriteLine("Test");
         }
         public override void Dispose()
         {

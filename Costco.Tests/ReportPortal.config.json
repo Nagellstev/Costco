@@ -9,8 +9,8 @@
     }
   },
   "launch": {
-    "name": "filipp_protopopov_TEST_EXAMPLE",
-    "description": "this is description",
+    "name": "Costco_tests",
+    "description": "Tests for costco.com",
     "debugMode": false,
     "attributes": [ "t1", "os:win10" ]
   }
