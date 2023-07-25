@@ -1,7 +1,9 @@
 ﻿using Costco.Core.Browser;
+using Costco.Core.ConfigurationModels;
 using Costco.Utilities.FileReader;
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshoter;
+using System.Reflection;
 
 namespace Costco.Tests
 {
@@ -18,7 +20,7 @@ namespace Costco.Tests
             if (testDataPath!= null)
             {
                 FileReader reader = new();
-                testData = reader.Read(testDataPath);
+                testData = reader.Read(testDataPath, AssemblyName.GetAssemblyName("Costco.TestData.dll").FullName);
                 Logger.Information($"Reading test data {testDataPath}.");
             }
 

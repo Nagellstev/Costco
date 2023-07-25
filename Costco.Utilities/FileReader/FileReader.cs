@@ -2,14 +2,12 @@
 {
     public class FileReader
     {
-        public string TargetXmlNode { get; set; } = "TestRunParameters";
-
         /// <summary>
         /// Checks location provided in path and deserializes the specified file.
         /// Supports xml and json. When working with xml pass the name of the desired node to TargetXmlNode property.  
         /// </summary>
         /// <returns>Contents of the specified file as returnType object.</returns>
-        public object Read(string path)
+        public object Read(string path, string assembyName)
         {
             IReadStrategy strategy;
 
@@ -32,6 +30,7 @@
             }
 
             strategy.Target = path;
+            strategy.ModelAssembly = assembyName;
             return strategy.Execute();
         }
     }

@@ -1,6 +1,5 @@
-﻿using Costco.Core.Browser;
-using Costco.Web.Blocks;
-using Costco.Web.Elements;
+﻿using Costco.Web.Blocks;
+using Costco.Core.Elements;
 using OpenQA.Selenium;
 using System.Text.RegularExpressions;
 

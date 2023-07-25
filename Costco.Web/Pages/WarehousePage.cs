@@ -1,7 +1,5 @@
 ﻿using OpenQA.Selenium;
-using Costco.Web.Elements;
-using OpenQA.Selenium.DevTools.V112.Tracing;
-using System.Net;
+using Costco.Core.Elements;
 
 namespace Costco.Web.Pages
 {

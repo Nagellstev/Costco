@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using Costco.Utilities.Logger;
 
 namespace Costco.Utilities.Screenshoter
 {

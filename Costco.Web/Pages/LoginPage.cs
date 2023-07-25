@@ -1,5 +1,5 @@
 ﻿using Costco.Core.Browser;
-using Costco.Web.Elements;
+using Costco.Core.Elements;
 using OpenQA.Selenium;
 
 namespace Costco.Web.Pages

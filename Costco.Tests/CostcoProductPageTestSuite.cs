@@ -1,5 +1,5 @@
 using Costco.Core.Browser;
-using Costco.Utilities.FileReader.Models;
+using Costco.TestData.Models;
 using Costco.Web.Pages;
 
 namespace Costco.Tests

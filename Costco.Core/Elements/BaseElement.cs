@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Costco.Core.Browser;
 
-namespace Costco.Web.Elements
+namespace Costco.Core.Elements
 {
     public abstract class BaseElement
     {

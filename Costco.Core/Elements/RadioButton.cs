@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Costco.Web.Elements
+namespace Costco.Core.Elements
 {
     public class RadioButton : BaseElement
     {

@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using Costco.Web.Elements;
+using Costco.Core.Elements;
 
 namespace Costco.Web.Blocks
 {
