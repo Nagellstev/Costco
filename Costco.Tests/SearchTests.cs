@@ -1,15 +1,17 @@
 using Costco.Core.Browser;
-using Costco.TestData.Models;
+using Costco.Utilities.FileReader.Models;
+using Costco.Utilities.Logger;
+using Costco.Utilities.Screenshoter;
 using Costco.Web.Pages;
 
 namespace Costco.Tests
 {
     [Trait("Target", "Search")]
-    public class SearchTestSuite : BaseTest, IClassFixture<TestFixture>
+    public class SearchTests : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
 
-        public SearchTestSuite(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        public SearchTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {
             this.fixture = fixture;
         }
@@ -26,13 +28,13 @@ namespace Costco.Tests
             MainPage mainPage = new MainPage();
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-            string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
+            string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
+            mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed());
+            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
             string searchResult = searchResultsPage.ReadSearchResultsMessage();
 
             Assert.Contains(searchString.ToLower(), searchResult.ToLower());
-
         }
 
         /// <summary>
@@ -50,13 +52,14 @@ namespace Costco.Tests
             MainPage mainPage = new MainPage();
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-            string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
+            string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
+            mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed());
+            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
             int totalQuantity = searchResultsPage.CheckTotalQuantity();
-            searchResultsPage.FilterByPrice0to25();
+            searchResultsPage.FilterByPrice("$0 to $25");
             Waiters.WaitForPageLoad();
-            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed());
+            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
             int totalQuantityFiltered = searchResultsPage.CheckTotalQuantity();
 
             Assert.NotEqual(totalQuantityFiltered, totalQuantity);
@@ -74,9 +77,10 @@ namespace Costco.Tests
             MainPage mainPage = new MainPage();
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-            string searchString = ((SearchStringModel)fixture.TestData).SearchString[1];
+            string searchString = ((SearchStringModel)fixture.testData).SearchString[1];
+            mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed());
+            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
             string searchResult = searchResultsPage.ReadSearchResultsMessage();
 
             Assert.Contains("we were not able to find a match", searchResult.ToLower());

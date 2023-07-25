@@ -1,5 +1,6 @@
-﻿using Costco.Web.Blocks;
-using Costco.Core.Elements;
+﻿using Costco.Core.Browser;
+using Costco.Web.Blocks;
+using Costco.Web.Elements;
 using OpenQA.Selenium;
 using System.Text.RegularExpressions;
 
@@ -7,8 +8,8 @@ namespace Costco.Web.Pages
 {
     public class SearchResultsPage : BasePage
     {
-        public readonly By SearchResultsMessageLocator = By.XPath("//div[@id = 'search-results']//div[@class = 'toolbar']");
-        public readonly By TotalProductsShowingQuantityLocator = By.CssSelector("span[automation-id='totalProductsOutputText']");
+        public By SearchResultsMessageLocator => By.XPath("//div[@id = 'search-results']//div[@class = 'toolbar']");
+        public By TotalProductsShowingQuantityLocator => By.CssSelector("span[automation-id='totalProductsOutputText']");
         public TextBox SearchResultsMessage => new TextBox(SearchResultsMessageLocator);
         public TextBox TotalProductsShowingQuantity => new TextBox(TotalProductsShowingQuantityLocator);
         public FilterBlock FilterBlock => new FilterBlock();
@@ -19,9 +20,15 @@ namespace Costco.Web.Pages
             return SearchResultsMessage.Text;
         }
 
-        public void FilterByPrice0to25()
+        public void FilterByPrice(string priceRange)
         {
-            FilterBlock.PriceCheckBox0to25.Click();
+            for (int i = 0; i < FilterBlock.PriceCheckBoxes.Count; i++)
+            {
+                if (FilterBlock.PriceCheckBoxes[i].Text.Contains(priceRange))
+                {
+                    FilterBlock.PriceCheckBoxes[i].Click();
+                }
+            }
         }
 
         public int CheckTotalQuantity()
