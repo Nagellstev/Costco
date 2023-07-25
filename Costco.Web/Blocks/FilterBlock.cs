@@ -6,10 +6,11 @@ namespace Costco.Web.Blocks
 {
     public class FilterBlock : BaseBlock
     {
-        public By PriceCheckBoxesLocator = By.XPath("//div[@id = 'accordion-filter_collapse-1']//span[@class='style-check ']");
+        public static By FilterBlockLocator => By.Id("search-filter");
+        public By PriceCheckBoxesLocator => By.XPath("//div[@id = 'accordion-filter_collapse-1']//span[@class='style-check ']");
         public List<CheckBox> PriceCheckBoxes;
 
-        public FilterBlock(By locator) : base(locator) 
+        public FilterBlock() : base(FilterBlockLocator) 
         { 
             PriceCheckBoxes = GetCheckBoxes();
         }
