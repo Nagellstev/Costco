@@ -7,8 +7,8 @@ namespace Costco.Core.Browser
     {
         public static void WaitForPageLoad() => BrowserFactory.Browser.Waiter(TestSettings.TestWaits).Until(condition => BrowserFactory.Browser.ExecuteScript("return document.readyState").Equals("complete"));
 
-        public static void WaitForCondition(Func<bool> condition, int seconds) => BrowserFactory.Browser.Waiter(seconds).Until(x => condition.Invoke());
+        public static void WaitForCondition(Func<bool> condition, int seconds = 10) => BrowserFactory.Browser.Waiter(seconds).Until(x => condition.Invoke());
 
-        public static void WaitUntilElementExists(By locator, int seconds) => BrowserFactory.Browser.Waiter(seconds).Until(ExpectedConditions.ElementExists(locator));
+        public static void WaitUntilElementExists(By locator, int seconds = 10) => BrowserFactory.Browser.Waiter(seconds).Until(ExpectedConditions.ElementExists(locator));
     }
 }
