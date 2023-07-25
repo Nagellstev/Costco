@@ -13,6 +13,7 @@ namespace Costco.Tests
             testDisplayName = Context.Test.DisplayName;
             Logger.Information($"Initializing {testDisplayName}.");
         }
+
         public override void Dispose()
         {
             var theExceptionThrownByTest = Context.TestException;

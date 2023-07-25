@@ -14,13 +14,13 @@ namespace Costco.Core.Browser
             _driver = driver;
         }
 
+        public static IWebDriver? Driver => _driver;
+
         public void MoveMouseToElement(IWebElement element)
         {
             Actions act = new Actions(_driver);
             act.MoveToElement(element);
         }
-
-        public static IWebDriver? Driver => _driver;
 
         public static void ScrollToElement(IWebElement element)
         {
@@ -61,7 +61,10 @@ namespace Costco.Core.Browser
             return _driver.FindElement(locator);
         }
 
-        public WebDriverWait Waiter(int seconds) => new WebDriverWait(_driver, TimeSpan.FromSeconds(seconds));
+        public WebDriverWait Waiter(int seconds)
+        {
+            return new WebDriverWait(_driver, TimeSpan.FromSeconds(seconds));
+        }
 
         public object ExecuteScript(string script, params object[] args)
         {

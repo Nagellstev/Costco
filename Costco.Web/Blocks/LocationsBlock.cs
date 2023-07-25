@@ -12,12 +12,12 @@ namespace Costco.Web.Blocks
         public By ZipCodeInputLocator = By.Id("zipCode");
         public By ChangeDeliveryLocationButtonLocator = By.XPath("//button[text()='Change Delivery Location']");
 
+        public LocationsBlock() : base(locationsBlockLocator) { }
+
         public Button MyWarehouseButton => new(MyWarehouseLocator);
         public Button DeliveryLocationButton => new(DeliveryLocationLocator);
         public InputField ZipCodeInput => new(ZipCodeInputLocator);
         public Button ChangeDeliveryLocationButton => new(ChangeDeliveryLocationButtonLocator);
-
-        public LocationsBlock() : base(locationsBlockLocator) { }
 
         public void SetDeliveryLocation(string deliveryLocation)
         {

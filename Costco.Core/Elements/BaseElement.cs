@@ -12,6 +12,9 @@ namespace Costco.Core.Elements
             _element = BrowserFactory.Browser.FindElement(locator);
         }
 
+        public IWebElement OriginalWebElement => _element;
+        public string Text => OriginalWebElement.Text;
+
         protected BaseElement(IWebElement element)
         {
             _element = element;
@@ -27,7 +30,7 @@ namespace Costco.Core.Elements
             OriginalWebElement.SendKeys(keys);
         }
 
-        public void Submit ()
+        public void Submit()
         {
             OriginalWebElement.Submit();
         }
@@ -37,11 +40,24 @@ namespace Costco.Core.Elements
             OriginalWebElement.Clear();
         }
 
-        public IWebElement OriginalWebElement => _element;
-        public string Text => OriginalWebElement.Text;
-        public bool IsDisplayed() => OriginalWebElement.Displayed;
-        public bool IsEnabled() => OriginalWebElement.Enabled;
-        public bool IsSelected() => OriginalWebElement.Selected;
-        public IWebElement FindElement(By by) => OriginalWebElement.FindElement(by);
+        public bool IsDisplayed()
+        {
+            return OriginalWebElement.Displayed;
+        }
+
+        public bool IsEnabled()
+        {
+            return OriginalWebElement.Enabled;
+        }
+
+        public bool IsSelected()
+        {
+            return OriginalWebElement.Selected;
+        }
+
+        public IWebElement FindElement(By by)
+        {
+            return OriginalWebElement.FindElement(by);
+        }
     }
 }

@@ -4,14 +4,7 @@ namespace Costco.Core.Elements
 {
     public class CheckBox : BaseElement
     {
-        public CheckBox(By locator) : base(locator)
-        {
-
-        }
-
-        public CheckBox(IWebElement element) : base(element)
-        {
-
-        }
+        public CheckBox(By locator) : base(locator) { }
+        public CheckBox(IWebElement element) : base(element) { }
     }
 }

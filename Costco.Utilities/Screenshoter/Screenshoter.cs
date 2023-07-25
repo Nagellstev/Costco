@@ -29,6 +29,9 @@ namespace Costco.Utilities.Screenshoter
             }
         }
 
-        private static string GetTimeStamp(DateTime dateTime) => dateTime.ToString("yyyy-MM-dd_HH-mm-ss");
+        private static string GetTimeStamp(DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy-MM-dd_HH-mm-ss");
+        }
     }
 }

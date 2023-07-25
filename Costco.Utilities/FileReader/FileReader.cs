@@ -3,10 +3,13 @@
     public class FileReader
     {
         /// <summary>
-        /// Checks location provided in path and deserializes the specified file.
-        /// Supports xml and json. When working with xml pass the name of the desired node to TargetXmlNode property.  
+        /// Checks location provided in path and deserializes the specified file. Supports json.
         /// </summary>
-        /// <returns>Contents of the specified file as returnType object.</returns>
+        /// <param name="path"></param>
+        /// <param name="assembyName"></param>
+        /// <returns>Contents of the specified file as an object model </returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="NotSupportedException"></exception>
         public object Read(string path, string assembyName)
         {
             IReadStrategy strategy;

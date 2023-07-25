@@ -15,7 +15,7 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void ZeroProductsReturnError()
+        public void ZeroProductsReturnErrorTest()
         {
             ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[0]);
 
@@ -29,7 +29,7 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void OverLimitProductsReturnError()
+        public void OverLimitProductsReturnErrorTest()
         {
             ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
             string lowCutoff = "Limit ";
@@ -52,7 +52,7 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void OverMaximumProductReturnError()
+        public void OverMaximumProductReturnErrorTest()
         {
             ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[2]);
 
