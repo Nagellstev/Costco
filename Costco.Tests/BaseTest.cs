@@ -1,15 +1,18 @@
 ﻿using Costco.Core.Browser;
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshoter;
+using ReportPortal.Shared;
 
 namespace Costco.Tests
 {
     public class BaseTest : XunitContextBase
     {
         string testDisplayName;
+        public ITestOutputHelper output;
 
         public BaseTest(ITestOutputHelper output) : base(output) 
         {
+            this.output = output.WithReportPortal();
             testDisplayName = Context.Test.DisplayName;
             Logger.Information($"Initializing {testDisplayName}.");
         }
