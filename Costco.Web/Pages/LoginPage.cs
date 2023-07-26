@@ -18,23 +18,5 @@ namespace Costco.Web.Pages
         public Button LoginButton => new Button(LoginButtonLocator);
         public TextBox PasswordIsRequiredError => new TextBox(PasswordIsRequiredErrorLocator);
         public TextBox InvalidCredentialsError => new TextBox(InvalidCredentialsErrorLocator);
-
-        public void LoginWithCredentials(string username, string password)
-        {
-            UsernameInputField.SendKeys(username);
-            PasswordInputField.SendKeys(password);
-            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(LoginButtonLocator));
-            LoginButton.Click();
-        }
-
-        public bool VerifyPasswordIsRequiredErrorIsDisplayed()
-        {
-            return PasswordIsRequiredError.IsDisplayed();
-        }
-        public bool VerifyInvalidCredentialsErrorIsDisplayed()
-        {
-            Waiters.WaitForCondition(() => InvalidCredentialsError.IsDisplayed(), 10);
-            return InvalidCredentialsError.IsDisplayed();
-        }
     }
 }

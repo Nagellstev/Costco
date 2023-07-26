@@ -16,19 +16,6 @@ namespace Costco.Web.Pages
         public Button DisabledSignInButton => new Button(DisabledSignInButtonLocator);
         public Button AccountButton => new Button(AccountButtonLocator);
 
-        public void NavigateToLoginPage()
-        {
-            Waiters.WaitForCondition(() => SignInButton.IsDisplayed(), 5);
-            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(SignInButtonLocator));
-            SignInButton.Click();
-            Waiters.WaitForCondition(() => new LoginPage().PasswordInputField.IsDisplayed(), 10);
-        }
-
-        public bool VerifyUserIsLoggedIn()
-        {
-            Waiters.WaitForCondition(() => AccountButton.IsDisplayed(), 10);
-            return AccountButton.IsDisplayed();
-        }
 
         public SearchBlock SearchBlock => new SearchBlock();
 
