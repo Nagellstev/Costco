@@ -1,6 +1,4 @@
-﻿using Costco.Web.Pages;
-using Costco.Utilities.FileReader.Models;
-using Costco.Core.Browser;
+﻿using Costco.Utilities.FileReader.Models;
 using Costco.Web.Steps;
 
 namespace Costco.Tests
