@@ -31,7 +31,7 @@ namespace Costco.Tests
             string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
             mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
+            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
             string searchResult = searchResultsPage.ReadSearchResultsMessage();
 
             Assert.Contains(searchString.ToLower(), searchResult.ToLower());
@@ -53,14 +53,13 @@ namespace Costco.Tests
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
             string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
-            string priceFilter = ((SearchStringModel)fixture.testData).PriceFilters[0];
             mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
+            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed());
             int totalQuantity = searchResultsPage.CheckTotalQuantity();
-            searchResultsPage.FilterByPrice(priceFilter);
+            searchResultsPage.FilterByPrice("$0 to $25");
             Waiters.WaitForPageLoad();
-            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
+            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed());
             int totalQuantityFiltered = searchResultsPage.CheckTotalQuantity();
 
             Assert.NotEqual(totalQuantityFiltered, totalQuantity);
@@ -81,7 +80,7 @@ namespace Costco.Tests
             string searchString = ((SearchStringModel)fixture.testData).SearchString[1];
             mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
+            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
             string searchResult = searchResultsPage.ReadSearchResultsMessage();
 
             Assert.Contains("we were not able to find a match", searchResult.ToLower());
