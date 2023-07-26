@@ -5,30 +5,22 @@ namespace Costco.Web.Pages
 {
     public class ProductPage: BasePage
     {
-        private string url;
-        public override string Url => url;
+        public readonly By promotionalTextPath = By.CssSelector(".marketing-container > p.PromotionalText");
+        public readonly By quantityInputPath = By.CssSelector(".quantity-selector-v2 input");
+        public readonly By errorMessageBelowInputPath = By.CssSelector(".product-error:not(:empty)");
+        public readonly By minusStepperPath = By.Id("minusQty");
+        public readonly By plusStepperPath = By.Id("plusQty");
+        public readonly By addToCartButtonPath = By.Id("add-to-cart-btn");
+        public readonly By errorMessageInsideInputPath = By.Id("minQtyText-error");
+        public readonly By ItemNumberPath = By.XPath("//*[@automation-id = 'itemNumber']");
 
-        public ProductPage(string url)
-        {
-             this.url = url;
-        }
-
-        public By PromotionalTextPath => By.CssSelector(".marketing-container > p.PromotionalText");
-        public By QuantityInputPath => By.CssSelector(".quantity-selector-v2 input");
-        public By ErrorMessageBelowInputPath => By.CssSelector(".product-error:not(:empty)");
-        public By MinusStepperPath => By.Id("minusQty");
-        public By PlusStepperPath => By.Id("plusQty");
-        public By AddToCartButtonPath => By.Id("add-to-cart-btn");
-        public By ErrorMessageInsideInputPath => By.Id("minQtyText-error");
-        public By ItemNumberPath => By.XPath("//*[@automation-id = 'itemNumber']");
-
-        public TextBox PromotionalText => new TextBox(PromotionalTextPath);
-        public InputField QuantityInput => new InputField(QuantityInputPath);
-        public Button MinusStepper => new Button(MinusStepperPath);
-        public Button PlusStepper => new Button(PlusStepperPath);
-        public Button AddToCartButton => new Button(AddToCartButtonPath);
-        public TextBox ErrorMessageBelowInput => new TextBox(ErrorMessageBelowInputPath);
-        public TextBox ErrorMessageInsideInput => new TextBox(ErrorMessageInsideInputPath);
+        public TextBox PromotionalText => new TextBox(promotionalTextPath);
+        public InputField QuantityInput => new InputField(quantityInputPath);
+        public TextBox ErrorMessageBelowInput => new TextBox(errorMessageBelowInputPath);
+        public Button MinusStepper => new Button(minusStepperPath);
+        public Button PlusStepper => new Button(plusStepperPath);
+        public Button AddToCartButton => new Button(addToCartButtonPath);
+        public TextBox ErrorMessageInsideInput => new TextBox(errorMessageInsideInputPath);
         public TextBox ItemNumber => new TextBox(ItemNumberPath);
 
         public void InputProductAmount(string amount)

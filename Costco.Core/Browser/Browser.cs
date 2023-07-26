@@ -16,17 +16,15 @@ namespace Costco.Core.Browser
 
         public static IWebDriver? Driver => _driver;
 
+        public void Maximize()
+        {
+            _driver.Manage().Window.Maximize();
+        }
+
         public void MoveMouseToElement(IWebElement element)
         {
             Actions act = new Actions(_driver);
             act.MoveToElement(element);
-        }
-
-        public static void ScrollToElement(IWebElement element)
-        {
-            Logger.Information("Scrolling to element");
-            ((IJavaScriptExecutor)_driver).
-                ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
 
         public void GoToUrl(string url)
@@ -81,6 +79,13 @@ namespace Costco.Core.Browser
         {
             Logger.Information("Quit browser");
             _driver.Quit();
+        }
+
+        public static void ScrollToElement(IWebElement element)
+        {
+            Logger.Information("Scrolling to element");
+            ((IJavaScriptExecutor)_driver).
+                ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
     }
 }

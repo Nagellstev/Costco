@@ -24,14 +24,12 @@ namespace Costco.Tests
                 Logger.Information($"Reading test data {testDataPath}.");
             }
 
-            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
             Logger.Information("Setup complete.");
         }
 
         public void Dispose()
         {
             GC.SuppressFinalize(this);
-            BrowserFactory.CleanUp();
             Logger.Information("Disposing of fixture.");
         }
     }

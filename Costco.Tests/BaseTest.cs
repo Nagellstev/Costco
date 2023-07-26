@@ -1,6 +1,7 @@
 ﻿using Costco.Core.Browser;
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshoter;
+using OpenQA.Selenium;
 
 namespace Costco.Tests
 {
@@ -12,6 +13,8 @@ namespace Costco.Tests
         {
             testDisplayName = Context.Test.DisplayName;
             Logger.Information($"Initializing {testDisplayName}.");
+            BrowserFactory.Browser.Maximize();
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
         }
 
         public override void Dispose()
@@ -26,6 +29,7 @@ namespace Costco.Tests
 
             GC.SuppressFinalize(this);
             base.Dispose();
+            BrowserFactory.CleanUp();
             Logger.Information($"Disposing of {testDisplayName}.");
         }
     }

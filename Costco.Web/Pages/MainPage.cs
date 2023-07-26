@@ -8,20 +8,19 @@ namespace Costco.Web.Pages
     public class MainPage : BasePage
     {
         public override string Url => "https://www.costco.com/";
+        public readonly By signInButtonLocator = By.CssSelector("#header_sign_in.myaccount");
+        public readonly By disabledSignInButtonLocator = By.XPath("//a[@class='myaccount'][@style='display: none;']");
+        public readonly By accountButtonLocator = By.CssSelector("#myaccount-react-d");
 
-        public By SignInButtonLocator = By.CssSelector("#header_sign_in.myaccount");
-        public By DisabledSignInButtonLocator = By.XPath("//a[@class='myaccount'][@style='display: none;']");
-        public By AccountButtonLocator = By.CssSelector("#myaccount-react-d");
-
-        public Button SignInButton => new Button(SignInButtonLocator);
-        public Button DisabledSignInButton => new Button(DisabledSignInButtonLocator);
-        public Button AccountButton => new Button(AccountButtonLocator);
+        public Button SignInButton => new Button(signInButtonLocator);
+        public Button DisabledSignInButton => new Button(disabledSignInButtonLocator);
+        public Button AccountButton => new Button(accountButtonLocator);
         public SearchBlock SearchBlock => new SearchBlock();
 
         public void NavigateToLoginPage()
         {
             Waiters.WaitForCondition(() => SignInButton.IsDisplayed(), 5);
-            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(SignInButtonLocator));
+            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(signInButtonLocator));
             SignInButton.Click();
             Waiters.WaitForCondition(() => new LoginPage().PasswordInputField.IsDisplayed(), 10);
         }

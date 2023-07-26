@@ -7,23 +7,23 @@ namespace Costco.Web.Pages
     public class LoginPage : BasePage
     {
         public override string Url => "https://www.costco.com/LogonForm";
-        public By UsernameInputFieldLocator = By.CssSelector("#signInName");
-        public By PasswordInputFieldLocator = By.XPath("//input[@id='password']");
-        public By LoginButtonLocator = By.XPath("//button[@type='submit']");
-        public By PasswordIsRequiredErrorLocator = By.XPath("//div[@aria-hidden='false'][@class='error itemLevel']");
-        public By InvalidCredentialsErrorLocator = By.XPath("//div[@aria-hidden='false'][@class='error pageLevel']");
+        public readonly By usernameInputFieldLocator = By.CssSelector("#signInName");
+        public readonly By passwordInputFieldLocator = By.XPath("//input[@id='password']");
+        public readonly By loginButtonLocator = By.XPath("//button[@type='submit']");
+        public readonly By passwordIsRequiredErrorLocator = By.XPath("//div[@aria-hidden='false'][@class='error itemLevel']");
+        public readonly By invalidCredentialsErrorLocator = By.XPath("//div[@aria-hidden='false'][@class='error pageLevel']");
 
-        public InputField UsernameInputField => new InputField(UsernameInputFieldLocator);
-        public InputField PasswordInputField => new InputField(PasswordInputFieldLocator);
-        public Button LoginButton => new Button(LoginButtonLocator);
-        public TextBox PasswordIsRequiredError => new TextBox(PasswordIsRequiredErrorLocator);
-        public TextBox InvalidCredentialsError => new TextBox(InvalidCredentialsErrorLocator);
+        public InputField UsernameInputField => new InputField(usernameInputFieldLocator);
+        public InputField PasswordInputField => new InputField(passwordInputFieldLocator);
+        public Button LoginButton => new Button(loginButtonLocator);
+        public TextBox PasswordIsRequiredError => new TextBox(passwordIsRequiredErrorLocator);
+        public TextBox InvalidCredentialsError => new TextBox(invalidCredentialsErrorLocator);
 
         public void LoginWithCredentials(string username, string password)
         {
             UsernameInputField.SendKeys(username);
             PasswordInputField.SendKeys(password);
-            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(LoginButtonLocator));
+            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(loginButtonLocator));
             LoginButton.Click();
         }
 

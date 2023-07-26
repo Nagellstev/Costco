@@ -3,13 +3,13 @@
     public class FileReader
     {
         /// <summary>
-        /// Checks location provided in path and deserializes the specified file. Supports json.
+        /// Checks location provided in path and deserializes the specified file to the class
+        /// the name of which should be located in DataModel field of the file. Supports json.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="assembyName"></param>
-        /// <returns>Contents of the specified file as an object model </returns>
-        /// <exception cref="FileNotFoundException"></exception>
-        /// <exception cref="NotSupportedException"></exception>
+        /// <param name="path">Absolute bath to the file.</param>
+        /// <param name="assembyName">Name of the assemly desired model is belonging to.</param>
+        /// <returns>Contents of the specified file as the specified object model.</returns>
+
         public object Read(string path, string assembyName)
         {
             IReadStrategy strategy;

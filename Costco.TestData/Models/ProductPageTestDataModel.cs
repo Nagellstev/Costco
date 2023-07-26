@@ -2,6 +2,8 @@
 {
     public class ProductPageTestDataModel
     {
-        public List<string> ProductPageUrl { get; init; }
+        public string ProductPageUrlZeroItemsTest { get; init; }
+        public string ProductPageUrlLimitedItemsTest { get; init; }
+        public string ProductPageUrlOverMaxAmoutTest { get; init; }
     }
 }

@@ -7,10 +7,10 @@ namespace Costco.Web.Pages
 {
     public class SearchResultsPage : BasePage
     {
-        public By SearchResultsMessageLocator => By.XPath("//div[@id = 'search-results']//div[@class = 'toolbar']");
-        public TextBox SearchResultsMessage => new TextBox(SearchResultsMessageLocator);
-        public By TotalProductsShowingQuantityLocator => By.CssSelector("span[automation-id='totalProductsOutputText']");
-        public TextBox TotalProductsShowingQuantity => new TextBox(TotalProductsShowingQuantityLocator);
+        public readonly By searchResultsMessageLocator = By.XPath("//div[@id = 'search-results']//div[@class = 'toolbar']");
+        public readonly By totalProductsShowingQuantityLocator = By.CssSelector("span[automation-id='totalProductsOutputText']");
+        public TextBox SearchResultsMessage => new TextBox(searchResultsMessageLocator);
+        public TextBox TotalProductsShowingQuantity => new TextBox(totalProductsShowingQuantityLocator);
         public FilterBlock FilterBlock => new FilterBlock();
 
         #region Search Tests Steps
