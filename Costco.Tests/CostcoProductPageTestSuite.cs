@@ -1,6 +1,7 @@
 using Costco.Core.Browser;
 using Costco.Utilities.FileReader.Models;
 using Costco.Web.Pages;
+using Costco.Web.Steps;
 
 namespace Costco.Tests
 {
@@ -17,53 +18,36 @@ namespace Costco.Tests
         [Fact]
         public void ZeroProductsReturnError()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[0]);
+            ProductPageSteps steps = new(new());
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
-            Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed, 30);
-            productPage.InputProductAmount("0");
-            productPage.AddToCartButton.Click();
-            Waiters.WaitUntilElementExists(productPage.ErrorMessageBelowInputPath, 30);
+            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[0]);
+            steps.AddToCart("0");
 
-            Assert.Contains("Quantity must be 1 or more to add to cart.", productPage.GetErrorText());
+            Assert.Contains("Quantity must be 1 or more to add to cart.", steps.GetErrorText());
         }
 
         [Fact]
         public void OverLimitProductsReturnError()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
-            string lowCutoff = "Limit ";
-            string highCutoff = " per member";
+            ProductPageSteps steps = new(new());
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
-            Waiters.WaitForCondition(productPage.PromotionalText.IsDisplayed, 30);
-            string promoTextMaxQuantity = productPage.PromotionalText.Text;
-            promoTextMaxQuantity = promoTextMaxQuantity.Substring(
-                promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
-                promoTextMaxQuantity.IndexOf(highCutoff) - promoTextMaxQuantity.IndexOf(lowCutoff) - lowCutoff.Length);
-            Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed, 30);
-            productPage.InputProductAmount((Int32.Parse(promoTextMaxQuantity) + 1).ToString());
-            productPage.AddToCartButton.Click();
-            productPage.AddToCartButton.Click();
-            Waiters.WaitUntilElementExists(productPage.ErrorMessageBelowInputPath, 30);
+            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
+            int amount = steps.GetMaximumLimitedItemsAllowed();
+            steps.AddToCart((amount + 1).ToString());
 
-            Assert.Contains($"Item {productPage.ItemNumber.Text} has a maximum order quantity of {promoTextMaxQuantity}", 
-                productPage.GetErrorText());
+            Assert.Contains($"Item {steps.GetItemNumber()} has a maximum order quantity of {amount}", 
+                steps.GetErrorText());
         }
 
         [Fact]
         public void OverMaximumProductReturnError()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[2]);
+            ProductPageSteps steps = new(new());
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
-            Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed, 30);
-            productPage.InputProductAmount("999");
-            productPage.PlusStepper.Click();
-            productPage.AddToCartButton.Click();
-            Waiters.WaitForCondition(productPage.ErrorMessageInsideInput.IsDisplayed, 30);
+            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[2]);
+            steps.AddToCartPlusOne("999");
 
-            Assert.Equal("Please enter no more than 3 characters.", productPage.GetInputFieldErrorText());
+            Assert.Equal("Please enter no more than 3 characters.", steps.GetInputFieldErrorText());
         }
     }
 }
