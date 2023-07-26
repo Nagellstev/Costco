@@ -53,11 +53,12 @@ namespace Costco.Tests
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
             string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
+            string priceFilter = ((SearchStringModel)fixture.testData).PriceFilters[0];
             mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
             Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
             int totalQuantity = searchResultsPage.CheckTotalQuantity();
-            searchResultsPage.FilterByPrice("$0 to $25");
+            searchResultsPage.FilterByPrice(priceFilter);
             Waiters.WaitForPageLoad();
             Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
             int totalQuantityFiltered = searchResultsPage.CheckTotalQuantity();
