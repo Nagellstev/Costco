@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/reportportal/agent-net-xunit/master/src/ReportPortal.XUnitReporter/ReportPortal.config.schema",
+  "enabled": true,
+  "server": {
+    "url": "https://reportportal.epam.com/api/v1",
+    "project": "filipp_protopopov_personal",
+    "authentication": {
+      "uuid": "3zoTn9XDhI7k0DvHw7G0lOnsvxI"
+    }
+  },
+  "launch": {
+    "name": "Costco_tests",
+    "description": "Tests for costco.com",
+    "debugMode": false,
+    "attributes": [ "t1", "os:win10" ]
+  }
+}
