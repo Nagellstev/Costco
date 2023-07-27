@@ -20,12 +20,13 @@ namespace Costco.Tests
             string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
 
             LocationsPage locationsPage = new();
+
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
-            Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled(), 10);
+            Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
             locationsPage.SearchForWarehouse(warehouse);
-            Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled(), 10);
+            Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled());
             locationsPage.SetAsMyWarehouse();
-            Waiters.WaitForCondition(() => locationsPage.IsWarehouseSet(warehouse), 10);
+            Waiters.WaitForCondition(() => locationsPage.IsWarehouseSet(warehouse));
 
             Assert.True(locationsPage.IsWarehouseSet(warehouse));
         }
@@ -36,15 +37,16 @@ namespace Costco.Tests
             string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
 
             LocationsPage locationsPage = new();
+
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
-            Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled(), 10);
+            Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
             locationsPage.SearchForWarehouse(warehouse);
-            Waiters.WaitForCondition(() => locationsPage.IsResultFound(warehouse), 10);
+            Waiters.WaitForCondition(() => locationsPage.IsResultFound(warehouse));
             string nameOnLocationsPage = locationsPage.GetWarehouseName();
             string addressOnLocationsPage = locationsPage.GetWarehouseAddress();
             locationsPage.ClickStoreDetails();
             WarehousePage warehousePage = new();
-            Waiters.WaitForCondition(() => warehousePage.Name.IsEnabled(), 10);
+            Waiters.WaitForCondition(() => warehousePage.Name.IsEnabled());
             string nameOnWarehousePage = warehousePage.GetName();
             string addressOnWarehousePage = warehousePage.GetAddress();
 
@@ -60,7 +62,7 @@ namespace Costco.Tests
             LocationsPage locationsPage = new();
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
             locationsPage.LocationsBlock.SetDeliveryLocation(deliveryLocation);
-            Waiters.WaitForCondition(() => locationsPage.IsDeliveryLocationSet(deliveryLocation), 10);
+            Waiters.WaitForCondition(() => locationsPage.IsDeliveryLocationSet(deliveryLocation));
 
             Assert.True(locationsPage.IsDeliveryLocationSet(deliveryLocation));
         }

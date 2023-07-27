@@ -32,7 +32,7 @@ namespace Costco.Web.Pages
         }
         public bool VerifyInvalidCredentialsErrorIsDisplayed()
         {
-            Waiters.WaitForCondition(() => InvalidCredentialsError.IsDisplayed(), 10);
+            Waiters.WaitForCondition(() => InvalidCredentialsError.IsDisplayed());
             return InvalidCredentialsError.IsDisplayed();
         }
     }

@@ -28,7 +28,7 @@ namespace Costco.Tests
 
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
+            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed());
             string searchResult = searchResultsPage.ReadSearchResultsMessage();
 
             Assert.Contains(searchString.ToLower(), searchResult.ToLower());
@@ -52,11 +52,11 @@ namespace Costco.Tests
 
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
+            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed());
             int totalQuantity = searchResultsPage.CheckTotalQuantity();
             searchResultsPage.FilterByPrice0to25();
             Waiters.WaitForPageLoad();
-            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
+            Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed());
             int totalQuantityFiltered = searchResultsPage.CheckTotalQuantity();
 
             Assert.NotEqual(totalQuantityFiltered, totalQuantity);
@@ -76,7 +76,7 @@ namespace Costco.Tests
 
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[1];
             mainPage.SearchFieldInput(searchString);
-            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
+            Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed());
             string searchResult = searchResultsPage.ReadSearchResultsMessage();
 
             Assert.Contains("we were not able to find a match", searchResult.ToLower());
