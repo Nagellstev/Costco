@@ -1,4 +1,5 @@
 ﻿using Serilog;
+using ReportPortal.Serilog;
 
 namespace Costco.Utilities.Logger
 {
@@ -14,6 +15,7 @@ namespace Costco.Utilities.Logger
             }
             logger = new LoggerConfiguration()
                 .WriteTo.File($"{filePath}/{loggerName}.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.ReportPortal()
                 .CreateLogger();
         }
 
