@@ -18,23 +18,5 @@ namespace Costco.Web.Blocks
         public Button DeliveryLocationButton => new(DeliveryLocationLocator);
         public InputField ZipCodeInput => new(ZipCodeInputLocator);
         public Button ChangeDeliveryLocationButton => new(ChangeDeliveryLocationButtonLocator);
-
-        public void SetDeliveryLocation(string deliveryLocation)
-        {
-            DeliveryLocationButton.Click();
-            ZipCodeInput.Clear();
-            ZipCodeInput.SendKeys(deliveryLocation);
-            ChangeDeliveryLocationButton.Click();
-        }
-
-        public bool IsWarehouseSet(string warehouse)
-        {
-            return MyWarehouseButton.Text.Equals(warehouse);
-        }
-
-        public bool IsDeliveryLocationSet(string deliveryLocation)
-        {
-            return DeliveryLocationButton.Text.Equals(deliveryLocation);
-        }
     }
 }

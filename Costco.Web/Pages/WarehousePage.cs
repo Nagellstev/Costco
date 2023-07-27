@@ -10,15 +10,5 @@ namespace Costco.Web.Pages
 
         public TextBox Name => new(NameLocator);
         public TextBox Address => new(AddressLocator);
-
-        public string GetName()
-        {
-            return Name.Text[..Name.Text.IndexOf(" ")];
-        }
-
-        public string GetAddress()
-        {
-            return Address.Text;
-        }
     }
 }

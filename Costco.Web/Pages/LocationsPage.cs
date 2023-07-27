@@ -20,47 +20,5 @@ namespace Costco.Web.Pages
         public TextBox WarehouseName => new(WarehouseNameLocator);
         public TextBox WarehouseAddress => new(WarehouseAddressLocator);
         public LocationsBlock LocationsBlock => new LocationsBlock();
-
-        public void SearchForWarehouse(string input)
-        {
-            WarehouseSearch.Clear();
-            WarehouseSearch.SendKeys(input);
-            FindButton.Click();
-        }
-
-        public void SetAsMyWarehouse()
-        {
-            SetAsMyWarehouseButton.Click();
-        }
-
-        public void ClickStoreDetails()
-        {
-            StoreDetailsButton.Click();
-        }
-
-        public string GetWarehouseName()
-        {
-            return WarehouseName.Text;
-        }
-        
-        public string GetWarehouseAddress()
-        {
-            return WarehouseAddress.Text;
-        }
-
-        public bool IsWarehouseSet(string warehouse)
-        {
-            return LocationsBlock.IsWarehouseSet(warehouse);
-        }
-
-        public bool IsDeliveryLocationSet(string location)
-        {
-            return LocationsBlock.IsDeliveryLocationSet(location);
-        }
-
-        public bool IsResultFound(string result)
-        {
-            return WarehouseName.Text.Equals(result);
-        }
     }
 }
