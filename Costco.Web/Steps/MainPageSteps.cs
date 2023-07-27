@@ -5,20 +5,24 @@ namespace Costco.Web.Steps
 {
     public class MainPageSteps
     {
-        public static void NavigateToLoginPage()
+        private MainPage _mainPage;
+
+        public MainPageSteps(MainPage mainPage)
         {
-            var mainPage = new MainPage();
-            Waiters.WaitForCondition(() => mainPage.SignInButton.IsDisplayed(), 5);
-            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(mainPage.SignInButtonLocator));
-            mainPage.SignInButton.Click();
+            _mainPage = mainPage;
+        }
+        public void NavigateToLoginPage()
+        {
+            Waiters.WaitForCondition(() => _mainPage.SignInButton.IsDisplayed(), 5);
+            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(_mainPage.SignInButtonLocator));
+            _mainPage.SignInButton.Click();
             Waiters.WaitForCondition(() => new LoginPage().PasswordInputField.IsDisplayed(), 10);
         }
 
-        public static bool VerifyUserIsLoggedIn()
+        public bool VerifyUserIsLoggedIn()
         {
-            var mainPage = new MainPage();
-            Waiters.WaitForCondition(() => mainPage.AccountButton.IsDisplayed(), 10);
-            return mainPage.AccountButton.IsDisplayed();
+            Waiters.WaitForCondition(() => _mainPage.AccountButton.IsDisplayed(), 10);
+            return _mainPage.AccountButton.IsDisplayed();
         }
     }
 }

@@ -7,9 +7,13 @@ namespace Costco.Tests
     public class LoginTests : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
-        public LoginTests(TestFixture fixture, ITestOutputHelper output) : base(output)
+        private MainPageSteps _mainPageSteps;
+        private LoginPageSteps _loginPageSteps;
+        public LoginTests(TestFixture fixture, ITestOutputHelper output, MainPageSteps mainPageSteps, LoginPageSteps loginPageSteps) : base(output)
         {
-            this.fixture= fixture;
+            this.fixture = fixture;
+            _mainPageSteps = mainPageSteps;
+            _loginPageSteps = loginPageSteps;
         }
 
         [Fact]
@@ -20,11 +24,11 @@ namespace Costco.Tests
             string password = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Password;
 
             //Action
-            MainPageSteps.NavigateToLoginPage();
-            LoginPageSteps.LoginWithCredentials(userName, password);
+            _mainPageSteps.NavigateToLoginPage();
+            _loginPageSteps.LoginWithCredentials(userName, password);
 
             //Assert
-            Assert.True(MainPageSteps.VerifyUserIsLoggedIn());
+            Assert.True(_mainPageSteps.VerifyUserIsLoggedIn());
         }
 
         [Fact]
@@ -35,11 +39,11 @@ namespace Costco.Tests
             string password = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Password;
 
             //Action
-            MainPageSteps.NavigateToLoginPage();
-            LoginPageSteps.LoginWithCredentials(userName, password);
+            _mainPageSteps.NavigateToLoginPage();
+            _loginPageSteps.LoginWithCredentials(userName, password);
 
             //Assert
-            Assert.True(LoginPageSteps.VerifyInvalidCredentialsErrorIsDisplayed());
+            Assert.True(_loginPageSteps.VerifyInvalidCredentialsErrorIsDisplayed());
         }
 
         [Fact]
@@ -50,11 +54,11 @@ namespace Costco.Tests
             string password = string.Empty;
 
             //Action
-            MainPageSteps.NavigateToLoginPage();
-            LoginPageSteps.LoginWithCredentials(userName, password);
+            _mainPageSteps.NavigateToLoginPage();
+            _loginPageSteps.LoginWithCredentials(userName, password);
 
             //Assert
-            Assert.True(LoginPageSteps.VerifyPasswordIsRequiredErrorIsDisplayed());
+            Assert.True(_loginPageSteps.VerifyPasswordIsRequiredErrorIsDisplayed());
         }
     }
 }
