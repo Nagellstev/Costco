@@ -5,14 +5,6 @@ namespace Costco.Web.Pages
 {
     public class ProductPage: BasePage
     {
-        private string url;
-        public override string Url => url;
-
-        public ProductPage(string url)
-        {
-             this.url = url;
-        }
-
         public By PromotionalTextPath => By.CssSelector(".marketing-container > p.PromotionalText");
         public By QuantityInputPath => By.CssSelector(".quantity-selector-v2 input");
         public By ErrorMessageBelowInputPath => By.CssSelector(".product-error:not(:empty)");
@@ -30,21 +22,5 @@ namespace Costco.Web.Pages
         public TextBox ErrorMessageBelowInput => new TextBox(ErrorMessageBelowInputPath);
         public TextBox ErrorMessageInsideInput => new TextBox(ErrorMessageInsideInputPath);
         public TextBox ItemNumber => new TextBox(ItemNumberPath);
-
-        public void InputProductAmount(string amount)
-        {
-            QuantityInput.Clear();
-            QuantityInput.SendKeys(amount);
-        }
-
-        public string GetErrorText()
-        {
-            return ErrorMessageBelowInput.Text.Trim();
-        }
-
-        public string GetInputFieldErrorText()
-        {
-            return ErrorMessageInsideInput.Text.Trim();
-        }
     }
 }

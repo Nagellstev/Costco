@@ -1,6 +1,7 @@
 using Costco.Core.Browser;
 using Costco.Utilities.FileReader.Models;
 using Costco.Web.Pages;
+using Costco.Web.Steps;
 
 namespace Costco.Tests
 {
@@ -8,62 +9,46 @@ namespace Costco.Tests
     public class CostcoProductPageTestSuite : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
+        ProductPageSteps steps;
 
         public CostcoProductPageTestSuite(TestFixture fixture, ITestOutputHelper output): base(output)
         {
             this.fixture = fixture;
+            steps = new(new());
         }
 
         [Fact]
         public void ZeroProductsReturnError()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[0]);
+            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[0]);
+            steps.InputProductAmount(0);
+            steps.PressAddToCart();
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
-            Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed);
-            productPage.InputProductAmount("0");
-            productPage.AddToCartButton.Click();
-            Waiters.WaitUntilElementExists(productPage.ErrorMessageBelowInputPath);
-
-            Assert.Contains("Quantity must be 1 or more to add to cart.", productPage.GetErrorText());
+            Assert.Contains("Quantity must be 1 or more to add to cart.", steps.GetErrorText());
         }
 
         [Fact]
         public void OverLimitProductsReturnError()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
-            string lowCutoff = "Limit ";
-            string highCutoff = " per member";
+            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
+            int amount = steps.GetMaximumLimitedItemsAllowed();
+            steps.InputProductAmount(amount + 1);
+            steps.PressAddToCart();
+            steps.PressAddToCart();
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
-            Waiters.WaitForCondition(productPage.PromotionalText.IsDisplayed);
-            string promoTextMaxQuantity = productPage.PromotionalText.Text;
-            promoTextMaxQuantity = promoTextMaxQuantity.Substring(
-                promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
-                promoTextMaxQuantity.IndexOf(highCutoff) - promoTextMaxQuantity.IndexOf(lowCutoff) - lowCutoff.Length);
-            Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed);
-            productPage.InputProductAmount((Int32.Parse(promoTextMaxQuantity) + 1).ToString());
-            productPage.AddToCartButton.Click();
-            productPage.AddToCartButton.Click();
-            Waiters.WaitUntilElementExists(productPage.ErrorMessageBelowInputPath);
-
-            Assert.Contains($"Item {productPage.ItemNumber.Text} has a maximum order quantity of {promoTextMaxQuantity}", 
-                productPage.GetErrorText());
+            Assert.Contains($"Item {steps.GetItemNumber()} has a maximum order quantity of {amount}", 
+                steps.GetErrorText());
         }
 
         [Fact]
         public void OverMaximumProductReturnError()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[2]);
+            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[2]);
+            steps.InputProductAmount(999);
+            steps.PressPlusOneStepper(1);
+            steps.PressAddToCart();
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
-            Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed);
-            productPage.InputProductAmount("999");
-            productPage.PlusStepper.Click();
-            productPage.AddToCartButton.Click();
-            Waiters.WaitForCondition(productPage.ErrorMessageInsideInput.IsDisplayed);
-
-            Assert.Equal("Please enter no more than 3 characters.", productPage.GetInputFieldErrorText());
+            Assert.Equal("Please enter no more than 3 characters.", steps.GetInputFieldErrorText());
         }
     }
 }
