@@ -18,15 +18,15 @@ namespace Costco.Web.Pages
 
         public void NavigateToLoginPage()
         {
-            Waiters.WaitForCondition(() => SignInButton.IsDisplayed(), 5);
+            Waiters.WaitForCondition(() => SignInButton.IsDisplayed());
             BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(SignInButtonLocator));
             SignInButton.Click();
-            Waiters.WaitForCondition(() => new LoginPage().PasswordInputField.IsDisplayed(), 10);
+            Waiters.WaitForCondition(() => new LoginPage().PasswordInputField.IsDisplayed());
         }
 
         public bool VerifyUserIsLoggedIn()
         {
-            Waiters.WaitForCondition(() => AccountButton.IsDisplayed(), 10);
+            Waiters.WaitForCondition(() => AccountButton.IsDisplayed());
             return AccountButton.IsDisplayed();
         }
 
