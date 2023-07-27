@@ -6,7 +6,6 @@ namespace Costco.Web.Pages
 {
     public class LocationsPage: BasePage
     {
-        public override string Url => "https://www.costco.com/warehouse-locations";
         public readonly By WarehouseSearchLocator = By.Id("search-warehouse");
         public readonly By FindButtonLocator = By.XPath("//button[@automation-id='findButton']");
         public readonly By SetAsMyWarehouseButtonLocator = By.XPath("//input[@aria-describedby='setMyWarehouseLocation1']");

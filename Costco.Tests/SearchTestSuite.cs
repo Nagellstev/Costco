@@ -27,7 +27,6 @@ namespace Costco.Tests
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
-            mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
             Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
             string searchResult = searchResultsPage.ReadSearchResultsMessage();
@@ -52,7 +51,6 @@ namespace Costco.Tests
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
-            mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
             Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 5);
             int totalQuantity = searchResultsPage.CheckTotalQuantity();
@@ -77,7 +75,6 @@ namespace Costco.Tests
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[1];
-            mainPage.GoToPage();
             mainPage.SearchFieldInput(searchString);
             Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed(), 5);
             string searchResult = searchResultsPage.ReadSearchResultsMessage();

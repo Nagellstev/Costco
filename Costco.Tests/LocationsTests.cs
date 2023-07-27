@@ -20,7 +20,7 @@ namespace Costco.Tests
             string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
 
             LocationsPage locationsPage = new();
-            locationsPage.GoToPage();
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
             Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled(), 10);
             locationsPage.SearchForWarehouse(warehouse);
             Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled(), 10);
@@ -36,7 +36,7 @@ namespace Costco.Tests
             string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
 
             LocationsPage locationsPage = new();
-            locationsPage.GoToPage();
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
             Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled(), 10);
             locationsPage.SearchForWarehouse(warehouse);
             Waiters.WaitForCondition(() => locationsPage.IsResultFound(warehouse), 10);
@@ -58,7 +58,7 @@ namespace Costco.Tests
             string deliveryLocation = ((LocationsModel)fixture.TestData).DeliveryLocation;
 
             LocationsPage locationsPage = new();
-            locationsPage.GoToPage();
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
             locationsPage.LocationsBlock.SetDeliveryLocation(deliveryLocation);
             Waiters.WaitForCondition(() => locationsPage.IsDeliveryLocationSet(deliveryLocation), 10);
 

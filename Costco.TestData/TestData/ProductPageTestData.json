@@ -1,6 +1,3 @@
 {
-  "DataModel": "ProductPageModel",
-  "AddToCartZeroItemsTestUrl": "https://www.costco.com/kirkland-signature-ladies'-slub-tee%2c-2-pack.product.100670508.html",
-  "AddToCartMoreLimitedItemsThanAllowedTestUrl": "https://www.costco.com/midea-duo-smart-12k-btu-doesacc-4-in-1-inverter-portable-air-conditioner.product.100978219.html",
-  "ExceedMaximumAmountOfItemsInCartInputFieldTest": "https://www.costco.com/.product.6262016.html"
+  "DataModel": "ProductPageModel"
 }

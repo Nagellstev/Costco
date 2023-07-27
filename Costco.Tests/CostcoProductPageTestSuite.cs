@@ -1,5 +1,4 @@
 using Costco.Core.Browser;
-using Costco.TestData.Models;
 using Costco.Web.Pages;
 
 namespace Costco.Tests
@@ -19,7 +18,7 @@ namespace Costco.Tests
         {
             ProductPage productPage = new();
 
-            BrowserFactory.Browser.GoToUrl(((ProductPageModel)fixture.TestData).AddToCartZeroItemsTestUrl);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartZeroItemsTest);
             Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed, 30);
             productPage.InputProductAmount("0");
             productPage.AddToCartButton.Click();
@@ -35,7 +34,7 @@ namespace Costco.Tests
             string lowCutoff = "Limit ";
             string highCutoff = " per member";
 
-            BrowserFactory.Browser.GoToUrl(((ProductPageModel)fixture.TestData).AddToCartMoreLimitedItemsThanAllowedTestUrl);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartMoreLimitedItemsThanAllowedTest);
             Waiters.WaitForCondition(productPage.PromotionalText.IsDisplayed, 30);
             string promoTextMaxQuantity = productPage.PromotionalText.Text;
             promoTextMaxQuantity = promoTextMaxQuantity.Substring(
@@ -56,7 +55,7 @@ namespace Costco.Tests
         {
             ProductPage productPage = new();
 
-            BrowserFactory.Browser.GoToUrl(((ProductPageModel)fixture.TestData).ExceedMaximumAmountOfItemsInCartInputFieldTestUrl);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.ExceedMaximumAmountOfItemsInCartInputFieldTest);
             Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed, 30);
             productPage.InputProductAmount("999");
             productPage.PlusStepper.Click();

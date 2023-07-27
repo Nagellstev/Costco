@@ -7,7 +7,6 @@ namespace Costco.Web.Pages
 {
     public class MainPage : BasePage
     {
-        public override string Url => "https://www.costco.com/";
         public readonly By SignInButtonLocator = By.CssSelector("#header_sign_in.myaccount");
         public readonly By DisabledSignInButtonLocator = By.XPath("//a[@class='myaccount'][@style='display: none;']");
         public readonly By AccountButtonLocator = By.CssSelector("#myaccount-react-d");
