@@ -17,7 +17,7 @@ namespace Costco.Tests
         [Fact]
         public void SetWarehouseAsMyWarehouseTest()
         {
-            string warehouse = ((LocationsModel)fixture.testData).Warehouse;
+            string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
 
             LocationsPage locationsPage = new();
             locationsPage.GoToPage();
@@ -33,7 +33,7 @@ namespace Costco.Tests
         [Fact]
         public void ViewStoreDetailsTest()
         {
-            string warehouse = ((LocationsModel)fixture.testData).Warehouse;
+            string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
 
             LocationsPage locationsPage = new();
             locationsPage.GoToPage();
@@ -55,7 +55,7 @@ namespace Costco.Tests
         [Fact]
         public void ChangeDeliveryLocationTest()
         {
-            string deliveryLocation = ((LocationsModel)fixture.testData).DeliveryLocation;
+            string deliveryLocation = ((LocationsModel)fixture.TestData).DeliveryLocation;
 
             LocationsPage locationsPage = new();
             locationsPage.GoToPage();

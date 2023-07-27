@@ -19,11 +19,11 @@ namespace Costco.Tests
         {
             ProductPage productPage = new();
 
-            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrlZeroItemsTest);
+            BrowserFactory.Browser.GoToUrl(((ProductPageModel)fixture.TestData).AddToCartZeroItemsTestUrl);
             Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed, 30);
             productPage.InputProductAmount("0");
             productPage.AddToCartButton.Click();
-            Waiters.WaitUntilElementExists(productPage.errorMessageBelowInputPath, 30);
+            Waiters.WaitUntilElementExists(productPage.ErrorMessageBelowInputPath, 30);
 
             Assert.Contains("Quantity must be 1 or more to add to cart.", productPage.GetErrorText());
         }
@@ -35,7 +35,7 @@ namespace Costco.Tests
             string lowCutoff = "Limit ";
             string highCutoff = " per member";
 
-            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrlLimitedItemsTest);
+            BrowserFactory.Browser.GoToUrl(((ProductPageModel)fixture.TestData).AddToCartMoreLimitedItemsThanAllowedTestUrl);
             Waiters.WaitForCondition(productPage.PromotionalText.IsDisplayed, 30);
             string promoTextMaxQuantity = productPage.PromotionalText.Text;
             promoTextMaxQuantity = promoTextMaxQuantity.Substring(
@@ -45,7 +45,7 @@ namespace Costco.Tests
             productPage.InputProductAmount((Int32.Parse(promoTextMaxQuantity) + 1).ToString());
             productPage.AddToCartButton.Click();
             productPage.AddToCartButton.Click();
-            Waiters.WaitUntilElementExists(productPage.errorMessageBelowInputPath, 30);
+            Waiters.WaitUntilElementExists(productPage.ErrorMessageBelowInputPath, 30);
 
             Assert.Contains($"Item {productPage.ItemNumber.Text} has a maximum order quantity of {promoTextMaxQuantity}", 
                 productPage.GetErrorText());
@@ -56,7 +56,7 @@ namespace Costco.Tests
         {
             ProductPage productPage = new();
 
-            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrlOverMaxAmoutTest);
+            BrowserFactory.Browser.GoToUrl(((ProductPageModel)fixture.TestData).ExceedMaximumAmountOfItemsInCartInputFieldTestUrl);
             Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed, 30);
             productPage.InputProductAmount("999");
             productPage.PlusStepper.Click();

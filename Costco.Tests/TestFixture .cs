@@ -9,7 +9,7 @@ namespace Costco.Tests
 {
     public class TestFixture : IDisposable
     {
-        public object testData;
+        public object TestData;
 
         public TestFixture()
         {
@@ -20,7 +20,7 @@ namespace Costco.Tests
             if (testDataPath!= null)
             {
                 FileReader reader = new();
-                testData = reader.Read(testDataPath, AssemblyName.GetAssemblyName("Costco.TestData.dll").FullName);
+                TestData = reader.Read(testDataPath, AssemblyName.GetAssemblyName("Costco.TestData.dll").FullName);
                 Logger.Information($"Reading test data {testDataPath}.");
             }
 

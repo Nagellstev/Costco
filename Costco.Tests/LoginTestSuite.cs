@@ -19,8 +19,8 @@ namespace Costco.Tests
             //Arrange
             MainPage mainPage = new MainPage();
             LoginPage loginPage = new LoginPage();
-            string userName = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Username;
-            string password = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Password;
+            string userName = ((LoginCredentialsModel)fixture.TestData).ValidCredentials.Username;
+            string password = ((LoginCredentialsModel)fixture.TestData).ValidCredentials.Password;
 
             //Action
             mainPage.NavigateToLoginPage();
@@ -36,8 +36,8 @@ namespace Costco.Tests
             //Arrange
             MainPage mainPage = new MainPage();
             LoginPage loginPage = new LoginPage();
-            string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
-            string password = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Password;
+            string userName = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Username;
+            string password = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Password;
 
             //Action
             mainPage.GoToPage();
@@ -54,7 +54,7 @@ namespace Costco.Tests
             //Arrange
             MainPage mainPage = new MainPage();
             LoginPage loginPage = new LoginPage();
-            string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
+            string userName = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Username;
             string password = string.Empty;
 
             //Action

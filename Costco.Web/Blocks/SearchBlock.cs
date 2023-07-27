@@ -6,10 +6,10 @@ namespace Costco.Web.Blocks
     public class SearchBlock : BaseBlock
     {
         private static readonly By searchBlockLocator = By.Id("formcatsearch");
-        public readonly By searchFieldLocator = By.Id("search-field");
+        public readonly By SearchFieldLocator = By.Id("search-field");
 
         public SearchBlock() : base(searchBlockLocator) { }
 
-        public InputField SearchField => new InputField(searchFieldLocator);
+        public InputField SearchField => new InputField(SearchFieldLocator);
     }
 }
