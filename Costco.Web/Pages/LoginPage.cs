@@ -1,17 +1,16 @@
 ﻿using Costco.Core.Browser;
-using Costco.Web.Elements;
+using Costco.Core.Elements;
 using OpenQA.Selenium;
 
 namespace Costco.Web.Pages
 {
     public class LoginPage : BasePage
     {
-        public override string Url => "https://www.costco.com/LogonForm";
-        public By UsernameInputFieldLocator = By.CssSelector("#signInName");
-        public By PasswordInputFieldLocator = By.XPath("//input[@id='password']");
-        public By LoginButtonLocator = By.XPath("//button[@type='submit']");
-        public By PasswordIsRequiredErrorLocator = By.XPath("//div[@aria-hidden='false'][@class='error itemLevel']");
-        public By InvalidCredentialsErrorLocator = By.XPath("//div[@aria-hidden='false'][@class='error pageLevel']");
+        public readonly By UsernameInputFieldLocator = By.CssSelector("#signInName");
+        public readonly By PasswordInputFieldLocator = By.XPath("//input[@id='password']");
+        public readonly By LoginButtonLocator = By.XPath("//button[@type='submit']");
+        public readonly By PasswordIsRequiredErrorLocator = By.XPath("//div[@aria-hidden='false'][@class='error itemLevel']");
+        public readonly By InvalidCredentialsErrorLocator = By.XPath("//div[@aria-hidden='false'][@class='error pageLevel']");
 
         public InputField UsernameInputField => new InputField(UsernameInputFieldLocator);
         public InputField PasswordInputField => new InputField(PasswordInputFieldLocator);

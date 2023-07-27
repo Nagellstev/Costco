@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Costco.Core\Costco.Core.csproj" />
+    <ProjectReference Include="..\Costco.TestData\Costco.TestData.csproj" />
     <ProjectReference Include="..\Costco.Utilities\Costco.Utilities.csproj" />
     <ProjectReference Include="..\Costco.Web\Costco.Web.csproj" />
   </ItemGroup>

@@ -8,7 +8,6 @@ namespace Costco.Core.Browser
         public IWebDriver GetDriver()
         {
             var options = new FirefoxOptions();
-            options.AddArgument("--start-maximized");
             var service = FirefoxDriverService.CreateDefaultService();
             var driver = new FirefoxDriver(service, options, TimeSpan.FromSeconds(TestSettings.TimeOuts));
             return driver;

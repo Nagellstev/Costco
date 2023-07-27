@@ -1,5 +1,5 @@
 ﻿using Costco.Utilities.FileReader;
-using Costco.Utilities.FileReader.Models;
+using Costco.Core.ConfigurationModels;
 
 namespace Costco.Core.Browser
 {
@@ -10,7 +10,8 @@ namespace Costco.Core.Browser
         static TestSettings()
         {
             FileReader reader = new();
-            _config = (ConfigModel)reader.Read(Environment.GetEnvironmentVariable("Config"));
+            _config = (ConfigModel)reader.Read(Environment.GetEnvironmentVariable("Config"), 
+                typeof(ConfigModel).Assembly.FullName);
         }
 
         public static BrowserType Browser => (BrowserType)Enum.Parse(typeof(BrowserType), _config.Browser);

@@ -1,7 +1,5 @@
 using Costco.Core.Browser;
-using Costco.Utilities.FileReader.Models;
-using Costco.Utilities.Logger;
-using Costco.Utilities.Screenshoter;
+using Costco.TestData.Models;
 using Costco.Web.Pages;
 
 namespace Costco.Tests
@@ -28,8 +26,7 @@ namespace Costco.Tests
             MainPage mainPage = new MainPage();
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-            string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
-            mainPage.GoToPage();
+            string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
             mainPage.SearchFieldInput(searchString);
             Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed());
             string searchResult = searchResultsPage.ReadSearchResultsMessage();
@@ -53,8 +50,7 @@ namespace Costco.Tests
             MainPage mainPage = new MainPage();
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-            string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
-            mainPage.GoToPage();
+            string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
             mainPage.SearchFieldInput(searchString);
             Waiters.WaitForCondition(() => searchResultsPage.TotalProductsShowingQuantity.IsDisplayed());
             int totalQuantity = searchResultsPage.CheckTotalQuantity();
@@ -78,8 +74,7 @@ namespace Costco.Tests
             MainPage mainPage = new MainPage();
             SearchResultsPage searchResultsPage = new SearchResultsPage();
 
-            string searchString = ((SearchStringModel)fixture.testData).SearchString[1];
-            mainPage.GoToPage();
+            string searchString = ((SearchStringModel)fixture.TestData).SearchString[1];
             mainPage.SearchFieldInput(searchString);
             Waiters.WaitForCondition(() => searchResultsPage.SearchResultsMessage.IsDisplayed());
             string searchResult = searchResultsPage.ReadSearchResultsMessage();

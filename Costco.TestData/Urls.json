@@ -1,0 +1,8 @@
+{
+  "DataModel": "UrlsModel",
+  "LoginPage": "/LogonForm",
+  "WarehouseLocations": "/warehouse-locations",
+  "AddToCartZeroItemsTest": "/kirkland-signature-ladies'-slub-tee%2c-2-pack.product.100670508.html",
+  "AddToCartMoreLimitedItemsThanAllowedTest": "/midea-duo-smart-12k-btu-doesacc-4-in-1-inverter-portable-air-conditioner.product.100978219.html",
+  "ExceedMaximumAmountOfItemsInCartInputFieldTest": "/.product.6262016.html"
+}

@@ -13,6 +13,7 @@ namespace Costco.Utilities.Logger
             {
                 Directory.CreateDirectory(filePath);
             }
+
             logger = new LoggerConfiguration()
                 .WriteTo.File($"{filePath}/{loggerName}.txt", rollingInterval: RollingInterval.Day)
                 .WriteTo.ReportPortal()

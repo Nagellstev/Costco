@@ -1,5 +1,4 @@
 using Costco.Core.Browser;
-using Costco.Utilities.FileReader.Models;
 using Costco.Web.Pages;
 
 namespace Costco.Tests
@@ -15,11 +14,11 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void ZeroProductsReturnError()
+        public void AddToCartZeroItemsTest()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[0]);
+            ProductPage productPage = new();
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartZeroItemsTest);
             Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed);
             productPage.InputProductAmount("0");
             productPage.AddToCartButton.Click();
@@ -29,13 +28,13 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void OverLimitProductsReturnError()
+        public void AddToCartMoreLimitedItemsThanAllowedTest()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
+            ProductPage productPage = new();
             string lowCutoff = "Limit ";
             string highCutoff = " per member";
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartMoreLimitedItemsThanAllowedTest);
             Waiters.WaitForCondition(productPage.PromotionalText.IsDisplayed);
             string promoTextMaxQuantity = productPage.PromotionalText.Text;
             promoTextMaxQuantity = promoTextMaxQuantity.Substring(
@@ -52,11 +51,11 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void OverMaximumProductReturnError()
+        public void ExceedMaximumAmountOfItemsInCartInputFieldTest()
         {
-            ProductPage productPage = new(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[2]);
+            ProductPage productPage = new();
 
-            BrowserFactory.Browser.GoToUrl(productPage.Url);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.ExceedMaximumAmountOfItemsInCartInputFieldTest);
             Waiters.WaitForCondition(productPage.QuantityInput.IsDisplayed);
             productPage.InputProductAmount("999");
             productPage.PlusStepper.Click();

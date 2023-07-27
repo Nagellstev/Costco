@@ -1,4 +1,4 @@
-﻿namespace Costco.Utilities.FileReader.Models
+﻿namespace Costco.Core.ConfigurationModels
 {
     public class ConfigModel
     {

@@ -1,4 +1,4 @@
-﻿using Costco.Core.Browser;
+using Costco.Core.Browser;
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshoter;
 using ReportPortal.Shared;
@@ -15,7 +15,10 @@ namespace Costco.Tests
             this.output = output.WithReportPortal();
             testDisplayName = Context.Test.DisplayName;
             Logger.Information($"Initializing {testDisplayName}.");
+            BrowserFactory.Browser.Maximize();
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
         }
+
         public override void Dispose()
         {
             var theExceptionThrownByTest = Context.TestException;
@@ -28,6 +31,7 @@ namespace Costco.Tests
 
             GC.SuppressFinalize(this);
             base.Dispose();
+            BrowserFactory.CleanUp();
             Logger.Information($"Disposing of {testDisplayName}.");
         }
     }

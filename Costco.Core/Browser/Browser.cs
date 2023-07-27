@@ -15,14 +15,19 @@ namespace Costco.Core.Browser
             Logger.Information($"Created new browser {driver.GetType().Name}");
         }
 
+        public static IWebDriver? Driver => _driver;
+
+        public void Maximize()
+        {
+            _driver.Manage().Window.Maximize();
+        }
+
         public void MoveMouseToElement(IWebElement element)
         {
             Logger.Information($"Moving mouse to {element.TagName} at {element.Location.X}:{element.Location.Y}");
             Actions act = new Actions(_driver);
             act.MoveToElement(element);
         }
-
-        public static IWebDriver? Driver => _driver;
 
         public static void ScrollToElement(IWebElement element)
         {
@@ -66,7 +71,10 @@ namespace Costco.Core.Browser
             return _driver.FindElement(locator);
         }
 
-        public WebDriverWait Waiter(int seconds) => new WebDriverWait(_driver, TimeSpan.FromSeconds(seconds));
+        public WebDriverWait Waiter(int seconds)
+        {
+            return new WebDriverWait(_driver, TimeSpan.FromSeconds(seconds));
+        }
 
         public object ExecuteScript(string script, params object[] args)
         {
