@@ -33,6 +33,8 @@ namespace Costco.Tests
             BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
             int amount = steps.GetMaximumLimitedItemsAllowed();
             steps.InputProductAmount(amount + 1);
+            steps.PressAddToCart();
+            steps.PressAddToCart();
 
             Assert.Contains($"Item {steps.GetItemNumber()} has a maximum order quantity of {amount}", 
                 steps.GetErrorText());
@@ -44,6 +46,7 @@ namespace Costco.Tests
             BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[2]);
             steps.InputProductAmount(999);
             steps.PressPlusOneStepper(1);
+            steps.PressAddToCart();
 
             Assert.Equal("Please enter no more than 3 characters.", steps.GetInputFieldErrorText());
         }
