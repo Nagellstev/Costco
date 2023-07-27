@@ -12,10 +12,12 @@ namespace Costco.Core.Browser
         public Browser(IWebDriver driver)
         {
             _driver = driver;
+            Logger.Information($"Created new browser {driver.GetType().Name}");
         }
 
         public void MoveMouseToElement(IWebElement element)
         {
+            Logger.Information($"Moving mouse to {element.TagName} at {element.Location.X}:{element.Location.Y}");
             Actions act = new Actions(_driver);
             act.MoveToElement(element);
         }
@@ -24,13 +26,14 @@ namespace Costco.Core.Browser
 
         public static void ScrollToElement(IWebElement element)
         {
-            Logger.Information("Scrolling to element");
+            Logger.Information($"Scrolling to element {element.TagName} at {element.Location.X}:{element.Location.Y}");
             ((IJavaScriptExecutor)_driver).
                 ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
 
         public void GoToUrl(string url)
         {
+            Logger.Information($"Moving to {url}");
             _driver.Navigate().GoToUrl(url);
         }
 
@@ -41,23 +44,25 @@ namespace Costco.Core.Browser
 
         public string GetText(By locator)
         {
+            Logger.Information($"Getting element text {locator.Criteria} by {locator.Mechanism}");
             return _driver.FindElement(locator).Text;
         }
 
         public void Back()
         {
-            Logger.Information("Navigate back");
+            Logger.Information("Navigating back");
             _driver.Navigate().Back();
         }
 
         public void Refresh()
         {
-            Logger.Information("Refresh page");
+            Logger.Information("Refreshing page");
             _driver.Navigate().Refresh();
         }
 
         public IWebElement FindElement(By locator)
         {
+            Logger.Information($"Getting element {locator.Criteria} by {locator.Mechanism}");
             return _driver.FindElement(locator);
         }
 
@@ -70,13 +75,13 @@ namespace Costco.Core.Browser
 
         public void Close()
         {
-            Logger.Information("Close page");
+            Logger.Information("Closing page");
             _driver.Close();
         }
 
         public void Quit()
         {
-            Logger.Information("Quit browser");
+            Logger.Information("Quitting browser");
             _driver.Quit();
         }
     }

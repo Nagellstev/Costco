@@ -1,5 +1,4 @@
-﻿using Costco.Core.Browser;
-using Costco.Web.Blocks;
+﻿using Costco.Web.Blocks;
 using Costco.Web.Elements;
 using OpenQA.Selenium;
 

@@ -5,26 +5,29 @@ namespace Costco.Web.Steps
 {
     public class LoginPageSteps
     {
-        public static void LoginWithCredentials(string username, string password)
+        private LoginPage _loginPage;
+
+        public LoginPageSteps(LoginPage loginPage)
         {
-            var loginPage = new LoginPage();
-            loginPage.UsernameInputField.SendKeys(username);
-            loginPage.PasswordInputField.SendKeys(password);
-            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(loginPage.LoginButtonLocator));
-            loginPage.LoginButton.Click();
+            _loginPage = loginPage;
+        }
+        public void LoginWithCredentials(string username, string password)
+        {
+            _loginPage.UsernameInputField.SendKeys(username);
+            _loginPage.PasswordInputField.SendKeys(password);
+            BrowserFactory.Browser.MoveMouseToElement(BrowserFactory.Browser.FindElement(_loginPage.LoginButtonLocator));
+            _loginPage.LoginButton.Click();
         }
 
-        public static bool VerifyPasswordIsRequiredErrorIsDisplayed()
+        public bool VerifyPasswordIsRequiredErrorIsDisplayed()
         {
-            var loginPage = new LoginPage();
-            return loginPage.PasswordIsRequiredError.IsDisplayed();
+            return _loginPage.PasswordIsRequiredError.IsDisplayed();
         }
 
-        public static bool VerifyInvalidCredentialsErrorIsDisplayed()
+        public bool VerifyInvalidCredentialsErrorIsDisplayed()
         {
-            var loginPage = new LoginPage();
-            Waiters.WaitForCondition(() => loginPage.InvalidCredentialsError.IsDisplayed(), 10);
-            return loginPage.InvalidCredentialsError.IsDisplayed();
+            Waiters.WaitForCondition(() => _loginPage.InvalidCredentialsError.IsDisplayed(), 10);
+            return _loginPage.InvalidCredentialsError.IsDisplayed();
         }
     }
 }
