@@ -12,23 +12,20 @@ namespace Costco.Web.Steps
             _productPage = productPage;
         }
 
-        public void AddToCart(string amount)
+        public void InputProductAmount(int amount)
         {
             Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed, 30);
             _productPage.QuantityInput.Clear();
-            _productPage.QuantityInput.SendKeys(amount);
-            _productPage.AddToCartButton.Click();
+            _productPage.QuantityInput.SendKeys(amount.ToString());
+        }
+        public void PressAddToCart()
+        {
             _productPage.AddToCartButton.Click();
         }
 
-        public void AddToCartPlusOne(string amount)
+        public void PressPlusOneStepper(int times)
         {
-            Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed, 30);
-            _productPage.QuantityInput.Clear();
-            _productPage.QuantityInput.SendKeys(amount);
-            _productPage.PlusStepper.Click();
-            _productPage.AddToCartButton.Click();
-            _productPage.AddToCartButton.Click();
+            for (int i = 0; i < times; i++, _productPage.PlusStepper.Click());
         }
 
         public int GetMaximumLimitedItemsAllowed()
