@@ -1,7 +1,6 @@
 using Costco.Core.Browser;
 using Costco.Utilities.Logger;
 using Costco.Utilities.Screenshoter;
-using OpenQA.Selenium;
 using ReportPortal.Shared;
 
 namespace Costco.Tests

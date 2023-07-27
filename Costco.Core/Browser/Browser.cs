@@ -29,8 +29,6 @@ namespace Costco.Core.Browser
             act.MoveToElement(element);
         }
 
-        public static IWebDriver? Driver => _driver;
-
         public static void ScrollToElement(IWebElement element)
         {
             Logger.Information($"Scrolling to element {element.TagName} at {element.Location.X}:{element.Location.Y}");
