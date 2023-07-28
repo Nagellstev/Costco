@@ -8,7 +8,6 @@ namespace Costco.Web.Pages
     {
         public override string Url => "https://www.costco.com/";
         public By SearchBlockLocator = By.Id("formcatsearch");
-
         public By SignInButtonLocator = By.CssSelector("#header_sign_in.myaccount");
         public By DisabledSignInButtonLocator = By.XPath("//a[@class='myaccount'][@style='display: none;']");
         public By AccountButtonLocator = By.CssSelector("#myaccount-react-d");
@@ -16,12 +15,5 @@ namespace Costco.Web.Pages
         public Button DisabledSignInButton => new Button(DisabledSignInButtonLocator);
         public Button AccountButton => new Button(AccountButtonLocator);
         public SearchBlock SearchBlock => new SearchBlock(SearchBlockLocator);
-
-
-        public void SearchFieldInput(string input)
-        {
-            SearchBlock.SearchField.SendKeys(input);
-            SearchBlock.SearchField.Submit();
-        }
     }
 }

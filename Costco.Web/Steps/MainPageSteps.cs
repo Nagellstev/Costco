@@ -1,4 +1,5 @@
 ﻿using Costco.Core.Browser;
+using Costco.Web.Blocks;
 using Costco.Web.Pages;
 
 namespace Costco.Web.Steps
@@ -23,6 +24,13 @@ namespace Costco.Web.Steps
         {
             Waiters.WaitForCondition(() => _mainPage.AccountButton.IsDisplayed(), 10);
             return _mainPage.AccountButton.IsDisplayed();
+        }
+
+        public void SearchFieldInput(string input)
+        {
+            Waiters.WaitForCondition(() => _mainPage.SearchBlock.SearchField.IsDisplayed(), 10);
+            _mainPage.SearchBlock.SearchField.SendKeys(input);
+            _mainPage.SearchBlock.SearchField.Submit();
         }
     }
 }
