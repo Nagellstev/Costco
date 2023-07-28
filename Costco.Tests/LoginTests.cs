@@ -9,11 +9,11 @@ namespace Costco.Tests
         TestFixture fixture;
         private MainPageSteps _mainPageSteps;
         private LoginPageSteps _loginPageSteps;
-        public LoginTests(TestFixture fixture, ITestOutputHelper output, MainPageSteps mainPageSteps, LoginPageSteps loginPageSteps) : base(output)
+        public LoginTests(TestFixture fixture, ITestOutputHelper output) : base(output)
         {
             this.fixture = fixture;
-            _mainPageSteps = mainPageSteps;
-            _loginPageSteps = loginPageSteps;
+            _mainPageSteps = new MainPageSteps(new());
+            _loginPageSteps = new LoginPageSteps(new());
         }
 
         [Fact]
