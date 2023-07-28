@@ -22,7 +22,6 @@ namespace Costco.Web.Steps
 
         public void FilterByPrice(string priceRange)
         {
-            Waiters.WaitForPageLoad();
             Waiters.WaitForCondition(() => _searchResultsPage.FilterBlock.IsDisplayed(), 10);
             for (int i = 0; i < _searchResultsPage.FilterBlock.PriceCheckBoxes.Count; i++)
             {

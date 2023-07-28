@@ -1,5 +1,6 @@
 using Costco.Utilities.FileReader.Models;
 using Costco.Web.Steps;
+using Costco.Web.Pages;
 
 namespace Costco.Tests
 {
@@ -10,11 +11,11 @@ namespace Costco.Tests
         private MainPageSteps _mainPageSteps;
         private SearchResultsPageSteps _searchResultsPageSteps;
 
-        public SearchTests(TestFixture fixture, ITestOutputHelper testOutputHelper, MainPageSteps mainPageSteps, SearchResultsPageSteps searchResultsPageSteps) : base(testOutputHelper)
+        public SearchTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {
             this.fixture = fixture;
-            _mainPageSteps = mainPageSteps;
-            _searchResultsPageSteps = searchResultsPageSteps;
+            _mainPageSteps = new MainPageSteps(new MainPage());
+            _searchResultsPageSteps = new SearchResultsPageSteps(new SearchResultsPage());
         }
 
         /// <summary>
@@ -27,6 +28,7 @@ namespace Costco.Tests
         public void SearchExistingItemTest()
         {
             string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
+
             _mainPageSteps.SearchFieldInput(searchString);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
 
@@ -47,6 +49,7 @@ namespace Costco.Tests
         {
             string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
             string priceFilter = ((SearchStringModel)fixture.testData).PriceFilters[0];
+
             _mainPageSteps.SearchFieldInput(searchString);
             int totalQuantity = _searchResultsPageSteps.CheckTotalQuantity();
             _searchResultsPageSteps.FilterByPrice(priceFilter);
@@ -65,6 +68,7 @@ namespace Costco.Tests
         public void SearchSenselessLineTest()
         {
             string searchString = ((SearchStringModel)fixture.testData).SearchString[1];
+
             _mainPageSteps.SearchFieldInput(searchString);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
 
