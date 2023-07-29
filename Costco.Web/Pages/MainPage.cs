@@ -1,12 +1,11 @@
 ﻿using Costco.Web.Blocks;
-using Costco.Web.Elements;
+using Costco.Core.Elements;
 using OpenQA.Selenium;
 
 namespace Costco.Web.Pages
 {
     public class MainPage : BasePage
     {
-        public override string Url => "https://www.costco.com/";
         public By SearchBlockLocator = By.Id("formcatsearch");
         public By SignInButtonLocator = By.CssSelector("#header_sign_in.myaccount");
         public By DisabledSignInButtonLocator = By.XPath("//a[@class='myaccount'][@style='display: none;']");

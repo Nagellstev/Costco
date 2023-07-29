@@ -71,6 +71,12 @@ namespace Costco.Core.Browser
             return _driver.FindElement(locator);
         }
 
+        public List<IWebElement> FindElements(By locator)
+        {
+            Logger.Information($"Getting multiple elements {locator.Criteria} by {locator.Mechanism}");
+            return _driver.FindElements(locator).ToList();
+        }
+
         public WebDriverWait Waiter(int seconds)
         {
             return new WebDriverWait(_driver, TimeSpan.FromSeconds(seconds));

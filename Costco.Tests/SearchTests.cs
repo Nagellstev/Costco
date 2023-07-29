@@ -1,4 +1,4 @@
-using Costco.Utilities.FileReader.Models;
+using Costco.TestData.Models;
 using Costco.Web.Steps;
 using Costco.Web.Pages;
 
@@ -27,7 +27,7 @@ namespace Costco.Tests
         [Fact]
         public void SearchExistingItemTest()
         {
-            string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
+            string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
 
             _mainPageSteps.SearchFieldInput(searchString);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
@@ -47,8 +47,8 @@ namespace Costco.Tests
         [Fact]
         public void SearchExistingItemAndSortByParametersTest()
         {
-            string searchString = ((SearchStringModel)fixture.testData).SearchString[0];
-            string priceFilter = ((SearchStringModel)fixture.testData).PriceFilters[0];
+            string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
+            string priceFilter = ((SearchStringModel)fixture.TestData).PriceFilters[0];
 
             _mainPageSteps.SearchFieldInput(searchString);
             int totalQuantity = _searchResultsPageSteps.CheckTotalQuantity();
@@ -67,7 +67,7 @@ namespace Costco.Tests
         [Fact]
         public void SearchSenselessLineTest()
         {
-            string searchString = ((SearchStringModel)fixture.testData).SearchString[1];
+            string searchString = ((SearchStringModel)fixture.TestData).SearchString[1];
 
             _mainPageSteps.SearchFieldInput(searchString);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();

@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using Costco.Web.Elements;
+using Costco.Core.Elements;
 using Costco.Core.Browser;
 
 namespace Costco.Web.Blocks
@@ -17,7 +17,7 @@ namespace Costco.Web.Blocks
         private List<CheckBox> GetCheckBoxes()
         {
             List<CheckBox> checkBoxes = new List<CheckBox>();
-            List<IWebElement> checkBoxesList = BrowserFactory.Browser.FindElements(PriceCheckBoxesLocator); ;
+            List<IWebElement> checkBoxesList = BrowserFactory.Browser.FindElements(PriceCheckBoxesLocator);
             
             foreach (IWebElement checkBox in checkBoxesList)
             {
