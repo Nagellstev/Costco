@@ -27,7 +27,7 @@ namespace Costco.Tests
             locationsPageSteps.SearchForWarehouse(warehouse);
             locationsPageSteps.SetAsMyWarehouse(warehouse);
 
-            Assert.True(locationsPageSteps.IsWarehouseSet(warehouse));
+            Assert.True(locationsPageSteps.IsWarehouseSet(warehouse), "\"My Warehouse\" wasn't set.");
         }
 
         [Fact]
@@ -44,7 +44,8 @@ namespace Costco.Tests
             string addressOnWarehousePage = warehousePageSteps.GetAddress();
 
             Assert.True(nameOnLocationsPage == nameOnWarehousePage &&
-                addressOnLocationsPage == addressOnWarehousePage);
+                addressOnLocationsPage == addressOnWarehousePage,
+                "Names and addresses don't match on search page and details page.");
         }
 
         [Fact]
@@ -55,7 +56,7 @@ namespace Costco.Tests
 
             locationsPageSteps.SetDeliveryLocation(deliveryLocation);
 
-            Assert.True(locationsPageSteps.IsDeliveryLocationSet(deliveryLocation));
+            Assert.True(locationsPageSteps.IsDeliveryLocationSet(deliveryLocation), "Delivery location wasn't set.");
         }
     }
 }
