@@ -23,7 +23,7 @@ namespace Costco.Core.Browser
             {
                 Kind = ProxyKind.Direct
             };
-            options.AddArgument("--start-maximized");
+
             var service = ChromeDriverService.CreateDefaultService();
             var driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(TestSettings.TimeOuts));
             WebRequest.DefaultWebProxy = null;

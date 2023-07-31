@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using Costco.Web.Elements;
+using Costco.Core.Elements;
 
 namespace Costco.Web.Blocks
 {
@@ -7,17 +7,17 @@ namespace Costco.Web.Blocks
     {
         private static readonly By locationsBlockLocator = By.Id("deliveryLocation");
 
-        public By MyWarehouseLocator = By.XPath("//button[contains(@aria-label, 'current warehouse')]");
-        public By DeliveryLocationLocator = By.XPath("//button[contains(@aria-label, 'ZIP Code')]");
-        public By ZipCodeInputLocator = By.Id("zipCode");
-        public By ChangeDeliveryLocationButtonLocator = By.XPath("//button[text()='Change Delivery Location']");
+        public readonly By MyWarehouseLocator = By.XPath("//button[contains(@aria-label, 'current warehouse')]");
+        public readonly By DeliveryLocationLocator = By.XPath("//button[contains(@aria-label, 'ZIP Code')]");
+        public readonly By ZipCodeInputLocator = By.Id("zipCode");
+        public readonly By ChangeDeliveryLocationButtonLocator = By.XPath("//button[text()='Change Delivery Location']");
+
+        public LocationsBlock() : base(locationsBlockLocator) { }
 
         public Button MyWarehouseButton => new(MyWarehouseLocator);
         public Button DeliveryLocationButton => new(DeliveryLocationLocator);
         public InputField ZipCodeInput => new(ZipCodeInputLocator);
         public Button ChangeDeliveryLocationButton => new(ChangeDeliveryLocationButtonLocator);
-
-        public LocationsBlock() : base(locationsBlockLocator) { }
 
         public void SetDeliveryLocation(string deliveryLocation)
         {

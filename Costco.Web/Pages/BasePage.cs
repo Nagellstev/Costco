@@ -2,13 +2,5 @@
 
 namespace Costco.Web.Pages
 {
-    public class BasePage 
-    {
-        public virtual string Url { get; }
-        public virtual void GoToPage()
-        {
-            BrowserFactory.Browser.GoToUrl(Url);
-            Waiters.WaitForPageLoad();
-        }
-    }
+    public class BasePage { }
 }

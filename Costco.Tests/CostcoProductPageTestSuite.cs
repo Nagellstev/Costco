@@ -1,5 +1,4 @@
 using Costco.Core.Browser;
-using Costco.Utilities.FileReader.Models;
 using Costco.Web.Pages;
 using Costco.Web.Steps;
 
@@ -18,9 +17,9 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void ZeroProductsReturnError()
+        public void AddToCartZeroItemsTest()
         {
-            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[0]);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartZeroItemsTest);
             steps.InputProductAmount(0);
             steps.PressAddToCart();
 
@@ -28,9 +27,9 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void OverLimitProductsReturnError()
+        public void AddToCartMoreLimitedItemsThanAllowedTest()
         {
-            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[1]);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartMoreLimitedItemsThanAllowedTest);
             int amount = steps.GetMaximumLimitedItemsAllowed();
             steps.InputProductAmount(amount + 1);
             steps.PressAddToCart();
@@ -41,9 +40,9 @@ namespace Costco.Tests
         }
 
         [Fact]
-        public void OverMaximumProductReturnError()
+        public void ExceedMaximumAmountOfItemsInCartInputFieldTest()
         {
-            BrowserFactory.Browser.GoToUrl(((ProductPageTestDataModel)fixture.testData).ProductPageUrl[2]);
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.ExceedMaximumAmountOfItemsInCartInputFieldTest);
             steps.InputProductAmount(999);
             steps.PressPlusOneStepper(1);
             steps.PressAddToCart();

@@ -1,6 +1,5 @@
 ﻿using Costco.Core.Browser;
-using Costco.Utilities.FileReader.Models;
-using Costco.Utilities.Logger;
+using Costco.TestData.Models;
 using Costco.Web.Pages;
 
 namespace Costco.Tests
@@ -18,10 +17,11 @@ namespace Costco.Tests
         [Fact]
         public void SetWarehouseAsMyWarehouseTest()
         {
-            string warehouse = ((LocationsModel)fixture.testData).Warehouse;
+            string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
 
             LocationsPage locationsPage = new();
-            locationsPage.GoToPage();
+
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
             Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
             locationsPage.SearchForWarehouse(warehouse);
             Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled());
@@ -34,10 +34,11 @@ namespace Costco.Tests
         [Fact]
         public void ViewStoreDetailsTest()
         {
-            string warehouse = ((LocationsModel)fixture.testData).Warehouse;
+            string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
 
             LocationsPage locationsPage = new();
-            locationsPage.GoToPage();
+
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
             Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
             locationsPage.SearchForWarehouse(warehouse);
             Waiters.WaitForCondition(() => locationsPage.IsResultFound(warehouse));
@@ -56,10 +57,10 @@ namespace Costco.Tests
         [Fact]
         public void ChangeDeliveryLocationTest()
         {
-            string deliveryLocation = ((LocationsModel)fixture.testData).DeliveryLocation;
+            string deliveryLocation = ((LocationsModel)fixture.TestData).DeliveryLocation;
 
             LocationsPage locationsPage = new();
-            locationsPage.GoToPage();
+            BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
             locationsPage.LocationsBlock.SetDeliveryLocation(deliveryLocation);
             Waiters.WaitForCondition(() => locationsPage.IsDeliveryLocationSet(deliveryLocation));
 

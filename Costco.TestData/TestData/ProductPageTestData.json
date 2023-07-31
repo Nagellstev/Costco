@@ -1,8 +1,3 @@
 {
-  "DataModel": "ProductPageTestDataModel",
-  "ProductPageUrl": [
-    "https://www.costco.com/hilary-radley-ladies'-printed-blouse.product.4000025245.html",
-    "https://www.costco.com/kirkland-signature-coq10-300-mg.%2c-100-softgels.product.100029983.html",
-    "https://www.costco.com/.product.6262016.html"
-  ]
+  "DataModel": "ProductPageModel"
 }

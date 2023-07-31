@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Costco.Core.Browser;
 
-namespace Costco.Web.Elements
+namespace Costco.Core.Elements
 {
     public abstract class BaseElement
     {
@@ -11,6 +11,9 @@ namespace Costco.Web.Elements
         {
             _element = BrowserFactory.Browser.FindElement(locator);
         }
+
+        public IWebElement OriginalWebElement => _element;
+        public string Text => OriginalWebElement.Text;
 
         protected BaseElement(IWebElement element)
         {
@@ -27,7 +30,7 @@ namespace Costco.Web.Elements
             OriginalWebElement.SendKeys(keys);
         }
 
-        public void Submit ()
+        public void Submit()
         {
             OriginalWebElement.Submit();
         }
@@ -37,11 +40,24 @@ namespace Costco.Web.Elements
             OriginalWebElement.Clear();
         }
 
-        public IWebElement OriginalWebElement => _element;
-        public string Text => OriginalWebElement.Text;
-        public bool IsDisplayed() => OriginalWebElement.Displayed;
-        public bool IsEnabled() => OriginalWebElement.Enabled;
-        public bool IsSelected() => OriginalWebElement.Selected;
-        public IWebElement FindElement(By by) => OriginalWebElement.FindElement(by);
+        public bool IsDisplayed()
+        {
+            return OriginalWebElement.Displayed;
+        }
+
+        public bool IsEnabled()
+        {
+            return OriginalWebElement.Enabled;
+        }
+
+        public bool IsSelected()
+        {
+            return OriginalWebElement.Selected;
+        }
+
+        public IWebElement FindElement(By by)
+        {
+            return OriginalWebElement.FindElement(by);
+        }
     }
 }
