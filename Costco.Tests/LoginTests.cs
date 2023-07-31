@@ -1,67 +1,65 @@
-﻿using Costco.Web.Pages;
-using Costco.TestData.Models;
-using Costco.Core.Browser;
+﻿using Costco.TestData.Models;
+using Costco.Web.Steps;
 
 namespace Costco.Tests
 {
     [Trait("Target", "Login")]
-    public class LoginTestSuite : BaseTest, IClassFixture<TestFixture>
+    public class LoginTests : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
-        public LoginTestSuite(TestFixture fixture, ITestOutputHelper output) : base(output)
+        private MainPageSteps _mainPageSteps;
+        private LoginPageSteps _loginPageSteps;
+
+        public LoginTests(TestFixture fixture, ITestOutputHelper output) : base(output)
         {
-            this.fixture= fixture;
+            this.fixture = fixture;
+            _mainPageSteps = new MainPageSteps(new());
+            _loginPageSteps = new LoginPageSteps(new());
         }
 
         [Fact]
         public void LoginWithValidCredentials()
         {
             //Arrange
-            MainPage mainPage = new MainPage();
-            LoginPage loginPage = new LoginPage();
             string userName = ((LoginCredentialsModel)fixture.TestData).ValidCredentials.Username;
             string password = ((LoginCredentialsModel)fixture.TestData).ValidCredentials.Password;
 
             //Action
-            mainPage.NavigateToLoginPage();
-            loginPage.LoginWithCredentials(userName, password);
+            _mainPageSteps.NavigateToLoginPage();
+            _loginPageSteps.LoginWithCredentials(userName, password);
 
             //Assert
-            Assert.True(mainPage.VerifyUserIsLoggedIn());
+            Assert.True(_mainPageSteps.VerifyUserIsLoggedIn());
         }
 
         [Fact]
         public void LoginWithInvalidCredentials()
         {
             //Arrange
-            MainPage mainPage = new MainPage();
-            LoginPage loginPage = new LoginPage();
             string userName = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Username;
             string password = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Password;
 
             //Action
-            mainPage.NavigateToLoginPage();
-            loginPage.LoginWithCredentials(userName, password);
+            _mainPageSteps.NavigateToLoginPage();
+            _loginPageSteps.LoginWithCredentials(userName, password);
 
             //Assert
-            Assert.True(loginPage.VerifyInvalidCredentialsErrorIsDisplayed());
+            Assert.True(_loginPageSteps.VerifyInvalidCredentialsErrorIsDisplayed());
         }
 
         [Fact]
         public void LoginWithValidUsernameButEmptyPassword()
         {
             //Arrange
-            MainPage mainPage = new MainPage();
-            LoginPage loginPage = new LoginPage();
             string userName = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Username;
             string password = string.Empty;
 
             //Action
-            mainPage.NavigateToLoginPage();
-            loginPage.LoginWithCredentials(userName, password);
+            _mainPageSteps.NavigateToLoginPage();
+            _loginPageSteps.LoginWithCredentials(userName, password);
 
             //Assert
-            Assert.True(loginPage.VerifyPasswordIsRequiredErrorIsDisplayed());
+            Assert.True(_loginPageSteps.VerifyPasswordIsRequiredErrorIsDisplayed());
         }
     }
 }

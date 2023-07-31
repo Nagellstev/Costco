@@ -22,21 +22,5 @@ namespace Costco.Web.Pages
         public Button AddToCartButton => new Button(AddToCartButtonPath);
         public TextBox ErrorMessageInsideInput => new TextBox(ErrorMessageInsideInputPath);
         public TextBox ItemNumber => new TextBox(ItemNumberPath);
-
-        public void InputProductAmount(string amount)
-        {
-            QuantityInput.Clear();
-            QuantityInput.SendKeys(amount);
-        }
-
-        public string GetErrorText()
-        {
-            return ErrorMessageBelowInput.Text.Trim();
-        }
-
-        public string GetInputFieldErrorText()
-        {
-            return ErrorMessageInsideInput.Text.Trim();
-        }
     }
 }

@@ -1,5 +1,5 @@
+﻿using Costco.Web.Blocks;
 ﻿using Costco.Core.Browser;
-using Costco.Web.Blocks;
 using Costco.Core.Elements;
 using OpenQA.Selenium;
 
@@ -29,13 +29,5 @@ namespace Costco.Web.Pages
             Waiters.WaitForCondition(() => AccountButton.IsDisplayed());
             return AccountButton.IsDisplayed();
         }
-
-        #region Search Tests Steps
-        public void SearchFieldInput(string input)
-        {
-            SearchBlock.SearchField.SendKeys(input);
-            SearchBlock.SearchField.Submit();
-        }
-        #endregion
     }
 }
