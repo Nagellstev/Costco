@@ -33,9 +33,9 @@ namespace Costco.Web.Steps
             }
         }
 
-        public int GetMaximumLimitedItemsAllowed()
+        public int GetMaximumLimitedItemsAllowed(string lowCutoff, string highCutoff)
         {
-            string lowCutoff = "Limit ";
+            string lowCutoff = ;
             string highCutoff = " per member";
 
             Waiters.WaitForCondition(_productPage.PromotionalText.IsDisplayed);
