@@ -1,7 +1,5 @@
 ﻿using Costco.Core.Browser;
-using Costco.Web.Blocks;
 using Costco.Web.Pages;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Costco.Web.Steps
 {

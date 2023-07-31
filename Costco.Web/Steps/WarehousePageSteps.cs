@@ -1,7 +1,5 @@
 ﻿using Costco.Core.Browser;
 using Costco.Web.Pages;
-using System.Net;
-using System.Xml.Linq;
 
 namespace Costco.Web.Steps
 {
