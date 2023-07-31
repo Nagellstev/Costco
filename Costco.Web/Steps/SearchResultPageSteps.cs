@@ -32,11 +32,11 @@ namespace Costco.Web.Steps
             }
         }
 
-        public int CheckTotalQuantity()
+        public int GetTotalQuantity()
         {
             Waiters.WaitForCondition(() => _searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 10);
-            string str = _searchResultsPage.TotalProductsShowingQuantity.Text;
-            return ExtractTotalQuantity(str);
+            string totalProductsShowingQuantity = _searchResultsPage.TotalProductsShowingQuantity.Text;
+            return ExtractTotalQuantity(totalProductsShowingQuantity);
         }
 
         private int ExtractTotalQuantity(string text)

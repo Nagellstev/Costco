@@ -51,9 +51,9 @@ namespace Costco.Tests
             string priceFilter = ((SearchStringModel)fixture.TestData).PriceFilters[0];
 
             _mainPageSteps.SearchFieldInput(searchString);
-            int totalQuantity = _searchResultsPageSteps.CheckTotalQuantity();
+            int totalQuantity = _searchResultsPageSteps.GetTotalQuantity();
             _searchResultsPageSteps.FilterByPrice(priceFilter);
-            int totalQuantityFiltered = _searchResultsPageSteps.CheckTotalQuantity();
+            int totalQuantityFiltered = _searchResultsPageSteps.GetTotalQuantity();
 
             Assert.NotEqual(totalQuantityFiltered, totalQuantity);
         }
