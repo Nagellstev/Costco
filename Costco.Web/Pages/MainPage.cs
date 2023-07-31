@@ -15,7 +15,6 @@ namespace Costco.Web.Pages
         public Button DisabledSignInButton => new Button(DisabledSignInButtonLocator);
         public Button AccountButton => new Button(AccountButtonLocator);
 
-
         public SearchBlock SearchBlock => new SearchBlock();
 
         #region Search Tests Steps

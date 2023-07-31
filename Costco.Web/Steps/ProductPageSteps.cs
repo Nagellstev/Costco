@@ -18,6 +18,7 @@ namespace Costco.Web.Steps
             _productPage.QuantityInput.Clear();
             _productPage.QuantityInput.SendKeys(amount.ToString());
         }
+
         public void PressAddToCart()
         {
             _productPage.AddToCartButton.Click();
