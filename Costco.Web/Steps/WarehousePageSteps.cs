@@ -13,6 +13,7 @@ namespace Costco.Web.Steps
         {
             this.warehousePage = warehousePage;
         }
+
         public string GetName()
         {
             Waiters.WaitUntilElementExists(warehousePage.NameLocator);

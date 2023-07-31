@@ -43,9 +43,9 @@ namespace Costco.Tests
             string nameOnWarehousePage = warehousePageSteps.GetName();
             string addressOnWarehousePage = warehousePageSteps.GetAddress();
 
-            Assert.True(nameOnLocationsPage == nameOnWarehousePage &&
-                addressOnLocationsPage == addressOnWarehousePage,
-                "Names and addresses don't match on search page and details page.");
+            Assert.Multiple(
+                () => Assert.Equal(nameOnLocationsPage, nameOnWarehousePage),
+                () => Assert.Equal(addressOnLocationsPage, addressOnWarehousePage));
         }
 
         [Fact]
