@@ -5,12 +5,12 @@ using Costco.Web.Steps;
 namespace Costco.Tests
 {
     [Trait("Target", "ProductPage")]
-    public class CostcoProductPageTestSuite : BaseTest, IClassFixture<TestFixture>
+    public class ProductPageTests : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
         ProductPageSteps steps;
 
-        public CostcoProductPageTestSuite(TestFixture fixture, ITestOutputHelper output): base(output)
+        public ProductPageTests(TestFixture fixture, ITestOutputHelper output): base(output)
         {
             this.fixture = fixture;
             steps = new(new());
