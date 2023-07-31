@@ -1,4 +1,4 @@
-﻿using Costco.Utilities.FileReader.Models;
+﻿using Costco.TestData.Models;
 using Costco.Web.Steps;
 
 namespace Costco.Tests
@@ -20,8 +20,8 @@ namespace Costco.Tests
         public void LoginWithValidCredentials()
         {
             //Arrange
-            string userName = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Username;
-            string password = ((LoginCredentialsModel)fixture.testData).ValidCredentials.Password;
+            string userName = ((LoginCredentialsModel)fixture.TestData).ValidCredentials.Username;
+            string password = ((LoginCredentialsModel)fixture.TestData).ValidCredentials.Password;
 
             //Action
             _mainPageSteps.NavigateToLoginPage();
@@ -35,8 +35,8 @@ namespace Costco.Tests
         public void LoginWithInvalidCredentials()
         {
             //Arrange
-            string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
-            string password = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Password;
+            string userName = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Username;
+            string password = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Password;
 
             //Action
             _mainPageSteps.NavigateToLoginPage();
@@ -50,7 +50,7 @@ namespace Costco.Tests
         public void LoginWithValidUsernameButEmptyPassword()
         {
             //Arrange
-            string userName = ((LoginCredentialsModel)fixture.testData).InvalidCredentials.Username;
+            string userName = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Username;
             string password = string.Empty;
 
             //Action
