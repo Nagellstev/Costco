@@ -7,10 +7,10 @@ namespace Costco.Web.Blocks
     {
         private static readonly By locationsBlockLocator = By.Id("deliveryLocation");
 
-        public readonly By MyWarehouseLocator = By.XPath("//button[contains(@aria-label, 'current warehouse')]");
-        public readonly By DeliveryLocationLocator = By.XPath("//button[contains(@aria-label, 'ZIP Code')]");
-        public readonly By ZipCodeInputLocator = By.Id("zipCode");
-        public readonly By ChangeDeliveryLocationButtonLocator = By.XPath("//button[text()='Change Delivery Location']");
+        private readonly By MyWarehouseLocator = By.XPath("//button[contains(@aria-label, 'current warehouse')]");
+        private readonly By DeliveryLocationLocator = By.XPath("//button[contains(@aria-label, 'ZIP Code')]");
+        private readonly By ZipCodeInputLocator = By.Id("zipCode");
+        private readonly By ChangeDeliveryLocationButtonLocator = By.XPath("//button[text()='Change Delivery Location']");
 
         public LocationsBlock() : base(locationsBlockLocator) { }
 
@@ -18,23 +18,5 @@ namespace Costco.Web.Blocks
         public Button DeliveryLocationButton => new(DeliveryLocationLocator);
         public InputField ZipCodeInput => new(ZipCodeInputLocator);
         public Button ChangeDeliveryLocationButton => new(ChangeDeliveryLocationButtonLocator);
-
-        public void SetDeliveryLocation(string deliveryLocation)
-        {
-            DeliveryLocationButton.Click();
-            ZipCodeInput.Clear();
-            ZipCodeInput.SendKeys(deliveryLocation);
-            ChangeDeliveryLocationButton.Click();
-        }
-
-        public bool IsWarehouseSet(string warehouse)
-        {
-            return MyWarehouseButton.Text.Equals(warehouse);
-        }
-
-        public bool IsDeliveryLocationSet(string deliveryLocation)
-        {
-            return DeliveryLocationButton.Text.Equals(deliveryLocation);
-        }
     }
 }

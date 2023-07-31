@@ -25,7 +25,7 @@ namespace Costco.Tests
 
             if(theExceptionThrownByTest!= null) 
             {
-                Logger.Error($"Test '{testDisplayName}' failed, exception {theExceptionThrownByTest}.");
+                Logger.Error($"Test '{testDisplayName}' failed, {theExceptionThrownByTest.Message}\nException: {theExceptionThrownByTest}");
                 Screenshoter.TakeScreenshot(Browser.Driver, testDisplayName);
             }
 
