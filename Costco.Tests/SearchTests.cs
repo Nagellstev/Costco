@@ -72,7 +72,8 @@ namespace Costco.Tests
             _mainPageSteps.SearchFieldInput(searchString);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
 
-            Assert.Contains("we were not able to find a match", searchResult.ToLower());
+            //Assert.Contains("we were not able to find a match", searchResult.ToLower());
+            AssertWithCustomUserMessage.Contains("we were not able to find a match111", searchResult.ToLower(), "Oy-vey! No matching substring!");
         }
     }
 }
