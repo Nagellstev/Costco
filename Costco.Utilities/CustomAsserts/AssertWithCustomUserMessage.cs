@@ -25,5 +25,45 @@ namespace Costco.Tests
                 throw;
             }
         }
+
+        /// <summary>
+        /// Verifies that a string equal to given string.
+        /// </summary>
+        /// <param name="expectedString">The sub-string expected to be in the string</param>
+        /// <param name="actualString">The string to be inspected</param>
+        /// <param name="message">The type of string comparison to perform</param>
+        /// <exception cref="ContainsException">Thrown when the sub-string is not present inside the string</exception>
+        public static void Equal(string expectedString, string actualString, string message)
+        {
+            try
+            {
+                Assert.Equal(expectedString, actualString);
+            }
+            catch (EqualException equalException)
+            {
+                Logger.Error(message + "\n" + equalException.Message);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Verifies that a string equal to string.
+        /// </summary>
+        /// <param name="expected">The sub-string expected to be in the string</param>
+        /// <param name="actual">The string to be inspected</param>
+        /// <param name="message">The type of string comparison to perform</param>
+        /// <exception cref="ContainsException">Thrown when the sub-string is not present inside the string</exception>
+        public static void NotEqual(int expected, int actual, string message)
+        {
+            try
+            {
+                Assert.NotEqual(expected, actual);
+            }
+            catch (NotEqualException notEqualException)
+            {
+                Logger.Error(message + "\n" + notEqualException.Message);
+                throw;
+            }
+        }
     }
 }

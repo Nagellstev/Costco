@@ -32,7 +32,7 @@ namespace Costco.Tests
             _mainPageSteps.SearchFieldInput(searchString);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
 
-            Assert.Contains(searchString.ToLower(), searchResult.ToLower());
+            AssertWithCustomUserMessage.Contains(searchString.ToLower(), searchResult.ToLower(), "Oy-vey! No matching substring!");
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Costco.Tests
             _searchResultsPageSteps.FilterByPrice(priceFilter);
             int totalQuantityFiltered = _searchResultsPageSteps.GetTotalQuantity();
 
-            Assert.NotEqual(totalQuantityFiltered, totalQuantity);
+            AssertWithCustomUserMessage.NotEqual(totalQuantityFiltered, totalQuantity, "Oy-vey! They are equal!");
         }
 
         /// <summary>
@@ -72,8 +72,7 @@ namespace Costco.Tests
             _mainPageSteps.SearchFieldInput(searchString);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
 
-            //Assert.Contains("we were not able to find a match", searchResult.ToLower());
-            AssertWithCustomUserMessage.Contains("we were not able to find a match111", searchResult.ToLower(), "Oy-vey! No matching substring!");
+            AssertWithCustomUserMessage.Contains("we were not able to find a match", searchResult.ToLower(), "Oy-vey! No matching substring!");
         }
     }
 }
