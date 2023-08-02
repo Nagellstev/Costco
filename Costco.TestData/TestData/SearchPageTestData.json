@@ -3,5 +3,8 @@
   "SearchString": [
     "vitamin",
     "qwerty"
+  ],
+  "PriceFilters": [
+    "$0 to $25"
   ]
 }

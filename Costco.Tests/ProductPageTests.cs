@@ -30,7 +30,7 @@ namespace Costco.Tests
         public void AddToCartMoreLimitedItemsThanAllowedTest()
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartMoreLimitedItemsThanAllowedTest);
-            int amount = steps.GetMaximumLimitedItemsAllowed();
+            int amount = steps.GetMaximumLimitedItemsAllowed("Limit ", " per member");
             steps.InputProductAmount(amount + 1);
             steps.PressAddToCart();
             steps.PressAddToCart();

@@ -14,7 +14,7 @@ namespace Costco.Web.Steps
 
         public void InputProductAmount(int amount)
         {
-            Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed, 30);
+            Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed);
             _productPage.QuantityInput.Clear();
             _productPage.QuantityInput.SendKeys(amount.ToString());
         }
@@ -24,17 +24,18 @@ namespace Costco.Web.Steps
             _productPage.AddToCartButton.Click();
         }
 
-        public void PressPlusOneStepper(int times)
+        public void PressPlusOneStepper(int quantity)
         {
-            for (int i = 0; i < times; i++, _productPage.PlusStepper.Click());
+            for (int i = 0; i < quantity; i++)
+            {
+                Waiters.WaitForCondition(_productPage.PlusStepper.IsEnabled);
+                _productPage.PlusStepper.Click();
+            }
         }
 
-        public int GetMaximumLimitedItemsAllowed()
+        public int GetMaximumLimitedItemsAllowed(string lowCutoff, string highCutoff)
         {
-            string lowCutoff = "Limit ";
-            string highCutoff = " per member";
-
-            Waiters.WaitForCondition(_productPage.PromotionalText.IsDisplayed, 30);
+            Waiters.WaitForCondition(_productPage.PromotionalText.IsDisplayed);
             string promoTextMaxQuantity = _productPage.PromotionalText.Text;
             promoTextMaxQuantity = promoTextMaxQuantity.Substring(
                 promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
@@ -45,13 +46,13 @@ namespace Costco.Web.Steps
 
         public string GetErrorText()
         {
-            Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath, 30);
+            Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
             return _productPage.ErrorMessageBelowInput.Text.Trim();
         }
 
         public string GetInputFieldErrorText()
         {
-            Waiters.WaitForCondition(_productPage.ErrorMessageInsideInput.IsDisplayed, 30);
+            Waiters.WaitForCondition(_productPage.ErrorMessageInsideInput.IsDisplayed);
             return _productPage.ErrorMessageInsideInput.Text.Trim();
         }
 
