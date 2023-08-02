@@ -29,10 +29,10 @@ namespace Costco.Tests
         {
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
 
-            _mainPageSteps.SearchFieldInput(searchString);
+            _mainPageSteps.InputSearchQuery(searchString);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
 
-            AssertWithCustomUserMessage.Contains(searchString.ToLower(), searchResult.ToLower(), "Oy-vey! No matching substring!");
+            AssertWithCustomUserMessage.Contains(searchString.ToLower(), searchResult.ToLower(), $"'{searchResult}' doesn't contain '{searchString}'");
         }
 
         /// <summary>
@@ -50,12 +50,12 @@ namespace Costco.Tests
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
             string priceFilter = ((SearchStringModel)fixture.TestData).PriceFilters[0];
 
-            _mainPageSteps.SearchFieldInput(searchString);
+            _mainPageSteps.InputSearchQuery(searchString);
             int totalQuantity = _searchResultsPageSteps.GetTotalQuantity();
             _searchResultsPageSteps.FilterByPrice(priceFilter);
             int totalQuantityFiltered = _searchResultsPageSteps.GetTotalQuantity();
 
-            AssertWithCustomUserMessage.NotEqual(totalQuantityFiltered, totalQuantity, "Oy-vey! They are equal!");
+            AssertWithCustomUserMessage.NotEqual(totalQuantityFiltered, totalQuantity, $"Total quantity '{totalQuantityFiltered}' after filtering equals to '{totalQuantity}'");
         }
 
         /// <summary>
@@ -69,10 +69,11 @@ namespace Costco.Tests
         {
             string searchString = ((SearchStringModel)fixture.TestData).SearchString[1];
 
-            _mainPageSteps.SearchFieldInput(searchString);
+            _mainPageSteps.InputSearchQuery(searchString);
+            string expectedResult = "we were not able to find a match";
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
 
-            AssertWithCustomUserMessage.Contains("we were not able to find a match", searchResult.ToLower(), "Oy-vey! No matching substring!");
+            AssertWithCustomUserMessage.Contains(expectedResult.ToLower(), searchResult.ToLower(), $"'{searchResult}' doesn't contain '{expectedResult}'");
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Costco.Web.Steps
             return _mainPage.AccountButton.IsDisplayed();
         }
 
-        public void SearchFieldInput(string input)
+        public void InputSearchQuery(string input)
         {
             Waiters.WaitForCondition(() => _mainPage.SearchBlock.SearchField.IsDisplayed(), 10);
             _mainPage.SearchBlock.SearchField.SendKeys(input);
