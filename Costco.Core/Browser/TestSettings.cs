@@ -11,7 +11,7 @@ namespace Costco.Core.Browser
         {
             FileReader reader = new();
             _config = (ConfigModel)reader.Read(Environment.GetEnvironmentVariable("Config"), 
-                typeof(ConfigModel).Assembly.FullName);
+                typeof(ConfigModel).AssemblyQualifiedName);
         }
 
         public static BrowserType Browser => (BrowserType)Enum.Parse(typeof(BrowserType), _config.Browser);

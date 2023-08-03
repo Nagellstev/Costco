@@ -10,24 +10,7 @@ namespace Costco.Utilities.FileReader
         public object Execute()
         {
             JsonDocument document = JsonDocument.Parse(File.ReadAllText(Target));
-            string typeName = document.RootElement.GetProperty("DataModel").GetString();
-            string nameSpace;
-
-            switch (typeName)
-            {
-                case string str when str.Contains("Config"):
-                    {
-                        nameSpace = "Costco.Core.ConfigurationModels.";
-                        break;
-                    }
-                default: 
-                    {
-                        nameSpace = "Costco.TestData.Models.";
-                        break;
-                    }
-            }
-
-            return JsonSerializer.Deserialize(document, Type.GetType(nameSpace + typeName + ", " + ModelAssembly));
+            return JsonSerializer.Deserialize(document, Type.GetType(ModelAssembly));
         }
     }
 }
