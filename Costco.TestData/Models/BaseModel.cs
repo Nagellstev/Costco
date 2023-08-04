@@ -14,7 +14,7 @@ namespace Costco.TestData.Models
             _container = (DataContainer)reader.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                 "..", "..", "..", "..", "Costco.TestData", "TestData", testDataFileName),
                 typeof(DataContainer).AssemblyQualifiedName);
-            return _container.TestData.GetEnumerator();
+            return _container.TestData.GetEnumerator(); //warning, implicit conversion from string to object
         }
 
         IEnumerator IEnumerable.GetEnumerator()

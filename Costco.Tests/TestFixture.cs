@@ -19,14 +19,6 @@ namespace Costco.Tests
             string urlDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "Costco.TestData", "Urls.json");
             FileReader reader = new();
             Urls = (UrlsModel)reader.Read(urlDataPath, typeof(UrlsModel).AssemblyQualifiedName);
-
-            string testDataPath = Environment.GetEnvironmentVariable("TestData"); //TODO remove at merge
-            if (testDataPath!= null)
-            {
-                TestData = reader.Read(testDataPath, AssemblyName.GetAssemblyName("Costco.TestData.dll").FullName);
-                Logger.Information($"Reading test data {testDataPath}.");
-            }
-
             Logger.Information("Setup complete.");
         }
 
