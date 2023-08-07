@@ -1,0 +1,17 @@
+{
+  "AddToCartZeroItemsTest": {
+    "Data": [
+      [ "0", "Quantity must be 1 or more to add to cart." ]
+    ]
+  },
+  "AddToCartMoreLimitedItemsThanAllowedTest": {
+    "Data": [
+      [ "Limit ", " per member", "Item {0} has a maximum order quantity of {1}" ]
+    ]
+  },
+  "ExceedMaximumAmountOfItemsInCartInputFieldTest": {
+    "Data": [
+      [ "999", "1", "Please enter no more than 3 characters." ]
+    ]
+  }
+}

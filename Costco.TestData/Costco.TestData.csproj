@@ -11,19 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="TestData\AddToCartMoreLimitedItemsThanAllowedTestData.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="TestData\ExceedMaximumAmountOfItemsInCartInputFieldTestData.json">
+    <None Update="TestData\ProductPageTestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestData\LoginCredentialsTestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestData\SearchPageTestData.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="TestData\AddToCartZeroItemsTestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

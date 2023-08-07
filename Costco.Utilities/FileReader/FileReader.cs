@@ -10,7 +10,7 @@
         /// <param name="assembyName">Name of the assemly desired model is belonging to.</param>
         /// <returns>Contents of the specified file as the specified object model.</returns>
 
-        public object Read(string path, string assembyName)
+        public object Read(string path, string assembyName, string? node = null)
         {
             IReadStrategy strategy;
 
@@ -23,7 +23,14 @@
             {
                 case ".json":
                     {
-                        strategy = new JsonReadStrategy();
+                        if (String.IsNullOrEmpty(node))
+                        {
+                            strategy = new JsonReadStrategy();
+                            break;
+                        }
+
+                        strategy = new JsonNodeReadStrategy();
+                        ((JsonNodeReadStrategy)strategy).Node = node;
                         break;
                     }
                 default:

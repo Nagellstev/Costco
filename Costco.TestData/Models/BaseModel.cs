@@ -7,14 +7,15 @@ namespace Costco.TestData.Models
     {
         private DataContainer _container;
         internal abstract string testDataFileName { get; }
+        internal abstract string testDataNodeName { get; }
 
         public IEnumerator<object[]> GetEnumerator()
         {
             FileReader reader = new();
             _container = (DataContainer)reader.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                 "..", "..", "..", "..", "Costco.TestData", "TestData", testDataFileName),
-                typeof(DataContainer).AssemblyQualifiedName);
-            return _container.TestData.GetEnumerator(); //warning, implicit conversion from string to object
+                typeof(DataContainer).AssemblyQualifiedName, testDataNodeName);
+            return _container.Data.GetEnumerator(); //warning, implicit conversion from string to object
         }
 
         IEnumerator IEnumerable.GetEnumerator()

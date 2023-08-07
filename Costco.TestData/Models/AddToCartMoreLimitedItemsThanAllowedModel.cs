@@ -5,6 +5,7 @@ namespace Costco.TestData.Models
 {
     public class AddToCartMoreLimitedItemsThanAllowedModel: BaseModel
     {
-        internal override string testDataFileName { get; } = "AddToCartMoreLimitedItemsThanAllowedTestData.json";
+        internal override string testDataFileName { get; } = "ProductPageTestData.json";
+        internal override string testDataNodeName { get; } = "AddToCartMoreLimitedItemsThanAllowedTest";
     }
 }
