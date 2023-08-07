@@ -1,5 +1,5 @@
 ﻿namespace Costco.TestData.Models
-{    public class DataContainer
+{    public class DataModel
     {
         public IEnumerable<string[]> Data { get; init; }
     }

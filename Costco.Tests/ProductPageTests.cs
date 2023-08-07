@@ -1,5 +1,5 @@
 using Costco.Core.Browser;
-using Costco.TestData.Models;
+using Costco.TestData.Models.ProductPage;
 using Costco.Web.Steps;
 
 namespace Costco.Tests
@@ -17,7 +17,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassData(typeof(AddToCartZeroItemsModel))]
+        [ClassData(typeof(ZeroItemsClassData))]
         public void AddToCartZeroItemsTest(int amount, string expectedResult)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartZeroItemsTest);
@@ -28,7 +28,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassData(typeof(AddToCartMoreLimitedItemsThanAllowedModel))]
+        [ClassData(typeof(LimitedMemberItemsClassData))]
         public void AddToCartMoreLimitedItemsThanAllowedTest(string lowCutoff, string highCutoff, string expectedResult)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartMoreLimitedItemsThanAllowedTest);
@@ -41,7 +41,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassData(typeof(ExceedMaximumAmountOfItemsInCartInputFieldModel))]
+        [ClassData(typeof(OrderOneThousandClassData))]
         public void ExceedMaximumAmountOfItemsInCartInputFieldTest(int inputAmount, int stepperPressAmount, string expectedResult)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.ExceedMaximumAmountOfItemsInCartInputFieldTest);
