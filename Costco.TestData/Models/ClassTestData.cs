@@ -1,4 +1,4 @@
-﻿using Costco.TestData.Models.ProductPage;
+﻿using Costco.TestData.Models;
 using Costco.Utilities.FileReader;
 using Xunit.Sdk;
 using System.Reflection;
@@ -10,13 +10,13 @@ namespace Costco.TestData.Models
         private object _classDataModel;
         internal string TestDataFile { get; init; }
         internal Type TestDataClassModel { get; init; }
-        internal PropertyInfo TestDataModel { get; init; }
+        internal string TestDataModel { get; init; }
 
         public ClassTestData(string testDataFile, Type testDataClassModel, string testDataModel)
         {
             TestDataFile = testDataFile;
             TestDataClassModel = testDataClassModel;
-            TestDataModel = TestDataClassModel.GetProperty(testDataModel);
+            TestDataModel = testDataModel;
         }
 
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
@@ -28,11 +28,7 @@ namespace Costco.TestData.Models
                 "..", "..", "..", "..", "Costco.TestData", "TestData", TestDataFile),
                 TestDataClassModel.AssemblyQualifiedName);
 
-            object testDataModelInstance = TestDataModel.GetValue(_classDataModel);
-            Type testDataModelType = TestDataModel.GetValue(_classDataModel).GetType();
-
-
-            return (IEnumerable<object[]>)testDataModelType.GetProperty("GenericData").GetValue(testDataModelInstance);
+            return ((IConvertiblesClassDataModel)_classDataModel).RetrieveData(TestDataModel);
         }
     }
 }

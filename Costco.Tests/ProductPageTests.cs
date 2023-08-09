@@ -1,6 +1,5 @@
 using Costco.Core.Browser;
 using Costco.TestData.Models;
-using Costco.TestData.Models.ProductPage;
 using Costco.Web.Steps;
 
 namespace Costco.Tests
