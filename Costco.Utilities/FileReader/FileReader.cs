@@ -21,17 +21,16 @@
 
             switch (new FileInfo(path).Extension.ToLower())
             {
-                case ".json":
+                case ".json" when !String.IsNullOrEmpty(node):
                     {
-                        if (String.IsNullOrEmpty(node))
-                        {
-                            strategy = new JsonReadStrategy();
-                            break;
-                        }
-
                         strategy = new JsonNodeReadStrategy();
                         ((JsonNodeReadStrategy)strategy).Node = node;
                         break;
+                    }
+                case ".json":
+                    {
+                        strategy = new JsonReadStrategy();
+                        break; 
                     }
                 default:
                     {
