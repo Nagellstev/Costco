@@ -7,7 +7,6 @@ namespace Costco.TestData.Models
 {
     public class ClassTestData: DataAttribute
     {
-        private object _classDataModel;
         internal string TestDataFile { get; init; }
         internal Type TestDataModel { get; init; }
 
@@ -21,7 +20,7 @@ namespace Costco.TestData.Models
         {
             if (testMethod == null) { throw new ArgumentNullException(nameof(testMethod)); }
 
-            Type type = typeof(GenericTestData<>).MakeGenericType(TestDataModel);
+            Type type = typeof(TestDataModel<>).MakeGenericType(TestDataModel);
             object genericTestData = Activator.CreateInstance(type);
 
             FileReader reader = new();
@@ -29,8 +28,8 @@ namespace Costco.TestData.Models
                 "..", "..", "..", "..", "Costco.TestData", "TestData", TestDataFile),
                 genericTestData.GetType().AssemblyQualifiedName);
 
-            List<object[]> returnData = new() 
-            { (object[])type.GetProperty("TestDataArray").GetValue(genericTestData) }; //the only way it casts to what we need
+            List<object[]> returnData = new() { 
+                (object[])type.GetProperty("TestDataArray").GetValue(genericTestData) }; //the only way it casts to what we need
 
             return returnData;
         }

@@ -2,7 +2,7 @@
 
 namespace Costco.TestData.Models
 {
-    public class GenericTestData<T>
+    public class TestDataModel<T>
     {
         public T[] TestDataArray { get; set; }
     }
