@@ -9,13 +9,11 @@ namespace Costco.TestData.Models
     {
         private object _classDataModel;
         internal string TestDataFile { get; init; }
-        internal Type TestDataClassModel { get; init; }
-        internal string TestDataModel { get; init; }
+        internal Type TestDataModel { get; init; }
 
-        public ClassTestData(string testDataFile, Type testDataClassModel, string testDataModel)
+        public ClassTestData(string testDataFile, Type testDataModel)
         {
             TestDataFile = testDataFile;
-            TestDataClassModel = testDataClassModel;
             TestDataModel = testDataModel;
         }
 
@@ -23,12 +21,18 @@ namespace Costco.TestData.Models
         {
             if (testMethod == null) { throw new ArgumentNullException(nameof(testMethod)); }
 
-            FileReader reader = new();
-            _classDataModel = reader.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                "..", "..", "..", "..", "Costco.TestData", "TestData", TestDataFile),
-                TestDataClassModel.AssemblyQualifiedName);
+            Type type = typeof(GenericTestData<>).MakeGenericType(TestDataModel);
+            object genericTestData = Activator.CreateInstance(type);
 
-            return ((IConvertiblesClassDataModel)_classDataModel).RetrieveData(TestDataModel);
+            FileReader reader = new();
+            genericTestData = reader.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                "..", "..", "..", "..", "Costco.TestData", "TestData", TestDataFile),
+                genericTestData.GetType().AssemblyQualifiedName);
+
+            List<object[]> data = new() { (object[])type.GetProperty("TestDataArray").GetValue(genericTestData) };
+
+            return data;
         }
+        
     }
 }

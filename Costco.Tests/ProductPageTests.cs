@@ -17,39 +17,39 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel), "AddToCartZeroItemsTest")]
-        public void AddToCartZeroItemsTest(int amount, string expectedResult)
+        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        public void AddToCartZeroItemsTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartZeroItemsTest);
-            steps.InputProductAmount(amount);
+            steps.InputProductAmount(int.Parse(model.ZeroItemsInput));
             steps.PressAddToCart();
 
-            Assert.Contains(expectedResult, steps.GetErrorText());
+            Assert.Contains(model.ZeroItemsError, steps.GetErrorText());
         }
 
         [Theory]
-        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel), "AddToCartMoreLimitedItemsThanAllowedTest")]
-        public void AddToCartMoreLimitedItemsThanAllowedTest(string lowCutoff, string highCutoff, string expectedResult)
+        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        public void AddToCartMoreLimitedItemsThanAllowedTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartMoreLimitedItemsThanAllowedTest);
-            int amount = steps.GetMaximumLimitedItemsAllowed(lowCutoff, highCutoff);
+            int amount = steps.GetMaximumLimitedItemsAllowed(model.LowCutoffString, model.HighCutoffString);
             steps.InputProductAmount(amount + 1);
             steps.PressAddToCart();
             steps.PressAddToCart();
 
-            Assert.Contains(String.Format(expectedResult, steps.GetItemNumber(), amount), steps.GetErrorText());
+            Assert.Contains(String.Format(model.MemberItemsError, steps.GetItemNumber(), amount), steps.GetErrorText());
         }
 
         [Theory]
-        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel), "ExceedMaximumAmountOfItemsInCartInputFieldTest")]
-        public void ExceedMaximumAmountOfItemsInCartInputFieldTest(int inputAmount, int stepperPressAmount, string expectedResult)
+        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        public void ExceedMaximumAmountOfItemsInCartInputFieldTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.ExceedMaximumAmountOfItemsInCartInputFieldTest);
-            steps.InputProductAmount(inputAmount);
-            steps.PressPlusOneStepper(stepperPressAmount);
+            steps.InputProductAmount(int.Parse(model.OverMaxItemsInput));
+            steps.PressPlusOneStepper(int.Parse(model.OverMaxItemsStepper));
             steps.PressAddToCart();
 
-            Assert.Equal(expectedResult, steps.GetInputFieldErrorText());
+            Assert.Equal(model.OverMaxItemsError, steps.GetInputFieldErrorText());
         }
     }
 }

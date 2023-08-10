@@ -1,24 +1,14 @@
 {
-  "AddToCartZeroItemsTest": [
+  "TestDataArray": [
     {
-      "InputItemAmount": "0",
-      "ErrorMessage": "Quantity must be 1 or more to add to cart."
-    }
-  ],
-
-  "AddToCartMoreLimitedItemsThanAllowedTest": [
-    {
+      "ZeroItemsInput": "0",
+      "ZeroItemsError": "Quantity must be 1 or more to add to cart.",
       "LowCutoffString": "Limit",
       "HighCutoffString": " per member",
-      "ErrorMessage": "Item {0} has a maximum order quantity of {1}"
-    }
-  ],
-
-  "ExceedMaximumAmountOfItemsInCartInputFieldTest": [
-    {
-      "InputItemAmount": "999",
-      "StepperPressAmount": "1",
-      "ErrorMessage": "Please enter no more than 3 characters."
+      "MemberItemsError": "Item {0} has a maximum order quantity of {1}",
+      "OverMaxItemsInput": "999",
+      "OverMaxItemsStepper": "1",
+      "OverMaxItemsError": "Please enter no more than 3 characters."
     }
   ]
 }
