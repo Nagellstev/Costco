@@ -24,7 +24,7 @@
                 case ".json":
                     {
                         strategy = new JsonReadStrategy();
-                        break;
+                        break; 
                     }
                 default:
                     {

@@ -16,17 +16,9 @@ namespace Costco.Tests
         {
             Logger.Init("Costco", TestSettings.LoggerPath);
             Screenshoter.Init(TestSettings.ScreenshotPath);
-            string urlDataPath = (Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "Costco.TestData", "Urls.json"));
-            string testDataPath = Environment.GetEnvironmentVariable("TestData");
-
-            if (testDataPath!= null)
-            {
-                FileReader reader = new();
-                Urls = (UrlsModel)reader.Read(urlDataPath, typeof(UrlsModel).Assembly.FullName);
-                TestData = reader.Read(testDataPath, AssemblyName.GetAssemblyName("Costco.TestData.dll").FullName);
-                Logger.Information($"Reading test data {testDataPath}.");
-            }
-
+            string urlDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "Costco.TestData", "Urls.json");
+            FileReader reader = new();
+            Urls = (UrlsModel)reader.Read(urlDataPath, typeof(UrlsModel).AssemblyQualifiedName);
             Logger.Information("Setup complete.");
         }
 

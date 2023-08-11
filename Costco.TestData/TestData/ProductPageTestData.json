@@ -1,3 +1,14 @@
 {
-  "DataModel": "ProductPageModel"
+  "TestDataArray": [
+    {
+      "ZeroItemsInput": "0",
+      "ZeroItemsError": "Quantity must be 1 or more to add to cart.",
+      "LowCutoffString": "Limit",
+      "HighCutoffString": " per member",
+      "MemberItemsError": "Item {0} has a maximum order quantity of {1}",
+      "OverMaxItemsInput": "999",
+      "OverMaxItemsStepper": "1",
+      "OverMaxItemsError": "Please enter no more than 3 characters."
+    }
+  ]
 }

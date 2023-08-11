@@ -1,5 +1,5 @@
 using Costco.Core.Browser;
-using Costco.Web.Pages;
+using Costco.TestData.Models;
 using Costco.Web.Steps;
 
 namespace Costco.Tests
@@ -16,38 +16,40 @@ namespace Costco.Tests
             steps = new(new());
         }
 
-        [Fact]
-        public void AddToCartZeroItemsTest()
+        [Theory]
+        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        public void AddToCartZeroItemsTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartZeroItemsTest);
-            steps.InputProductAmount(0);
+            steps.InputProductAmount(int.Parse(model.ZeroItemsInput));
             steps.PressAddToCart();
 
-            Assert.Contains("Quantity must be 1 or more to add to cart.", steps.GetErrorText());
+            Assert.Contains(model.ZeroItemsError, steps.GetErrorText());
         }
 
-        [Fact]
-        public void AddToCartMoreLimitedItemsThanAllowedTest()
+        [Theory]
+        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        public void AddToCartMoreLimitedItemsThanAllowedTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartMoreLimitedItemsThanAllowedTest);
-            int amount = steps.GetMaximumLimitedItemsAllowed("Limit ", " per member");
+            int amount = steps.GetMaximumLimitedItemsAllowed(model.LowCutoffString, model.HighCutoffString);
             steps.InputProductAmount(amount + 1);
             steps.PressAddToCart();
             steps.PressAddToCart();
 
-            Assert.Contains($"Item {steps.GetItemNumber()} has a maximum order quantity of {amount}", 
-                steps.GetErrorText());
+            Assert.Contains(String.Format(model.MemberItemsError, steps.GetItemNumber(), amount), steps.GetErrorText());
         }
 
-        [Fact]
-        public void ExceedMaximumAmountOfItemsInCartInputFieldTest()
+        [Theory]
+        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        public void ExceedMaximumAmountOfItemsInCartInputFieldTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.ExceedMaximumAmountOfItemsInCartInputFieldTest);
-            steps.InputProductAmount(999);
-            steps.PressPlusOneStepper(1);
+            steps.InputProductAmount(int.Parse(model.OverMaxItemsInput));
+            steps.PressPlusOneStepper(int.Parse(model.OverMaxItemsStepper));
             steps.PressAddToCart();
 
-            Assert.Equal("Please enter no more than 3 characters.", steps.GetInputFieldErrorText());
+            Assert.Equal(model.OverMaxItemsError, steps.GetInputFieldErrorText());
         }
     }
 }
