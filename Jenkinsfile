@@ -6,11 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building'
-            }
-        }
         stage('TestSetup') {
             steps {
                 echo 'Testing'
@@ -78,12 +73,6 @@ steps {
     post{
         always{
             cleanWs()
-        }
-        success{
-            echo 'Deploying'
-        }
-        unstable{
-            echo 'Not deploying'
         }
     }
 }
