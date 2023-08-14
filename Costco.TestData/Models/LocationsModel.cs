@@ -2,7 +2,7 @@
 {
     public class LocationsModel
     {
-        public string Warehouse { get; set; }
-        public string DeliveryLocation { get; set; }
+        public string Warehouse { get; init; }
+        public string DeliveryLocation { get; init; }
     }
 }
