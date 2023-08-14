@@ -1,10 +1,6 @@
 pipeline {
     agent any
         parameters {
-            booleanParam(name: 'ProductPage', defaultValue: true)
-            booleanParam(name: 'Delivery', defaultValue: true)
-            booleanParam(name: 'SearchPage', defaultValue: true)
-            booleanParam(name: 'Login', defaultValue: true)
             choice(name: 'Config', choices: ['DefaultConfig.json', 'FirefoxConfig.json'], description: '')
             credentials(name: 'GitCredentials',description: '')
     }
@@ -25,9 +21,6 @@ pipeline {
         stage('Test'){
             parallel{
                 stage('ProductPage') {
-                    when {
-                        expression { return params.ProductPage }
-                    }
                     steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                         bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\ProductPageTestData.json --filter Target=ProductPage  --logger:"xunit;LogFileName=TestResults.xml" --no-build'
@@ -41,10 +34,7 @@ pipeline {
                     }
                 }
                 stage('Delivery') {
-                    when {
-                        expression { return params.Delivery }
-                    }
-                    steps {
+steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                         bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LocationsTestData.json --filter Target=Delivery --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
@@ -57,10 +47,7 @@ pipeline {
                     }
                 }
                 stage('SearchPage') {
-                    when {
-                        expression { return params.SearchPage }
-                    }
-                    steps {
+steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                         bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\SearchPageTestData.json --filter Target=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
@@ -73,10 +60,7 @@ pipeline {
                     }
                 }
                 stage('Login') {
-                    when {
-                        expression { return params.Login }
-                    }
-                    steps {
+steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                         bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LoginCredentialsTestData.json --filter Target=Login --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
