@@ -23,6 +23,7 @@ namespace Costco.Web.Steps
 
         public void PressAddToCart()
         {
+            Logger.Information($"Pressing \"Add to card\" button.");
             _productPage.AddToCartButton.Click();
         }
 

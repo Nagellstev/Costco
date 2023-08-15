@@ -27,7 +27,7 @@ namespace Costco.Tests
             Assert.Contains(model.ZeroItemsError, steps.GetErrorText());
         }
 
-        [Theory(DisplayName = "AddToCartMoreLimitedItemsThanAllowedTest")]
+        [Theory]
         [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
         public void AddToCartMoreLimitedItemsThanAllowedTest(ProductPageDataModel model)
         {
@@ -40,7 +40,7 @@ namespace Costco.Tests
             Assert.Contains(String.Format(model.MemberItemsError, steps.GetItemNumber(), amount), steps.GetErrorText());
         }
 
-        [Theory(DisplayName = "ExceedMaximumAmountOfItemsInCartInputFieldTest")]
+        [Theory]
         [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
         public void ExceedMaximumAmountOfItemsInCartInputFieldTest(ProductPageDataModel model)
         {
