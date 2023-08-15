@@ -12,5 +12,10 @@
         public string OverMaxItemsInput { get; init; }
         public string OverMaxItemsStepper { get; init; }
         public string OverMaxItemsError { get; init; }
+
+        public override string ToString()
+        {
+            return GetType().Name;
+        }
     }
 }

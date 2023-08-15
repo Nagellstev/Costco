@@ -1,4 +1,5 @@
 {
+  "$schema": "TestDataSchema.json",
   "TestDataArray": [
     {
       "ZeroItemsInput": "0",

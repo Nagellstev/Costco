@@ -1,4 +1,5 @@
 {
+  "$schema": "TestDataSchema.json",
   "DataModel": "LocationsModel",
   "Warehouse": "Louisville",
   "DeliveryLocation": "12345"
