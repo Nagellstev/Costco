@@ -2,20 +2,10 @@
 {
     public class LoginCredentialsModel
     {
-        public ValidCredentials ValidCredentials { get; set; }
-        public InvalidCredentials InvalidCredentials { get; set; }
+        public string ValidUsername { get; init; }
+        public string ValidPassword { get; init; }
+        public string InvalidUsername { get; init; }
+        public string InvalidPassword { get; init; }
     }
-
-        public class InvalidCredentials
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
-        }
-
-        public class ValidCredentials
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
-        }
-    }
+}
 

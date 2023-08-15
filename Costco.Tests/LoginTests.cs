@@ -22,8 +22,8 @@ namespace Costco.Tests
         public void LoginWithValidCredentials(LoginCredentialsModel model)
         {
             //Arrange
-            string username = model.ValidCredentials.Username;
-            string password = model.ValidCredentials.Password;
+            string username = model.ValidUsername;
+            string password = model.ValidPassword;
 
             //Action
             _mainPageSteps.NavigateToLoginPage();
@@ -38,8 +38,8 @@ namespace Costco.Tests
         public void LoginWithInvalidCredentials(LoginCredentialsModel model)
         {
             //Arrange
-            string username = model.InvalidCredentials.Username;
-            string password = model.InvalidCredentials.Password;
+            string username = model.InvalidUsername;
+            string password = model.InvalidPassword;
 
             //Action
             _mainPageSteps.NavigateToLoginPage();
@@ -54,7 +54,7 @@ namespace Costco.Tests
         public void LoginWithValidUsernameButEmptyPassword(LoginCredentialsModel model)
         {
             //Arrange
-            string username = model.InvalidCredentials.Username;
+            string username = model.ValidUsername;
             string password = string.Empty;
 
             //Action
