@@ -8,5 +8,10 @@
         public string SearchSenselessLineResult { get; init; }
         public string SearchExistingItemAndFilterByPriceSearch { get; init; }
         public string SearchExistingItemAndFilterByPriceFilter { get; init; }
+
+        public override string ToString()
+        {
+            return GetType().Name;
+        }
     }
 }

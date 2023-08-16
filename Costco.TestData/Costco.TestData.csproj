@@ -20,6 +20,11 @@
     <None Update="TestData\SearchPageTestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestData\TestDataSchema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties testdata_4productpagetestdata_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

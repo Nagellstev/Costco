@@ -2,15 +2,20 @@
 {
     public class ProductPageDataModel
     {
-        public string ZeroItemsInput { get; set; }
-        public string ZeroItemsError { get; set; }
+        public string ZeroItemsInput { get; init; }
+        public string ZeroItemsError { get; init; }
 
-        public string LowCutoffString { get; set; }
-        public string HighCutoffString { get; set; }
-        public string MemberItemsError { get; set; }
+        public string LowCutoffString { get; init; }
+        public string HighCutoffString { get; init; }
+        public string MemberItemsError { get; init; }
 
-        public string OverMaxItemsInput { get; set; }
-        public string OverMaxItemsStepper { get; set; }
-        public string OverMaxItemsError { get; set; }
+        public string OverMaxItemsInput { get; init; }
+        public string OverMaxItemsStepper { get; init; }
+        public string OverMaxItemsError { get; init; }
+
+        public override string ToString()
+        {
+            return GetType().Name;
+        }
     }
 }
