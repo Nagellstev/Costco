@@ -24,15 +24,16 @@ namespace Costco.Tests
         ///2. Send keys «vitamin» to the search field
         ///result. Header of search results contains substring «vitamin»
         /// </summary>
-        [Fact]
-        public void SearchExistingItemTest()
+        [Theory]
+        [ClassTestData("SearchPageTestData.json", typeof(SearchPageDataModel))]
+        public void SearchExistingItemTest(SearchPageDataModel searchPageDataModel)
         {
-            string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
-
-            _mainPageSteps.InputSearchQuery(searchString);
+            _mainPageSteps.InputSearchQuery(searchPageDataModel.SearchExistingItem);
             string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
+            string expectedResult = searchPageDataModel.SearchExistingItemResult;
 
-            AssertWithCustomUserMessage.Contains(searchString.ToLower(), searchResult.ToLower(), $"'{searchResult}' doesn't contain '{searchString}'");
+            AssertWithCustomUserMessage.Contains(expectedResult.ToLower(), searchResult.ToLower(),
+                $"'{searchResult}' doesn't contain '{expectedResult}'");
         }
 
         /// <summary>
@@ -44,18 +45,17 @@ namespace Costco.Tests
         ///5. Extract total quantity from string "showing 1-XX from ZZ"
         ///result. Total quantity is updated
         /// </summary>
-        [Fact]
-        public void SearchExistingItemAndSortByParametersTest()
+        [Theory]
+        [ClassTestData("SearchPageTestData.json", typeof(SearchPageDataModel))]
+        public void SearchExistingItemAndSortByParametersTest(SearchPageDataModel searchPageDataModel)
         {
-            string searchString = ((SearchStringModel)fixture.TestData).SearchString[0];
-            string priceFilter = ((SearchStringModel)fixture.TestData).PriceFilters[0];
-
-            _mainPageSteps.InputSearchQuery(searchString);
+            _mainPageSteps.InputSearchQuery(searchPageDataModel.SearchExistingItemAndFilterByPriceSearch);
             int totalQuantity = _searchResultsPageSteps.GetTotalQuantity();
-            _searchResultsPageSteps.FilterByPrice(priceFilter);
+            _searchResultsPageSteps.FilterByPrice(searchPageDataModel.SearchExistingItemAndFilterByPriceFilter);
             int totalQuantityFiltered = _searchResultsPageSteps.GetTotalQuantity();
 
-            AssertWithCustomUserMessage.NotEqual(totalQuantityFiltered, totalQuantity, $"Total quantity '{totalQuantityFiltered}' after filtering equals to '{totalQuantity}'");
+            AssertWithCustomUserMessage.NotEqual(totalQuantityFiltered, totalQuantity, 
+                $"Total quantity '{totalQuantityFiltered}' after filtering equals to '{totalQuantity}'");
         }
 
         /// <summary>
@@ -64,16 +64,16 @@ namespace Costco.Tests
         ///2. Send keys «qwerty» to the search field
         ///result. Header of search results contains substring «we were not able to find a match»
         /// </summary>
-        [Fact]
-        public void SearchSenselessLineTest()
+        [Theory]
+        [ClassTestData("SearchPageTestData.json", typeof(SearchPageDataModel))]
+        public void SearchSenselessLineTest(SearchPageDataModel searchPageDataModel)
         {
-            string searchString = ((SearchStringModel)fixture.TestData).SearchString[1];
+            _mainPageSteps.InputSearchQuery(searchPageDataModel.SearchSenselessLine);
+            string expectedResult = searchPageDataModel.SearchSenselessLineResult;
+            string searchResult = _searchResultsPageSteps.NothingFoundMessage();
 
-            _mainPageSteps.InputSearchQuery(searchString);
-            string expectedResult = "we were not able to find a match";
-            string searchResult = _searchResultsPageSteps.ReadSearchResultsMessage();
-
-            AssertWithCustomUserMessage.Contains(expectedResult.ToLower(), searchResult.ToLower(), $"'{searchResult}' doesn't contain '{expectedResult}'");
+            AssertWithCustomUserMessage.Contains(expectedResult.ToLower(), searchResult.ToLower(), 
+                $"'{searchResult}' doesn't contain '{expectedResult}'");
         }
     }
 }

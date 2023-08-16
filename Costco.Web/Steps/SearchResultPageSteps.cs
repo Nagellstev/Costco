@@ -1,5 +1,4 @@
 ﻿using Costco.Core.Browser;
-using Costco.Web.Blocks;
 using Costco.Web.Pages;
 using System.Text.RegularExpressions;
 
@@ -18,6 +17,12 @@ namespace Costco.Web.Steps
         {
             Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
             return _searchResultsPage.SearchResultsMessage.Text;
+        }
+
+        public string NothingFoundMessage()
+        {
+            Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
+            return _searchResultsPage.NothingFoundMessage.Text;
         }
 
         public void FilterByPrice(string priceRange)
