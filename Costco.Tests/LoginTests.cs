@@ -30,7 +30,7 @@ namespace Costco.Tests
             _loginPageSteps.LoginWithCredentials(username, password);
 
             //Assert
-            Assert.True(_mainPageSteps.VerifyUserIsLoggedIn());
+            Assert.True(_mainPageSteps.VerifyUserIsLoggedIn(), "User is not logged in");
         }
 
         [Theory]
@@ -46,7 +46,7 @@ namespace Costco.Tests
             _loginPageSteps.LoginWithCredentials(username, password);
 
             //Assert
-            Assert.True(_loginPageSteps.VerifyInvalidCredentialsErrorIsDisplayed());
+            Assert.True(_loginPageSteps.VerifyInvalidCredentialsErrorIsDisplayed(), "The 'Invalid credentials' error isn't displayed");
         }
 
         [Theory]
@@ -62,7 +62,7 @@ namespace Costco.Tests
             _loginPageSteps.LoginWithCredentials(username, password);
 
             //Assert
-            Assert.True(_loginPageSteps.VerifyPasswordIsRequiredErrorIsDisplayed());
+            Assert.True(_loginPageSteps.VerifyPasswordIsRequiredErrorIsDisplayed(), "The 'Invalid password' error isn't displayed");
         }
     }
 }
