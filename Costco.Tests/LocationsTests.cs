@@ -18,10 +18,11 @@ namespace Costco.Tests
             warehousePageSteps = new(new());
         }
 
-        [Fact]
-        public void SetWarehouseAsMyWarehouseTest()
+        [Theory]
+        [ClassTestData("LocationsTestData.json", typeof(LocationsModel))]
+        public void SetWarehouseAsMyWarehouseTest(LocationsModel model)
         {
-            string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
+            string warehouse = model.Warehouse;
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
             
             locationsPageSteps.SearchForWarehouse(warehouse);
@@ -30,10 +31,11 @@ namespace Costco.Tests
             Assert.True(locationsPageSteps.IsWarehouseSet(warehouse), "\"My Warehouse\" wasn't set.");
         }
 
-        [Fact]
-        public void ViewStoreDetailsTest()
+        [Theory]
+        [ClassTestData("LocationsTestData.json", typeof(LocationsModel))]
+        public void ViewStoreDetailsTest(LocationsModel model)
         {
-            string warehouse = ((LocationsModel)fixture.TestData).Warehouse;
+            string warehouse = model.Warehouse;
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
 
             locationsPageSteps.SearchForWarehouse(warehouse);
@@ -48,10 +50,11 @@ namespace Costco.Tests
                 () => Assert.Equal(addressOnLocationsPage, addressOnWarehousePage));
         }
 
-        [Fact]
-        public void ChangeDeliveryLocationTest()
+        [Theory]
+        [ClassTestData("LocationsTestData.json", typeof(LocationsModel))]
+        public void ChangeDeliveryLocationTest(LocationsModel model)
         {
-            string deliveryLocation = ((LocationsModel)fixture.TestData).DeliveryLocation;
+            string deliveryLocation = model.DeliveryLocation;
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.WarehouseLocations);
 
             locationsPageSteps.SetDeliveryLocation(deliveryLocation);

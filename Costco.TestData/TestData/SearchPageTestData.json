@@ -1,11 +1,13 @@
 {
   "$schema": "TestDataSchema.json",
-  "DataModel": "SearchStringModel",
-  "SearchString": [
-    "vitamin",
-    "qwerty"
-  ],
-  "PriceFilters": [
-    "$0 to $25"
+  "TestDataArray": [
+    {
+      "SearchExistingItem": "vitamin",
+      "SearchExistingItemResult": "vitamin",
+      "SearchSenselessLine": "qwerty",
+      "SearchSenselessLineResult": "we were not able to find a match",
+      "SearchExistingItemAndFilterByPriceSearch": "vitamin",
+      "SearchExistingItemAndFilterByPriceFilter": "$0 to $25"
+    }
   ]
 }

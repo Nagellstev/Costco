@@ -1,6 +1,9 @@
 {
   "$schema": "TestDataSchema.json",
-  "DataModel": "LocationsModel",
-  "Warehouse": "Louisville",
-  "DeliveryLocation": "12345"
+  "TestDataArray": [
+    {
+      "Warehouse": "Louisville",
+      "DeliveryLocation": "12345"
+    }
+  ]
 }
