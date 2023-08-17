@@ -17,49 +17,52 @@ namespace Costco.Tests
             _loginPageSteps = new LoginPageSteps(new());
         }
 
-        [Fact]
-        public void LoginWithValidCredentials()
+        [Theory]
+        [ClassTestData("LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
+        public void LoginWithValidCredentials(LoginCredentialsModel model)
         {
             //Arrange
-            string userName = ((LoginCredentialsModel)fixture.TestData).ValidCredentials.Username;
-            string password = ((LoginCredentialsModel)fixture.TestData).ValidCredentials.Password;
+            string username = model.ValidUsername;
+            string password = model.ValidPassword;
 
             //Action
             _mainPageSteps.NavigateToLoginPage();
-            _loginPageSteps.LoginWithCredentials(userName, password);
+            _loginPageSteps.LoginWithCredentials(username, password);
 
             //Assert
-            Assert.True(_mainPageSteps.VerifyUserIsLoggedIn());
+            Assert.True(_mainPageSteps.VerifyUserIsLoggedIn(), "User is not logged in");
         }
 
-        [Fact]
-        public void LoginWithInvalidCredentials()
+        [Theory]
+        [ClassTestData("LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
+        public void LoginWithInvalidCredentials(LoginCredentialsModel model)
         {
             //Arrange
-            string userName = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Username;
-            string password = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Password;
+            string username = model.InvalidUsername;
+            string password = model.InvalidPassword;
 
             //Action
             _mainPageSteps.NavigateToLoginPage();
-            _loginPageSteps.LoginWithCredentials(userName, password);
+            _loginPageSteps.LoginWithCredentials(username, password);
 
             //Assert
-            Assert.True(_loginPageSteps.VerifyInvalidCredentialsErrorIsDisplayed());
+            Assert.True(_loginPageSteps.VerifyInvalidCredentialsErrorIsDisplayed(), "The 'Invalid credentials' error isn't displayed");
         }
 
-        [Fact]
-        public void LoginWithValidUsernameButEmptyPassword()
+        [Theory]
+        [ClassTestData("LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
+        public void LoginWithValidUsernameButEmptyPassword(LoginCredentialsModel model)
         {
             //Arrange
-            string userName = ((LoginCredentialsModel)fixture.TestData).InvalidCredentials.Username;
+            string username = model.ValidUsername;
             string password = string.Empty;
 
             //Action
             _mainPageSteps.NavigateToLoginPage();
-            _loginPageSteps.LoginWithCredentials(userName, password);
+            _loginPageSteps.LoginWithCredentials(username, password);
 
             //Assert
-            Assert.True(_loginPageSteps.VerifyPasswordIsRequiredErrorIsDisplayed());
+            Assert.True(_loginPageSteps.VerifyPasswordIsRequiredErrorIsDisplayed(), "The 'Invalid password' error isn't displayed");
         }
     }
 }
