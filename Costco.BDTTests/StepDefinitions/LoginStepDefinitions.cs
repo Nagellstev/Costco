@@ -4,8 +4,8 @@ namespace Costco.BDTTests.StepDefinitions
     [Binding]
     public sealed class LoginStepDefinitions
     {
-        [When("I click on sign in/register button")]
-        public void WhenIClickOnSignInRegisterButton()
+        [When("I click the sign in/register button")]
+        public void WhenIClickTheSignInRegisterButton()
         {
             throw new PendingStepException();
         }
