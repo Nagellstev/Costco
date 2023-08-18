@@ -4,12 +4,6 @@ namespace Costco.BDTTests.StepDefinitions
     [Binding]
     public sealed class LoginStepDefinitions
     {
-        [Given("I am on the main page")]
-        public void GivenIAmOnTheMainPage()
-        {
-            throw new PendingStepException();
-        }
-
         [When("I click on sign in/register button")]
         public void WhenIClickOnSignInRegisterButton()
         {
