@@ -8,7 +8,7 @@ pipeline {
         stage('TestSetup') {
             steps {
                 echo 'Testing'
-                checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[credentialsId: 8e473d11-99ad-40f5-b471-88f1c6afa416, url: 'https://git.epam.com/filipp_protopopov/epam-at-lab-2023cw36-dotnet/']])
+                checkout scmGit(branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[credentialsId: PasswordJenkins, url: 'https://git.epam.com/filipp_protopopov/epam-at-lab-2023cw36-dotnet/']])
                 bat 'dotnet build Costco.sln -t:restore,build -p:RestorePackagesConfig=true'
             }
         }
