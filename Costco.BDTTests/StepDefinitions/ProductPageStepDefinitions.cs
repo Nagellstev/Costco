@@ -32,6 +32,12 @@ namespace Costco.BDTTests.StepDefinitions
         [AfterScenario]
         public void Cleanup()
         {
+            if (_scenarioContext.TestError != null)
+            {
+                Logger.Error($"Test '{_scenarioContext.ScenarioInfo.Title}' failed, {_scenarioContext.TestError.Message}\nException: {_scenarioContext.TestError.InnerException}");
+                Screenshoter.TakeScreenshot(Browser.Driver, _scenarioContext.ScenarioInfo.Title);
+            }
+
             BrowserFactory.CleanUp();
             Logger.Information("Cleaning up.");
         }
