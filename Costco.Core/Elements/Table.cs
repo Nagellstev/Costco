@@ -12,10 +12,5 @@ namespace Costco.Core.Elements
             IReadOnlyCollection<IWebElement> rows = OriginalWebElement.FindElements(By.TagName("tr"));
             return rows.Count == 0;
         }
-
-        public bool IsNotEmpty()
-        {
-            return !IsEmpty();
-        }
     }
 }

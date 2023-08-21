@@ -56,7 +56,7 @@ namespace Costco.Web.Steps
 
         public bool IsWarehouseTableNotEmpty()
         {
-            return locationsPage.WarehouseTable.IsNotEmpty();
+            return !locationsPage.WarehouseTable.IsEmpty();
         }
 
         public bool IsResultFound(string result)
