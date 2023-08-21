@@ -16,9 +16,9 @@ namespace Costco.BDTTests.StepDefinitions
         public ProductPageStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
+            Logger.Information($"Initializing {_scenarioContext.ScenarioInfo.Title}.");
             _productPage = new();
             BrowserFactory.Browser.Maximize();
-            Logger.Information("Setup complete.");
         }
 
         [BeforeFeature]
@@ -26,7 +26,7 @@ namespace Costco.BDTTests.StepDefinitions
         {
             Logger.Init("Costco", TestSettings.LoggerPath);
             Screenshoter.Init(TestSettings.ScreenshotPath);
-            Logger.Information("Pre-run setup complete.");
+            Logger.Information("Setup complete.");
         }
 
         [AfterScenario]
@@ -39,7 +39,7 @@ namespace Costco.BDTTests.StepDefinitions
             }
 
             BrowserFactory.CleanUp();
-            Logger.Information("Cleaning up.");
+            Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
         }
 
         [Given(@"I opened the product page (.*)")]
