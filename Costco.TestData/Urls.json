@@ -3,6 +3,6 @@
   "LoginPage": "/LogonForm",
   "WarehouseLocations": "/warehouse-locations",
   "AddToCartZeroItemsTest": "/kirkland-signature-ladies'-slub-tee%2c-2-pack.product.100670508.html",
-  "AddToCartMoreLimitedItemsThanAllowedTest": "/midea-duo-smart-12k-btu-doesacc-4-in-1-inverter-portable-air-conditioner.product.100978219.html",
+  "AddToCartMoreLimitedItemsThanAllowedTest": "/macbook-air-13.3-inch---apple-m1-chip-8-core-cpu%2c-7-core-gpu---8gb-memory---256gb-ssd-space-gray.product.100688258.html",
   "ExceedMaximumAmountOfItemsInCartInputFieldTest": "/.product.6262016.html"
 }

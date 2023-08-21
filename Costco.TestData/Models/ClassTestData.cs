@@ -29,7 +29,9 @@ namespace Costco.TestData.Models
                 genericTestData.GetType().AssemblyQualifiedName);
 
             List<object[]> returnData = new() { 
-                (object[])type.GetProperty("TestDataArray").GetValue(genericTestData) }; //the only way it casts to what we need
+                (object[])type.
+                GetProperty("TestDataArray").
+                GetValue(genericTestData) }; //the only way it casts to what we need
 
             return returnData;
         }

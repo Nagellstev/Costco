@@ -4,6 +4,6 @@ namespace Costco.TestData.Models
 {
     public class TestDataModel<T>
     {
-        public T[] TestDataArray { get; set; }
+        public T[] TestDataArray { get; init; }
     }
 }

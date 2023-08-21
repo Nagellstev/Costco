@@ -40,7 +40,6 @@ namespace Costco.Web.Steps
             promoTextMaxQuantity = promoTextMaxQuantity.Substring(
                 promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
                 promoTextMaxQuantity.IndexOf(highCutoff) - promoTextMaxQuantity.IndexOf(lowCutoff) - lowCutoff.Length);
-
             return Int32.Parse(promoTextMaxQuantity);
         }
 

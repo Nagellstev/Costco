@@ -1,0 +1,22 @@
+{
+  "$schema" "http://json-schema.org/draft-04/schema#",
+  "title": "TestDataSchema",
+  "type": "object",
+  "properties": {
+    "TestDataArray": {
+      "description": "Array containing all test data separated into blocks that will be sequentially passed to each test method.",
+      "type": "array",
+      "items": [
+        {
+          "description": "All test data that could be used in a singular test run of the appropriate test suite.",
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "required": [
+    "TestDataArray"
+  ]
+}
+
+
