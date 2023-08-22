@@ -2,7 +2,7 @@ pipeline {
     agent any
         parameters {
             choice(name: 'Config', choices: ['DefaultConfig.json', 'FirefoxConfig.json'], description: '')
-            credentials(name: 'GitCredentials',description: '')
+            credentials(name: 'GitCredentials', defaultValue: 'PasswordJenkins', description: '')
     }
 
     stages {
