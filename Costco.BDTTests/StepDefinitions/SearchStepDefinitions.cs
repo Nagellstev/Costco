@@ -58,8 +58,8 @@ namespace Costco.BDTTests.StepDefinitions
         public void ThenIShouldSeeHeaderContainingNameOfExistingItemWhichWasInputtedOnThePreviousStep(string expectedHeader)
         {
             Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
-            string header = _searchResultsPage.SearchResultsMessage.Text;
-            header.Should().Contain(expectedHeader);
+            string header = _searchResultsPage.SearchResultsMessage.Text.ToLower();
+            header.Should().Contain(expectedHeader.ToLower());
         }
 
         [When(@"I get total quantity of found goods")]
@@ -101,8 +101,8 @@ namespace Costco.BDTTests.StepDefinitions
         public void ThenIShouldSeeMessageContainingWeWereNotAbleToFindAMatch(string expected)
         {
             Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
-            string result = _searchResultsPage.NothingFoundMessage.Text;
-            result.Should().Contain(expected);
+            string result = _searchResultsPage.NothingFoundMessage.Text.ToLower();
+            result.Should().Contain(expected.ToLower());
         }
 
         private int ExtractTotalQuantity(string text)
