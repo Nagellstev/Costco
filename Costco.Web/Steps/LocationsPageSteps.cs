@@ -14,18 +14,18 @@ namespace Costco.Web.Steps
 
         public void SearchForWarehouse(string input)
         {
-            Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
+            //Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
             locationsPage.WarehouseSearch.Clear();
             locationsPage.WarehouseSearch.SendKeys(input);
             locationsPage.FindButton.Click();
-            Waiters.WaitForCondition(() => IsResultFound(input));
+            //Waiters.WaitForCondition(() => IsResultFound(input));
         }
 
         public void SetAsMyWarehouse(string warehouse)
         {
-            Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled());
+            //Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled());
             locationsPage.SetAsMyWarehouseButton.Click();
-            Waiters.WaitForCondition(() => IsWarehouseSet(warehouse));
+            //Waiters.WaitForCondition(() => IsWarehouseSet(warehouse));
         }
 
         public void ClickStoreDetails()

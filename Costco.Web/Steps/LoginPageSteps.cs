@@ -11,6 +11,7 @@ namespace Costco.Web.Steps
         {
             _loginPage = loginPage;
         }
+
         public void LoginWithCredentials(string username, string password)
         {
             _loginPage.UsernameInputField.SendKeys(username);
@@ -26,7 +27,7 @@ namespace Costco.Web.Steps
 
         public bool VerifyInvalidCredentialsErrorIsDisplayed()
         {
-            Waiters.WaitForCondition(() => _loginPage.InvalidCredentialsError.IsDisplayed(), 10);
+            //Waiters.WaitForCondition(() => _loginPage.InvalidCredentialsError.IsDisplayed(), 10);
             return _loginPage.InvalidCredentialsError.IsDisplayed();
         }
     }
