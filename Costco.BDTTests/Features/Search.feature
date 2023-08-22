@@ -21,5 +21,5 @@ Scenario: Search Existing Item And Sort By Parameters
 Scenario: Search Senseless Line
 	Given I am on the main page
 	When I input qwerty to the search field
-	Then I should see header containing we were not able to find a match
+	Then I should see message containing we were not able to find a match
 

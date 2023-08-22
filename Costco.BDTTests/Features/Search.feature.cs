@@ -80,16 +80,16 @@ namespace Costco.BDTTests.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="SearchExistingItem")]
+        [Xunit.SkippableFactAttribute(DisplayName="Search Existing Item")]
         [Xunit.TraitAttribute("FeatureTitle", "Search")]
-        [Xunit.TraitAttribute("Description", "SearchExistingItem")]
+        [Xunit.TraitAttribute("Description", "Search Existing Item")]
         [Xunit.TraitAttribute("Category", "Search")]
         public void SearchExistingItem()
         {
             string[] tagsOfScenario = new string[] {
                     "Search"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("SearchExistingItem", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Existing Item", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -113,14 +113,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="SearchExistingItemAndSortByParameters")]
+        [Xunit.SkippableFactAttribute(DisplayName="Search Existing Item And Sort By Parameters")]
         [Xunit.TraitAttribute("FeatureTitle", "Search")]
-        [Xunit.TraitAttribute("Description", "SearchExistingItemAndSortByParameters")]
+        [Xunit.TraitAttribute("Description", "Search Existing Item And Sort By Parameters")]
         public void SearchExistingItemAndSortByParameters()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("SearchExistingItemAndSortByParameters", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Existing Item And Sort By Parameters", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -154,14 +154,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="SearchSenselessLine")]
+        [Xunit.SkippableFactAttribute(DisplayName="Search Senseless Line")]
         [Xunit.TraitAttribute("FeatureTitle", "Search")]
-        [Xunit.TraitAttribute("Description", "SearchSenselessLine")]
+        [Xunit.TraitAttribute("Description", "Search Senseless Line")]
         public void SearchSenselessLine()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("SearchSenselessLine", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Senseless Line", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -176,10 +176,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am on the main page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 23
- testRunner.When("I input senseless line to the search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I input qwerty to the search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 24
- testRunner.Then("I should see header containing we were not able to find a match", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see message containing we were not able to find a match", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

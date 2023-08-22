@@ -3,6 +3,7 @@ using Costco.Utilities.Screenshoter;
 using Costco.Web.Pages;
 using Costco.Utilities.Logger;
 using System.Text.RegularExpressions;
+using FluentAssertions;
 
 namespace Costco.BDTTests.StepDefinitions
 {
@@ -58,7 +59,7 @@ namespace Costco.BDTTests.StepDefinitions
         {
             Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
             string header = _searchResultsPage.SearchResultsMessage.Text;
-            Assert.Contains(header, expectedHeader);
+            header.Should().Contain(expectedHeader);
         }
 
         [When(@"I get total quantity of found goods")]
@@ -93,7 +94,15 @@ namespace Costco.BDTTests.StepDefinitions
         [Then(@"Total quantity of found goods sould be greater then total quantity of filtered goods")]
         public void ThenTotalQuantityOfFoundGoodsSouldBeGreaterThenTotalQuantityOfFilteredGoods()
         {
-            Assert.NotEqual(_totalQuantity, _filteredQuantity);
+            _totalQuantity.Should().BeGreaterThan(_filteredQuantity);
+        }
+
+        [Then(@"I should see message containing (.*)")]
+        public void ThenIShouldSeeMessageContainingWeWereNotAbleToFindAMatch(string expected)
+        {
+            Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
+            string result = _searchResultsPage.NothingFoundMessage.Text;
+            result.Should().Contain(expected);
         }
 
         private int ExtractTotalQuantity(string text)
