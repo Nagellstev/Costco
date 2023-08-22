@@ -1,8 +1,8 @@
 ﻿using Costco.Web.Pages;
 using Costco.Core.Browser;
-using Costco.Utilities.Screenshoter;
-using Costco.Utilities.Logger;
+using FluentAssertions;
 using TechTalk.SpecFlow;
+using System.Security.Policy;
 
 namespace Costco.BDTTests.StepDefinitions
 {
@@ -11,41 +11,11 @@ namespace Costco.BDTTests.StepDefinitions
     {
         private ScenarioContext _scenarioContext;
         private ProductPage _productPage;
-        string promoTextMaxQuantity;
 
         public ProductPageStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            Logger.Information($"Initializing {_scenarioContext.ScenarioInfo.Title}.");
             _productPage = new();
-            BrowserFactory.Browser.Maximize();
-        }
-
-        [BeforeFeature]
-        public static void Setup()
-        {
-            Logger.Init("Costco", TestSettings.LoggerPath);
-            Screenshoter.Init(TestSettings.ScreenshotPath);
-            Logger.Information("Setup complete.");
-        }
-
-        [AfterScenario]
-        public void Cleanup()
-        {
-            if (_scenarioContext.TestError != null)
-            {
-                Logger.Error($"Test '{_scenarioContext.ScenarioInfo.Title}' failed, {_scenarioContext.TestError.Message}\nException: {_scenarioContext.TestError.InnerException}");
-                Screenshoter.TakeScreenshot(Browser.Driver, _scenarioContext.ScenarioInfo.Title);
-            }
-
-            BrowserFactory.CleanUp();
-            Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
-        }
-
-        [Given(@"I opened the product page (.*)")]
-        public void OpenPage(string url)
-        {
-            BrowserFactory.Browser.GoToUrl(url);
         }
 
         [Given("I want to order (.*) items")]
@@ -59,12 +29,13 @@ namespace Costco.BDTTests.StepDefinitions
         {
             string lowCutoff = "Limit ";
             string highCutoff = " per member";
-
+            string promoTextMaxQuantity;
             Waiters.WaitForCondition(_productPage.PromotionalText.IsDisplayed);
             promoTextMaxQuantity = _productPage.PromotionalText.Text;
             promoTextMaxQuantity = promoTextMaxQuantity.Substring(
                 promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
                 promoTextMaxQuantity.IndexOf(highCutoff) - promoTextMaxQuantity.IndexOf(lowCutoff) - lowCutoff.Length);
+            _scenarioContext["MaxProductQuantity"] = promoTextMaxQuantity;
             _scenarioContext["OrderQuantity"] = promoTextMaxQuantity;
         }
 
@@ -99,18 +70,27 @@ namespace Costco.BDTTests.StepDefinitions
         public void GetBelowFieldErrorText(string error)
         {
             Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
+
             switch (error)
             {
                 case "Item ... has a maximum order quantity of ...":
                     {
-                        Assert.Contains($"Item {_productPage.ItemNumber.Text} has a maximum order quantity of {promoTextMaxQuantity}",
-                            _productPage.ErrorMessageBelowInput.Text.Trim());
+                        _productPage.ErrorMessageBelowInput.Text.Trim().
+                            Should().
+                            ContainAll(new string[] {"Item",
+                                                    _productPage.ItemNumber.Text,
+                                                    "has a maximum order quantity of"}).
+                            And.
+                            EndWith(_scenarioContext["MaxProductQuantity"].ToString()).
+                            And.
+                            MatchRegex("([A-Z][a-z]+ [0-9]+ [a-z ]+ [0-9]+$)");
                         break;
                     }
-
                 default:
                     {
-                        Assert.Contains(error, _productPage.ErrorMessageBelowInput.Text.Trim());
+                        _productPage.ErrorMessageBelowInput.Text.Trim().
+                            Should().
+                            Contain(error);
                         break;
                     }
             }
@@ -120,7 +100,9 @@ namespace Costco.BDTTests.StepDefinitions
         public void GetInputFieldErrorText(string error)
         {
             Waiters.WaitForCondition(_productPage.ErrorMessageInsideInput.IsDisplayed);
-            Assert.Contains(error, _productPage.ErrorMessageInsideInput.Text.Trim());
+            _productPage.ErrorMessageInsideInput.Text.Trim().
+                Should().
+                Contain(error);
         }
     }
 }

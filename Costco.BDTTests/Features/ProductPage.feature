@@ -4,14 +4,14 @@ A short summary of the feature
 
 @ProductPage
 Scenario: [Order 0 items]
-	Given I opened the product page https://www.costco.com/kirkland-signature-ladies'-slub-tee%2c-2-pack.product.100670508.html
+	Given I go to the page /kirkland-signature-ladies'-slub-tee%2c-2-pack.product.100670508.html
 	And I want to order 0 items
 	When I enter the desired amount to the product amount field
 	And I press add to card button
 	Then Error Quantity must be 1 or more to add to cart is displayed below the input field
 
 Scenario: [Order more limited items than allowed]
-	Given I opened the product page https://www.costco.com/macbook-air-13.3-inch---apple-m1-chip-8-core-cpu%2c-7-core-gpu---8gb-memory---256gb-ssd-space-gray.product.100688258.html
+	Given I go to the page /macbook-air-13.3-inch---apple-m1-chip-8-core-cpu%2c-7-core-gpu---8gb-memory---256gb-ssd-space-gray.product.100688258.html
 	And I see the maximum number of limited items I can order
 	When I add 1 more to the desired amount
 	And I enter the desired amount to the product amount field
@@ -20,7 +20,7 @@ Scenario: [Order more limited items than allowed]
 	Then Error Item ... has a maximum order quantity of ... is displayed below the input field
 
 Scenario: [Order 1000 items]
-	Given I opened the product page https://www.costco.com/.product.6262016.html
+	Given I go to the page /charmin-ultra-soft-bath-tissue%2c-2-ply%2c-205-sheets%2c-30-rolls.product.100847281.html
 	And I want to order 999 items
 	When I enter the desired amount to the product amount field
 	And I press plus stepper
