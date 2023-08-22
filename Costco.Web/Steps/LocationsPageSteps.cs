@@ -18,6 +18,7 @@ namespace Costco.Web.Steps
             locationsPage.WarehouseSearch.Clear();
             locationsPage.WarehouseSearch.SendKeys(input);
             locationsPage.FindButton.Click();
+            Waiters.WaitForCondition(() => IsWarehouseTableNotEmpty());
             Waiters.WaitForCondition(() => IsResultFound(input));
         }
 
@@ -51,6 +52,11 @@ namespace Costco.Web.Steps
         public bool IsDeliveryLocationSet(string location)
         {
             return locationsPage.LocationsBlock.DeliveryLocationButton.Text.Equals(location);
+        }
+
+        public bool IsWarehouseTableNotEmpty()
+        {
+            return !locationsPage.WarehouseTable.IsEmpty();
         }
 
         public bool IsResultFound(string result)
