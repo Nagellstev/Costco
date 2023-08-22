@@ -98,7 +98,6 @@ namespace Costco.Core.Browser
             Logger.Information("Quitting browser");
             _driver.Close();
             _driver.Quit();
-
         }
     }
 }

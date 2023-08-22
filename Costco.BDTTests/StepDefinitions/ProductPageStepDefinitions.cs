@@ -53,7 +53,7 @@ namespace Costco.BDTTests.StepDefinitions
             _productPage.QuantityInput.SendKeys(_scenarioContext["OrderQuantity"].ToString());
         }
 
-        [When("I press add to card button")]
+        [When("I press add to cart button")]
         public void PressAddToCart()
         {
             _productPage.AddToCartButton.Click();
