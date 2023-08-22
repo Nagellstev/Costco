@@ -91,7 +91,8 @@ namespace Costco.Core.Browser
 
         public void Quit()
         {
-            Logger.Information("Quitting browser.");
+            Logger.Information("Quitting browser");
+            _driver.Close();
             _driver.Quit();
         }
 
