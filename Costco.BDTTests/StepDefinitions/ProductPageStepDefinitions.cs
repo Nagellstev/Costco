@@ -1,10 +1,6 @@
 ﻿using Costco.Web.Pages;
 using Costco.Core.Browser;
-using FluentAssertions;
 using TechTalk.SpecFlow;
-using System.Security.Policy;
-using Xunit.Abstractions;
-using System.Diagnostics.Metrics;
 
 namespace Costco.BDTTests.StepDefinitions
 {
@@ -20,7 +16,7 @@ namespace Costco.BDTTests.StepDefinitions
             _productPage = new();
         }
 
-        [When("I locate the promo text with number of limited items I can order")]
+        [When(@"I locate the promo text with number of limited items I can order")]
         public void ILocateTheMaximumNumberOfLimitedItemsICanOrder()
         {
             string lowCutoff = "Limit ";
@@ -50,20 +46,20 @@ namespace Costco.BDTTests.StepDefinitions
             _productPage.QuantityInput.SendKeys((Convert.ToInt32(_scenarioContext["MaxProductQuantity"]) + 1).ToString());
         }
 
-        [When("I press add to cart button")]
+        [When(@"I press add to cart button")]
         public void IPressAddToCartButton()
         {
             _productPage.AddToCartButton.Click();
         }
 
-        [When("I press plus stepper")]
+        [When(@"I press plus stepper")]
         public void IPressPlusOneStepper()
         {
             Waiters.WaitForCondition(_productPage.PlusStepper.IsEnabled);
             _productPage.PlusStepper.Click();
         }
 
-        [Then("Error '(.*)' is displayed below the input field")]
+        [Then(@"Error '(.*)' is displayed below the input field")]
         public void ErrorIsDisplayedBelowTheInputField(string error)
         {
             Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
@@ -72,7 +68,7 @@ namespace Costco.BDTTests.StepDefinitions
                 Contain(error);
         }
 
-        [Then("Maximum order quantity error is displayed below the input field")]
+        [Then(@"Maximum order quantity error is displayed below the input field")]
         public void MaximumOrderQuantityErrorIsDisplayedBelowTheInputField()
         {
             Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
@@ -87,7 +83,7 @@ namespace Costco.BDTTests.StepDefinitions
                 MatchRegex("([A-Z][a-z]+ [0-9]+ [a-z ]+ [0-9]+$)");
         }
 
-        [Then("Error '(.*)' is displayed in the input field")]
+        [Then(@"Error '(.*)' is displayed in the input field")]
         public void ErrorIsDisplayedInTheInputField(string error)
         {
             Waiters.WaitForCondition(_productPage.ErrorMessageInsideInput.IsDisplayed);
