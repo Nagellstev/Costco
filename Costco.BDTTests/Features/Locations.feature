@@ -7,21 +7,23 @@ I need to set warehouse and delivery location
 @Locations
 Scenario: Set warehouse as My Warehouse
 	Given I am on the locations page
-	When I enter warehouse name in warehouse search field
-	And I click 'Find a Warehouse'
-	And I click 'Set as My Warehouse'
-	Then New My Warehouse should be set
+	When I enter 'Louisville' in warehouse search field
+	And I click Find a Warehouse
+	And I click Set as My Warehouse
+	Then My Warehouse should be 'Louisville'
 
 Scenario: View Store Details
 	Given I am on the locations page
-	When I enter warehouse name in warehouse search field
-	And I click 'Find a Warehouse'
-	And I click 'Store Details'
-	Then Name and address on 'Store Details' should be equal to name and address on search page
+	When I enter 'Louisville' in warehouse search field
+	And I click Find a Warehouse
+	And I remember name and address on locations page
+	And I click Store Details
+	And I remember name and address on warehouse page
+	Then Name and address should match on warehouse page and on locations page
 
 Scenario: Change Delivery Location
 	Given I am on the locations page
-	When I click the delivery location
-	And I enter ZIP code in the ZIP code field
-	And I click 'Change Delivery Location'
-	Then New Delivery Location should be set 
+	When I click Delivery Location
+	And I enter '12345' in the ZIP code field
+	And I click Change Delivery Location
+	Then Delivery Location should be '12345'
