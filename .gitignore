@@ -368,3 +368,5 @@ FodyWeavers.xsd
 Testrun.bat
 /Costco.BDTTests/Features/Search.feature.cs
 /Costco.BDTTests/Features/Search.feature.cs
+/Costco.BDTTests/Features/Search.feature.cs
+/Costco.BDTTests/Features/Login.feature.cs
