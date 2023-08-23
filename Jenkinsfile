@@ -18,7 +18,7 @@ pipeline {
                 stage('ProductPage') {
                     steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
-                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\ProductPageTestData.json --filter Target=ProductPage  --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter Target=ProductPage  --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
                     }
                     post{
@@ -31,7 +31,7 @@ pipeline {
                 stage('Delivery') {
 steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
-                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LocationsTestData.json --filter Target=Delivery --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter Target=Delivery --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
                     }
                     post{
@@ -44,7 +44,7 @@ steps {
                 stage('SearchPage') {
 steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
-                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\SearchPageTestData.json --filter Target=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter Target=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
                     }
                     post{
@@ -57,7 +57,7 @@ steps {
                 stage('Login') {
 steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
-                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% -e: TestData=%WORKSPACE%\\Costco.TestData\\TestData\\LoginCredentialsTestData.json --filter Target=Login --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter Target=Login --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
                     }
                     post{
@@ -72,6 +72,7 @@ steps {
     }
     post{
         always{
+jiraSendBuildInfo branch: '', site: 'https://jira.epam.com'
             cleanWs()
         }
     }
