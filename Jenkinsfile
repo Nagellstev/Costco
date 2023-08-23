@@ -72,7 +72,8 @@ steps {
     }
     post{
         always{
-jiraSendBuildInfo branch: '', site: 'https://jira.epam.com'
+            def issueKeys = jiraIssueSelector(issueSelector: [$class: 'DefaultIssueSelector'])
+            jiraComment body: 'test', issueKey: 'issueKeys'
             cleanWs()
         }
     }
