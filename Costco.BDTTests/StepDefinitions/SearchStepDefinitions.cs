@@ -46,7 +46,7 @@ namespace Costco.BDTTests.StepDefinitions
             Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
         }
 
-        [When(@"I input (.*) to the search field")]
+        [When(@"I input '(.*)' to the search field")]
         public void WhenIInputNameOfExistingItemToTheSearchField(string input)
         {
             Waiters.WaitForCondition(() => _mainPage.SearchBlock.SearchField.IsDisplayed(), 10);
@@ -54,7 +54,7 @@ namespace Costco.BDTTests.StepDefinitions
             _mainPage.SearchBlock.SearchField.Submit();
         }
 
-        [Then(@"I should see header containing (.*)")]
+        [Then(@"I should see header containing '(.*)'")]
         public void ThenIShouldSeeHeaderContainingNameOfExistingItemWhichWasInputtedOnThePreviousStep(string expectedHeader)
         {
             Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
@@ -70,7 +70,7 @@ namespace Costco.BDTTests.StepDefinitions
             _totalQuantity = ExtractTotalQuantity(totalProductsShowingQuantity);
         }
 
-        [When(@"I filter search results by price (.*)")]
+        [When(@"I filter search results by price '(.*)'")]
         public void WhenIFilterSearchResultsByPrice(string priceRange)
         {
             Waiters.WaitForCondition(() => _searchResultsPage.FilterBlock.IsDisplayed(), 10);
@@ -97,7 +97,7 @@ namespace Costco.BDTTests.StepDefinitions
             _totalQuantity.Should().BeGreaterThan(_filteredQuantity);
         }
 
-        [Then(@"I should see message containing (.*)")]
+        [Then(@"I should see message containing '(.*)'")]
         public void ThenIShouldSeeMessageContainingWeWereNotAbleToFindAMatch(string expected)
         {
             Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
