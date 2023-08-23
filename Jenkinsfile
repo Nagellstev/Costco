@@ -4,7 +4,9 @@ pipeline {
             choice(name: 'Config', choices: ['DefaultConfig.json', 'FirefoxConfig.json'], description: '')
             credentials(name: 'GitCredentials', defaultValue: 'PasswordJenkins', description: '')
     }
-
+    environment { 
+        issueKeys = jiraIssueSelector(issueSelector: [$class: 'DefaultIssueSelector'])
+    }
     stages {
         stage('TestSetup') {
             steps {
@@ -72,8 +74,7 @@ steps {
     }
     post{
         always{
-            def issueKeys = jiraIssueSelector(issueSelector: [$class: 'DefaultIssueSelector'])
-            jiraComment body: 'test', issueKey: 'issueKeys'
+            jiraComment body: 'test', issueKey: '%issueKeys%'
             cleanWs()
         }
     }
