@@ -48,7 +48,6 @@ namespace Costco.BDTTests.StepDefinitions
             Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed);
             _productPage.QuantityInput.Clear();
             _productPage.QuantityInput.SendKeys((Convert.ToInt32(_scenarioContext["MaxProductQuantity"]) + 1).ToString());
-
         }
 
         [When("I press add to cart button")]
@@ -64,7 +63,7 @@ namespace Costco.BDTTests.StepDefinitions
             _productPage.PlusStepper.Click();
         }
 
-        [Then("Error \"(.*)\" is displayed below the input field")]
+        [Then("Error '(.*)' is displayed below the input field")]
         public void ErrorIsDisplayedBelowTheInputField(string error)
         {
             Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
@@ -88,7 +87,7 @@ namespace Costco.BDTTests.StepDefinitions
                 MatchRegex("([A-Z][a-z]+ [0-9]+ [a-z ]+ [0-9]+$)");
         }
 
-        [Then("Error \"(.*)\" is displayed in the input field")]
+        [Then("Error '(.*)' is displayed in the input field")]
         public void ErrorIsDisplayedInTheInputField(string error)
         {
             Waiters.WaitForCondition(_productPage.ErrorMessageInsideInput.IsDisplayed);
