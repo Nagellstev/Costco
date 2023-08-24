@@ -8,7 +8,7 @@ namespace Costco.BDTTests.StepDefinitions
     {
         private readonly string _mainPageUrl = TestSettings.ApplicationUrl;
 
-        [Given("I am on the main page")]
+        [Given(@"I am on the main page")]
         public void GivenIAmOnTheMainPage()
         {
             BrowserFactory.Browser.GoToUrl(_mainPageUrl);
