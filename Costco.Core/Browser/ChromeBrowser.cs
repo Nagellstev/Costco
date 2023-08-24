@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Net;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 
 namespace Costco.Core.Browser
 {
@@ -8,6 +10,7 @@ namespace Costco.Core.Browser
     {
         public IWebDriver GetDriver()
         {
+            new DriverManager().SetUpDriver(new ChromeConfig());
             List<string> ls = new List<string>();
             ls.Add("excludeSwitches");
             ls.Add("enable-automation");
