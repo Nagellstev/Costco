@@ -40,7 +40,7 @@ namespace Costco.BDTTests.StepDefinitions
             }
 
             BrowserFactory.CleanUp();
-            Logger.Information($"{_scenarioContext.ScenarioInfo.Title} run complete.");
+            Logger.Information($"{_scenarioContext.ScenarioInfo.Title} test run complete.");
         }
     }
 }
