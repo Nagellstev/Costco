@@ -16,8 +16,8 @@ namespace Costco.BDTTests.StepDefinitions
             _productPage = new();
         }
 
-        [When(@"I locate the promo text with number of limited items I can order")]
-        public void ILocateTheMaximumNumberOfLimitedItemsICanOrder()
+        [When(@"I locate the promo text with number of limited items")]
+        public void WhenILocateTheMaximumNumberOfLimitedItemsICanOrder()
         {
             string lowCutoff = "Limit ";
             string highCutoff = " per member";
@@ -30,16 +30,16 @@ namespace Costco.BDTTests.StepDefinitions
             _scenarioContext["MaxProductQuantity"] = promoTextMaxQuantity;
         }
 
-        [When(@"I enter (.*) to the product amount field")]
-        public void IEnterToTheProductAmountField(int amount)
+        [When(@"I enter '(.*)' to the product amount field")]
+        public void WhenIEnterToTheProductAmountField(int amount)
         {
             Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed);
             _productPage.QuantityInput.Clear();
             _productPage.QuantityInput.SendKeys(amount.ToString());
         }
 
-        [When(@"I enter to the product amount field maximum number of limited items plus one")]
-        public void IEnterToTheProductAmountFieldMaximumNumberOfLimitedItemsPlusOne()
+        [When(@"I enter maximum number of limited items plus one to the product amount field")]
+        public void WhenIEnterToTheProductAmountFieldMaximumNumberOfLimitedItemsPlusOne()
         {
             Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed);
             _productPage.QuantityInput.Clear();
@@ -47,20 +47,20 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [When(@"I press add to cart button")]
-        public void IPressAddToCartButton()
+        public void WhenIPressAddToCartButton()
         {
             _productPage.AddToCartButton.Click();
         }
 
         [When(@"I press plus stepper")]
-        public void IPressPlusOneStepper()
+        public void WhenIPressPlusOneStepper()
         {
             Waiters.WaitForCondition(_productPage.PlusStepper.IsEnabled);
             _productPage.PlusStepper.Click();
         }
 
         [Then(@"Error '(.*)' is displayed below the input field")]
-        public void ErrorIsDisplayedBelowTheInputField(string error)
+        public void ThenErrorIsDisplayedBelowTheInputField(string error)
         {
             Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
             _productPage.ErrorMessageBelowInput.Text.Trim().
@@ -69,7 +69,7 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [Then(@"Maximum order quantity error is displayed below the input field")]
-        public void MaximumOrderQuantityErrorIsDisplayedBelowTheInputField()
+        public void ThenMaximumOrderQuantityErrorIsDisplayedBelowTheInputField()
         {
             Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
             _productPage.ErrorMessageBelowInput.Text.Trim().
@@ -84,7 +84,7 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [Then(@"Error '(.*)' is displayed in the input field")]
-        public void ErrorIsDisplayedInTheInputField(string error)
+        public void ThenErrorIsDisplayedInTheInputField(string error)
         {
             Waiters.WaitForCondition(_productPage.ErrorMessageInsideInput.IsDisplayed);
             _productPage.ErrorMessageInsideInput.Text.Trim().

@@ -15,7 +15,7 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [Given(@"I go to the page '(.*)'")]
-        public void OpenPage(string url)
+        public void GivenIGoToThePage(string url)
         {
             BrowserFactory.Browser.GoToUrl(_mainPageUrl+'/'+url);
         }
