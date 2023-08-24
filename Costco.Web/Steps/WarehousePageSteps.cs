@@ -14,13 +14,13 @@ namespace Costco.Web.Steps
 
         public string GetName()
         {
-            Waiters.WaitUntilElementExists(warehousePage.NameLocator);
+            //Waiters.WaitUntilElementExists(warehousePage.NameLocator);
             return warehousePage.Name.Text[..warehousePage.Name.Text.IndexOf(" ")];
         }
 
         public string GetAddress()
         {
-            Waiters.WaitUntilElementExists(warehousePage.NameLocator);
+            //Waiters.WaitUntilElementExists(warehousePage.NameLocator);
             return warehousePage.Address.Text;
         }
     }
