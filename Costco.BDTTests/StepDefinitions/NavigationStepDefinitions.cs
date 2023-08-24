@@ -14,10 +14,10 @@ namespace Costco.BDTTests.StepDefinitions
             BrowserFactory.Browser.GoToUrl(_mainPageUrl);
         }
 
-        [Given(@"I go to the page (.*)")]
+        [Given(@"I go to the page '(.*)'")]
         public void OpenPage(string url)
         {
-            BrowserFactory.Browser.GoToUrl(_mainPageUrl+url);
+            BrowserFactory.Browser.GoToUrl(_mainPageUrl+'/'+url);
         }
     }
 }
