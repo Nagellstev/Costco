@@ -88,8 +88,8 @@ namespace Costco.BDTTests.StepDefinitions
         [Then(@"My Warehouse should be '(.*)'")]
         public void ThenMyWarehouseShouldBe(string warehouse)
         {
-            string warehouseToAssert = locationsPage.LocationsBlock.MyWarehouseButton.Text;
-            warehouseToAssert.Should().Be(warehouse);
+            string actualWarehouse = locationsPage.LocationsBlock.MyWarehouseButton.Text;
+            actualWarehouse.Should().Be(warehouse);
         }
 
         [Then(@"Name and address should match on warehouse page and on locations page")]
@@ -105,8 +105,8 @@ namespace Costco.BDTTests.StepDefinitions
         [Then(@"Delivery Location should be '(.*)'")]
         public void ThenDeliveryLocationShouldBe(string location)
         {
-            string locationToAssert = locationsPage.LocationsBlock.DeliveryLocationButton.Text;
-            locationToAssert.Should().Be(location);
+            string actualLocation = locationsPage.LocationsBlock.DeliveryLocationButton.Text;
+            actualLocation.Should().Be(location);
         }
     }
 }
