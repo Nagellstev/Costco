@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Costco.Core.Browser;
+using OpenQA.Selenium.Interactions;
 
 namespace Costco.Core.Elements
 {
@@ -23,6 +24,12 @@ namespace Costco.Core.Elements
         public virtual void Click()
         {
             OriginalWebElement.Click();
+        }
+
+        public void Hover()
+        {
+            Actions actions = new Actions(Browser.Browser.Driver);
+            actions.MoveToElement(OriginalWebElement).Perform();
         }
 
         public void SendKeys(string keys)
