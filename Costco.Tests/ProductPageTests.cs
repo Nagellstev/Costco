@@ -35,7 +35,6 @@ namespace Costco.Tests
             int amount = steps.GetMaximumLimitedItemsAllowed(model.LowCutoffString, model.HighCutoffString);
             steps.InputProductAmount(amount + 1);
             steps.PressAddToCart();
-            steps.PressAddToCart();
 
             Assert.Contains(String.Format(model.MemberItemsError, steps.GetItemNumber(), amount), steps.GetErrorText());
         }
