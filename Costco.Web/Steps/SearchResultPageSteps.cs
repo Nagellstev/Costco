@@ -15,13 +15,13 @@ namespace Costco.Web.Steps
 
         public string ReadSearchResultsMessage()
         {
-            Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
+            //Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
             return _searchResultsPage.SearchResultsMessage.Text;
         }
 
         public string NothingFoundMessage()
         {
-            Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
+            //Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
             return _searchResultsPage.NothingFoundMessage.Text;
         }
 
@@ -39,7 +39,7 @@ namespace Costco.Web.Steps
 
         public int GetTotalQuantity()
         {
-            Waiters.WaitForCondition(() => _searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 10);
+            //Waiters.WaitForCondition(() => _searchResultsPage.TotalProductsShowingQuantity.IsDisplayed(), 10);
             string totalProductsShowingQuantity = _searchResultsPage.TotalProductsShowingQuantity.Text;
             return ExtractTotalQuantity(totalProductsShowingQuantity);
         }

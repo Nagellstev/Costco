@@ -1,8 +1,8 @@
 {
   "DataModel": "ConfigModel",
   "Browser": "Chrome",
-  "TimeOuts": "120",
-  "TestWaits": "60",
+  "TimeOuts": "60",
+  "TestWaits": "15",
   "ApplicationUrl": "https://www.costco.com",
   "ScreenshotPath": "logs\\screenshots\\",
   "LoggerPath": "logs\\"
