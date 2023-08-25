@@ -12,7 +12,7 @@ namespace Costco.Core.Browser
         public Browser(IWebDriver driver)
         {
             _driver = driver;
-            Logger.Information($"Created new browser {driver.GetType().Name}");
+            Logger.Information($"Created new browser {driver.GetType().Name}.");
         }
 
         public static IWebDriver? Driver => _driver;
@@ -24,21 +24,21 @@ namespace Costco.Core.Browser
 
         public void MoveMouseToElement(IWebElement element)
         {
-            Logger.Information($"Moving mouse to {element.TagName} at {element.Location.X}:{element.Location.Y}");
+            Logger.Information($"Moving mouse to {element.TagName} at {element.Location.X}:{element.Location.Y}.");
             Actions act = new Actions(_driver);
             act.MoveToElement(element);
         }
 
         public static void ScrollToElement(IWebElement element)
         {
-            Logger.Information($"Scrolling to element {element.TagName} at {element.Location.X}:{element.Location.Y}");
+            Logger.Information($"Scrolling to element {element.TagName} at {element.Location.X}:{element.Location.Y}.");
             ((IJavaScriptExecutor)_driver).
                 ExecuteScript("arguments[0].scrollIntoView(true);", element);
         }
 
         public void GoToUrl(string url)
         {
-            Logger.Information($"Moving to {url}");
+            Logger.Information($"Moving to {url}.");
             _driver.Navigate().GoToUrl(url);
         }
 
@@ -49,47 +49,43 @@ namespace Costco.Core.Browser
 
         public string GetText(By locator)
         {
-            Logger.Information($"Getting element text {locator.Criteria} by {locator.Mechanism}");
+            Logger.Information($"Getting element text {locator.Criteria} by {locator.Mechanism}.");
             return _driver.FindElement(locator).Text;
         }
 
         public void Back()
         {
-            Logger.Information("Navigating back");
+            Logger.Information("Navigating back.");
             _driver.Navigate().Back();
         }
 
         public void Refresh()
         {
-            Logger.Information("Refreshing page");
+            Logger.Information("Refreshing page.");
             _driver.Navigate().Refresh();
         }
 
         public IWebElement FindElement(By locator)
         {
-            Logger.Information($"Getting element {locator.Criteria} by {locator.Mechanism}");
+            Logger.Information($"Getting element {locator.Criteria} by {locator.Mechanism}.");
             return _driver.FindElement(locator);
         }
 
         public List<IWebElement> FindElements(By locator)
         {
-            Logger.Information($"Getting multiple elements {locator.Criteria} by {locator.Mechanism}");
+            Logger.Information($"Getting multiple elements {locator.Criteria} by {locator.Mechanism}.");
             return _driver.FindElements(locator).ToList();
-        }
-
-        public WebDriverWait Waiter(int seconds)
-        {
-            return new WebDriverWait(_driver, TimeSpan.FromSeconds(seconds));
         }
 
         public object ExecuteScript(string script, params object[] args)
         {
+            Logger.Information($"Executing {script}.");
             return ((IJavaScriptExecutor)_driver).ExecuteScript(script, args);
         }
 
         public void Close()
         {
-            Logger.Information("Closing page");
+            Logger.Information("Closing page.");
             _driver.Close();
         }
 
@@ -98,6 +94,16 @@ namespace Costco.Core.Browser
             Logger.Information("Quitting browser");
             _driver.Close();
             _driver.Quit();
+        }
+
+        internal void SetImplicitWait(int seconds)
+        {
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
+        }
+
+        internal WebDriverWait Waiter(int seconds)
+        {
+            return new WebDriverWait(_driver, TimeSpan.FromSeconds(seconds));
         }
     }
 }

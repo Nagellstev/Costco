@@ -14,16 +14,17 @@ namespace Costco.Web.Steps
 
         public void SearchForWarehouse(string input)
         {
-            Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
+            //Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
             locationsPage.WarehouseSearch.Clear();
             locationsPage.WarehouseSearch.SendKeys(input);
             locationsPage.FindButton.Click();
+            Waiters.WaitForCondition(() => IsWarehouseTableNotEmpty());
             Waiters.WaitForCondition(() => IsResultFound(input));
         }
 
         public void SetAsMyWarehouse(string warehouse)
         {
-            Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled());
+            //Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled());
             locationsPage.SetAsMyWarehouseButton.Click();
             Waiters.WaitForCondition(() => IsWarehouseSet(warehouse));
         }
@@ -51,6 +52,11 @@ namespace Costco.Web.Steps
         public bool IsDeliveryLocationSet(string location)
         {
             return locationsPage.LocationsBlock.DeliveryLocationButton.Text.Equals(location);
+        }
+
+        public bool IsWarehouseTableNotEmpty()
+        {
+            return !locationsPage.WarehouseTable.IsEmpty();
         }
 
         public bool IsResultFound(string result)

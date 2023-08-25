@@ -16,6 +16,7 @@ namespace Costco.Tests
             testDisplayName = Context.Test.DisplayName;
             Logger.Information($"Initializing {testDisplayName}.");
             BrowserFactory.Browser.Maximize();
+            Waiters.SetImplicitWait(TestSettings.TestWaits);
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl);
         }
 
