@@ -12,16 +12,16 @@ namespace Costco.Core.Elements
             return OriginalWebElement.FindElements(By.CssSelector("li"));
         }
 
-        public void ClickElementByText(string text)
+        public IWebElement? GetElementByText(string text)
         {
             foreach (var element in GetElements())
             {
                 if (element.Text == text)
                 {
-                    element.Click();
-                    break;
+                    return element;
                 }
             }
+            return null;
         }
     }
 }
