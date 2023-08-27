@@ -54,7 +54,7 @@ namespace Costco.BDTTests.StepDefinitions
             _mainPage.SearchBlock.SearchField.Submit();
         }
 
-        [Then(@"I should see header containing '(.*)'")]
+        [Then(@"I should see header above found goods containing '(.*)'")]
         public void ThenIShouldSeeHeaderContainingNameOfExistingItemWhichWasInputtedOnThePreviousStep(string expectedHeader)
         {
             Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);

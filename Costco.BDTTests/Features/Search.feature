@@ -8,7 +8,7 @@ I need to search and filter results
 Scenario: Search Existing Item
 	Given I am on the main page
 	When I input 'vitamin' to the search field
-	Then I should see header containing 'vitamin'
+	Then I should see header above found goods containing 'vitamin'
 
 Scenario: Search Existing Item And Sort By Parameters
 	Given I am on the main page
