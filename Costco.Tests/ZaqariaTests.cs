@@ -10,12 +10,12 @@ namespace Costco.Tests
     {
         TestFixture fixture;
         private TiresPageSteps _tiresPageSteps;
-        private MainPageCaSteps _mainPageCaSteps;
+        private MainPageSteps _mainPageSteps;
 
         public ZaqariaTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {
             this.fixture = fixture;
-            _mainPageCaSteps = new MainPageCaSteps(new MainPageCa());
+            _mainPageSteps = new MainPageSteps(new MainPage());
             _tiresPageSteps = new(new TiresPage());
         }
 
@@ -39,7 +39,7 @@ namespace Costco.Tests
             BrowserFactory.Browser.GoToUrl("https://www.costco.ca/");
 
             Waiters.WaitForPageLoad();
-            _mainPageCaSteps.ChooseTires();
+            _mainPageSteps.ChooseTires();
 
             Waiters.WaitForPageLoad();
             _tiresPageSteps.SearchBySize();

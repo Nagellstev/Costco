@@ -46,9 +46,12 @@ namespace Costco.Web.Steps
         public void SelectTire(string width, string aspect, string rim)
         {
             MenuItemClick(_tiresPage.WidthSelectBlock, width);
+            Thread.Sleep(500);
             MenuItemClick(_tiresPage.AspectSelectBlock, aspect);
+            Thread.Sleep(500);
             MenuItemClick(_tiresPage.RimSelectBlock, rim);
-            _tiresPage.RimSelectBlock.Click();
+            Thread.Sleep(500);
+            //_tiresPage.RimSelectBlock.Click();
         }
 
         private void MenuItemClick(DropdownOnClickSelectBlock menu, string item)
