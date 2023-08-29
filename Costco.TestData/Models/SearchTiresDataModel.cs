@@ -1,6 +1,6 @@
 ﻿namespace Costco.TestData.Models
 {
-    public class ZaqariaDataModel
+    public class SearchTiresDataModel
     {
         public string TireWidth { get; init; }
         public string TireAspect { get; init; }

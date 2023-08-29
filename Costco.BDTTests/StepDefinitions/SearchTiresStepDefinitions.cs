@@ -10,13 +10,13 @@ using Costco.Web.Steps;
 namespace Costco.BDTTests.StepDefinitions
 {
     [Binding]
-    public class ZaqariaStepDefinitions
+    public class SearchTiresStepDefinitions
     {
         private ScenarioContext _scenarioContext;
         private MainPage _mainPage;
         private TiresPage _tiresPage;
 
-        public ZaqariaStepDefinitions(ScenarioContext scenarioContext)
+        public SearchTiresStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
             Logger.Information($"Initializing {_scenarioContext.ScenarioInfo.Title}.");
@@ -44,6 +44,12 @@ namespace Costco.BDTTests.StepDefinitions
 
             BrowserFactory.CleanUp();
             Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
+        }
+
+        [Given(@"I opened the page '(.*)'")]
+        public void GivenIOpenedThePage(string url)
+        {
+            BrowserFactory.Browser.GoToUrl(url);
         }
 
         [When(@"I press button Tires")]

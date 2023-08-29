@@ -16,7 +16,7 @@ Scenario: Search Existing Item And Sort By Parameters
 	And I get total quantity of found goods
 	And I filter search results by price '$0 to $25'
 	And I get total quantity of filtered goods
-	Then Total quantity of found goods sould be greater then total quantity of filtered goods
+	Then Total quantity of found goods should be greater than total quantity of filtered goods
 
 Scenario: Search Senseless Line
 	Given I am on the main page

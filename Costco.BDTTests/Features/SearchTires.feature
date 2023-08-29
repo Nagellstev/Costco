@@ -1,15 +1,15 @@
-﻿Feature: Zaqaria
+﻿Feature: SearchTires
 
 In order to find tires in Canada
 As a user 
 I need to change region to Canada, search tires and filter results
 
-@Zaqaria
+@SearchTires
 Scenario: Search Tires
 	#Given I am on the main page
 	#When I change region to 'Ca'
-	#Steps above depends on Vasilii's test
-	Given I opened the product page https://www.costco.ca/
+	#Steps above depends on Vasilii's step definitions.
+	Given I opened the page 'https://www.costco.ca/'
 	When I press button Tires
 	And I press button Search by size
 	And I press button Accept all cookies
