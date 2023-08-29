@@ -1,4 +1,5 @@
 ﻿using Costco.Core.Browser;
+using TechTalk.SpecFlow;
 
 namespace Costco.BDTTests.StepDefinitions
 {
@@ -7,10 +8,16 @@ namespace Costco.BDTTests.StepDefinitions
     {
         private readonly string _mainPageUrl = TestSettings.ApplicationUrl;
 
-        [Given("I am on the main page")]
+        [Given(@"I am on the main page")]
         public void GivenIAmOnTheMainPage()
         {
             BrowserFactory.Browser.GoToUrl(_mainPageUrl);
+        }
+
+        [Given(@"I go to the page '(.*)'")]
+        public void GivenIGoToThePage(string url)
+        {
+            BrowserFactory.Browser.GoToUrl(_mainPageUrl+'/'+url);
         }
     }
 }
