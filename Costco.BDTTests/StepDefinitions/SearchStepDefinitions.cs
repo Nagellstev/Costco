@@ -46,7 +46,7 @@ namespace Costco.BDTTests.StepDefinitions
             Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
         }
 
-        [When(@"I input '(.*)' to the search field")]
+        [When(@"I input '(.*)' to the search field and submit my search query")]
         public void WhenIInputNameOfExistingItemToTheSearchField(string input)
         {
             Waiters.WaitForCondition(() => _mainPage.SearchBlock.SearchField.IsDisplayed(), 10);
