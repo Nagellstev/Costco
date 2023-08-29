@@ -1,7 +1,5 @@
 ﻿using Costco.Web.Pages;
 using Costco.Core.Browser;
-using Costco.Utilities.Screenshoter;
-using Costco.Utilities.Logger;
 using TechTalk.SpecFlow;
 
 namespace Costco.BDTTests.StepDefinitions
@@ -11,116 +9,87 @@ namespace Costco.BDTTests.StepDefinitions
     {
         private ScenarioContext _scenarioContext;
         private ProductPage _productPage;
-        string promoTextMaxQuantity;
 
         public ProductPageStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            Logger.Information($"Initializing {_scenarioContext.ScenarioInfo.Title}.");
             _productPage = new();
-            BrowserFactory.Browser.Maximize();
         }
 
-        [BeforeFeature]
-        public static void Setup()
-        {
-            Logger.Init("Costco", TestSettings.LoggerPath);
-            Screenshoter.Init(TestSettings.ScreenshotPath);
-            Logger.Information("Setup complete.");
-        }
-
-        [AfterScenario]
-        public void Cleanup()
-        {
-            if (_scenarioContext.TestError != null)
-            {
-                Logger.Error($"Test '{_scenarioContext.ScenarioInfo.Title}' failed, {_scenarioContext.TestError.Message}\nException: {_scenarioContext.TestError.InnerException}");
-                Screenshoter.TakeScreenshot(Browser.Driver, _scenarioContext.ScenarioInfo.Title);
-            }
-
-            BrowserFactory.CleanUp();
-            Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
-        }
-
-        [Given(@"I opened the product page (.*)")]
-        public void OpenPage(string url)
-        {
-            BrowserFactory.Browser.GoToUrl(url);
-        }
-
-        [Given("I want to order (.*) items")]
-        public void InputDesiredQuantity(int quantity)
-        {
-            _scenarioContext["OrderQuantity"] = quantity;
-        }
-
-        [Given("I see the maximum number of limited items I can order")]
-        public void GetMaximumLimitedItemsAllowed()
+        [When(@"I locate the promo text with number of limited items")]
+        public void WhenILocateTheMaximumNumberOfLimitedItemsICanOrder()
         {
             string lowCutoff = "Limit ";
             string highCutoff = " per member";
-
+            string promoTextMaxQuantity;
             Waiters.WaitForCondition(_productPage.PromotionalText.IsDisplayed);
             promoTextMaxQuantity = _productPage.PromotionalText.Text;
             promoTextMaxQuantity = promoTextMaxQuantity.Substring(
                 promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
                 promoTextMaxQuantity.IndexOf(highCutoff) - promoTextMaxQuantity.IndexOf(lowCutoff) - lowCutoff.Length);
-            _scenarioContext["OrderQuantity"] = promoTextMaxQuantity;
+            _scenarioContext["MaxProductQuantity"] = promoTextMaxQuantity;
         }
 
-        [When(@"I add (.*) more to the desired amount")]
-        public void InputZeroProductAmount(int amount)
-        {
-            _scenarioContext["OrderQuantity"] = Int32.Parse((string)_scenarioContext["OrderQuantity"]) + amount;
-        }
-
-        [When(@"I enter the desired amount to the product amount field")]
-        public void InputZeroProductAmount()
+        [When(@"I enter '(.*)' to the product amount field")]
+        public void WhenIEnterToTheProductAmountField(int amount)
         {
             Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed);
             _productPage.QuantityInput.Clear();
-            _productPage.QuantityInput.SendKeys(_scenarioContext["OrderQuantity"].ToString());
+            _productPage.QuantityInput.SendKeys(amount.ToString());
         }
 
-        [When("I press add to card button")]
-        public void PressAddToCart()
+        [When(@"I enter maximum number of limited items plus one to the product amount field")]
+        public void WhenIEnterToTheProductAmountFieldMaximumNumberOfLimitedItemsPlusOne()
+        {
+            Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed);
+            _productPage.QuantityInput.Clear();
+            _productPage.QuantityInput.SendKeys((Convert.ToInt32(_scenarioContext["MaxProductQuantity"]) + 1).ToString());
+        }
+
+        [When(@"I press add to cart button")]
+        public void WhenIPressAddToCartButton()
         {
             _productPage.AddToCartButton.Click();
         }
 
-        [When("I press plus stepper")]
-        public void PressPlusOneStepper()
+        [When(@"I press plus stepper")]
+        public void WhenIPressPlusOneStepper()
         {
             Waiters.WaitForCondition(_productPage.PlusStepper.IsEnabled);
             _productPage.PlusStepper.Click();
         }
 
-        [Then("Error (.*) is displayed below the input field")]
-        public void GetBelowFieldErrorText(string error)
+        [Then(@"Error '(.*)' is displayed below the input field")]
+        public void ThenErrorIsDisplayedBelowTheInputField(string error)
         {
             Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
-            switch (error)
-            {
-                case "Item ... has a maximum order quantity of ...":
-                    {
-                        Assert.Contains($"Item {_productPage.ItemNumber.Text} has a maximum order quantity of {promoTextMaxQuantity}",
-                            _productPage.ErrorMessageBelowInput.Text.Trim());
-                        break;
-                    }
-
-                default:
-                    {
-                        Assert.Contains(error, _productPage.ErrorMessageBelowInput.Text.Trim());
-                        break;
-                    }
-            }
+            _productPage.ErrorMessageBelowInput.Text.Trim().
+                Should().
+                Contain(error);
         }
 
-        [Then("Error (.*) is displayed in the input field")]
-        public void GetInputFieldErrorText(string error)
+        [Then(@"Maximum order quantity error is displayed below the input field")]
+        public void ThenMaximumOrderQuantityErrorIsDisplayedBelowTheInputField()
+        {
+            Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
+            _productPage.ErrorMessageBelowInput.Text.Trim().
+                Should().
+                ContainAll(new string[] {"Item",
+                                        _productPage.ItemNumber.Text,
+                                        "has a maximum order quantity of"}).
+                And.
+                EndWith(_scenarioContext["MaxProductQuantity"].ToString()).
+                And.
+                MatchRegex("([A-Z][a-z]+ [0-9]+ [a-z ]+ [0-9]+$)");
+        }
+
+        [Then(@"Error '(.*)' is displayed in the input field")]
+        public void ThenErrorIsDisplayedInTheInputField(string error)
         {
             Waiters.WaitForCondition(_productPage.ErrorMessageInsideInput.IsDisplayed);
-            Assert.Contains(error, _productPage.ErrorMessageInsideInput.Text.Trim());
+            _productPage.ErrorMessageInsideInput.Text.Trim().
+                Should().
+                Contain(error);
         }
     }
 }
