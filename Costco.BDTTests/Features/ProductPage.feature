@@ -27,3 +27,12 @@ Rule: "Special limited items can be added only in quantities not exceeding the a
 	And I enter maximum number of limited items plus one to the product amount field
 	And I press add to cart button
 	Then Maximum order quantity error is displayed below the input field
+
+Rule: "Added items should appear on the shopping cart page"
+
+Scenario:  [Adding 1 item to the shopping cart]
+	Given I go to the page '.product.1179641.html'
+	When I enter '1' to the product amount field
+	And I press add to cart button
+	And I press View Cart button in opened 'Added to Cart' window
+	Then I see 'Comvita Certified UMF 5+ (MGO 83+) Raw Manuka Honey (35.2 oz)' in list of items added to the cart
