@@ -17,11 +17,11 @@ Scenario: Failed login with invalid credentials
 	When I click the sign in/register button
 	And I enter invalid username and password
 	And I click the sign in button
-	Then I should see Invalid credentials error message
+	Then I should see 'The email address and/or password you entered are invalid' error message
 
 Scenario: Failed login with empty password
 	Given I am on the main page
 	When I click the sign in/register button
 	And I enter valid username and empty password
 	And I click the sign in button
-	Then I should see Password is required error message
+	Then 'Password is required' error message should be displayed
