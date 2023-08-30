@@ -89,7 +89,7 @@ namespace Costco.BDTTests.StepDefinitions
         public void ThenMyWarehouseShouldBe(string warehouse)
         {
             string actualWarehouse = locationsPage.LocationsBlock.MyWarehouseButton.Text;
-            actualWarehouse.Should().Be(warehouse);
+            actualWarehouse.Should().Be(warehouse, "warehouse should be set as My Warehouse");
         }
 
         [Then(@"Name and address should match on warehouse page and on locations page")]
@@ -97,8 +97,8 @@ namespace Costco.BDTTests.StepDefinitions
         {
             using (new AssertionScope())
             {
-                context["nameOnLocationsPage"].Should().Be(context["nameOnWarehousePage"]);
-                context["addressOnLocationsPage"].Should().Be(context["addressOnWarehousePage"]);
+                context["nameOnLocationsPage"].Should().Be(context["nameOnWarehousePage"], "warehouse names should match on warehouse page and on locations page");
+                context["addressOnLocationsPage"].Should().Be(context["addressOnWarehousePage"], "warehouse addresses should match on warehouse page and on locations page");
             }
         }
 
@@ -106,7 +106,7 @@ namespace Costco.BDTTests.StepDefinitions
         public void ThenDeliveryLocationShouldBe(string location)
         {
             string actualLocation = locationsPage.LocationsBlock.DeliveryLocationButton.Text;
-            actualLocation.Should().Be(location);
+            actualLocation.Should().Be(location, "location should be set as Delivery Location");
         }
     }
 }
