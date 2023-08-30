@@ -7,7 +7,7 @@ namespace Costco.BDTTests.StepDefinitions
     [Binding]
     public sealed class LocationsStepDefinitions
     {
-        private ScenarioContext context;
+        private ScenarioContext _scenarioContext;
         private LocationsPage locationsPage;
         private WarehousePage warehousePage;
         private string warehouse;
@@ -19,7 +19,7 @@ namespace Costco.BDTTests.StepDefinitions
 
         public LocationsStepDefinitions(ScenarioContext scenarioContext)
         {
-            context = scenarioContext;
+            _scenarioContext = scenarioContext;
             locationsPage = new();
             warehousePage = new();
         }
