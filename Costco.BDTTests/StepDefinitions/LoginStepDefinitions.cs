@@ -54,18 +54,18 @@ namespace Costco.BDTTests.StepDefinitions
         public void ThenIShouldBeRedirectedToTheMainPage()
         {
             Waiters.WaitUntilElementExists(_mainPage.AccountButtonLocator);
-            _mainPage.AccountButton.Should().NotBeNull();
+            _mainPage.AccountButton.Should().NotBeNull("because the Account button should be present on the main page");
         }
 
         [Then(@"I should see '(.*)' error message")]
         public void ThenIShouldSeeErrorMessage(string error)
         {
-            _loginPage.InvalidCredentialsError.Text.Should().Contain(error);
+            _loginPage.InvalidCredentialsError.Text.Should().Contain(error, $"because the error message should be '{error}'");
         }
         [Then(@"'(.*)' error message should be displayed")]
         public void ThenErrorMessageShouldBeDisplayed(string error)
         {
-            _loginPage.PasswordIsRequiredError.Text.Should().Contain(error);
+            _loginPage.PasswordIsRequiredError.Text.Should().Contain(error, $"because the error message should be '{error}'");
         }
     }
 }
