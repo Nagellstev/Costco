@@ -10,12 +10,12 @@ namespace Costco.BDTTests.StepDefinitions
         private ScenarioContext _scenarioContext;
         private LocationsPage locationsPage;
         private WarehousePage warehousePage;
-        private string warehouse;
-        private string location;
-        private string nameOnLocationsPage;
-        private string addressOnLocationsPage;
-        private string nameOnWarehousePage;
-        private string addressOnWarehousePage;
+        private const string warehouse = nameof(warehouse);
+        private const string location = nameof(location);
+        private const string nameOnLocationsPage = nameof(nameOnLocationsPage);
+        private const string addressOnLocationsPage = nameof(addressOnLocationsPage);
+        private const string nameOnWarehousePage = nameof(nameOnWarehousePage);
+        private const string addressOnWarehousePage = nameof(addressOnWarehousePage);
 
         public LocationsStepDefinitions(ScenarioContext scenarioContext)
         {
@@ -25,12 +25,12 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [When(@"I enter '(.*)' in warehouse search field")]
-        public void WhenIEnterWarehouseNameInWarehouseSearchField(string warehouse)
+        public void WhenIEnterWarehouseNameInWarehouseSearchField(string wh)
         {
-            this.warehouse = warehouse;
+            _scenarioContext[warehouse] = wh;
             Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
             locationsPage.WarehouseSearch.Clear();
-            locationsPage.WarehouseSearch.SendKeys(this.warehouse);
+            locationsPage.WarehouseSearch.SendKeys(wh);
         }
 
         [When(@"I click Find a Warehouse")]
@@ -38,7 +38,7 @@ namespace Costco.BDTTests.StepDefinitions
         {
             locationsPage.FindButton.Click();
             Waiters.WaitForCondition(() => !locationsPage.WarehouseTable.IsEmpty());
-            Waiters.WaitForCondition(() => locationsPage.WarehouseName.Text.Equals(warehouse));
+            Waiters.WaitForCondition(() => locationsPage.WarehouseName.Text.Equals(_scenarioContext[warehouse]));
         }
 
         [When(@"I click Set as My Warehouse")]
@@ -46,22 +46,22 @@ namespace Costco.BDTTests.StepDefinitions
         {
             Waiters.WaitForCondition(() => locationsPage.SetAsMyWarehouseButton.IsEnabled());
             locationsPage.SetAsMyWarehouseButton.Click();
-            Waiters.WaitForCondition(() => locationsPage.LocationsBlock.MyWarehouseButton.Text.Equals(warehouse));
+            Waiters.WaitForCondition(() => locationsPage.LocationsBlock.MyWarehouseButton.Text.Equals(_scenarioContext[warehouse]));
         }
 
         [When(@"I remember name and address on locations page")]
         public void WhenIRememberNameAndAddressOnLocationsPage()
         {
-            nameOnLocationsPage = locationsPage.WarehouseName.Text;
-            addressOnLocationsPage = locationsPage.WarehouseAddress.Text;
+            _scenarioContext[nameOnLocationsPage] = locationsPage.WarehouseName.Text;
+            _scenarioContext[addressOnLocationsPage] = locationsPage.WarehouseAddress.Text;
         }
 
         [When(@"I remember name and address on warehouse page")]
         public void WhenIRememberNameAndAddressOnWarehousePage()
         {
             Waiters.WaitUntilElementExists(warehousePage.NameLocator);
-            nameOnWarehousePage = warehousePage.Name.Text[..warehousePage.Name.Text.IndexOf(" ")];
-            addressOnWarehousePage = warehousePage.Address.Text;
+            _scenarioContext[nameOnWarehousePage] = warehousePage.Name.Text[..warehousePage.Name.Text.IndexOf(" ")];
+            _scenarioContext[addressOnWarehousePage] = warehousePage.Address.Text;
         }
 
         [When(@"I click Store Details")]
@@ -77,18 +77,18 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [When(@"I enter '(.*)' in the ZIP code field")]
-        public void WhenIEnterZIPCodeInTheZIPCodeField(string location)
+        public void WhenIEnterZIPCodeInTheZIPCodeField(string loc)
         {
-            this.location = location;
+            _scenarioContext[location] = loc;
             locationsPage.LocationsBlock.ZipCodeInput.Clear();
-            locationsPage.LocationsBlock.ZipCodeInput.SendKeys(this.location);
+            locationsPage.LocationsBlock.ZipCodeInput.SendKeys(loc);
         }
 
         [When(@"I click Change Delivery Location")]
         public void WhenIClickChangeDeliveryLocation()
         {
             locationsPage.LocationsBlock.ChangeDeliveryLocationButton.Click();
-            Waiters.WaitForCondition(() => locationsPage.LocationsBlock.DeliveryLocationButton.Text.Equals(location));
+            Waiters.WaitForCondition(() => locationsPage.LocationsBlock.DeliveryLocationButton.Text.Equals(_scenarioContext[location]));
         }
 
         [Then(@"My Warehouse should be '(.*)'")]
@@ -103,8 +103,8 @@ namespace Costco.BDTTests.StepDefinitions
         {
             using (new AssertionScope())
             {
-                nameOnLocationsPage.Should().Be(nameOnWarehousePage, "warehouse names should match on warehouse page and on locations page");
-                addressOnLocationsPage.Should().Be(addressOnWarehousePage, "warehouse addresses should match on warehouse page and on locations page");
+                _scenarioContext[nameOnLocationsPage].Should().Be(_scenarioContext[nameOnWarehousePage], "warehouse names should match on warehouse page and on locations page");
+                _scenarioContext[addressOnLocationsPage].Should().Be(_scenarioContext[addressOnWarehousePage], "warehouse addresses should match on warehouse page and on locations page");
             }
         }
 
