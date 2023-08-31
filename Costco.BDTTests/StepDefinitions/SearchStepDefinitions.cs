@@ -46,7 +46,7 @@ namespace Costco.BDTTests.StepDefinitions
             Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
         }
 
-        [When(@"I input '(.*)' to the search field")]
+        [When(@"I input '(.*)' to the search field and submit my search query")]
         public void WhenIInputNameOfExistingItemToTheSearchField(string input)
         {
             Waiters.WaitForCondition(() => _mainPage.SearchBlock.SearchField.IsDisplayed(), 10);
@@ -97,9 +97,10 @@ namespace Costco.BDTTests.StepDefinitions
             _totalQuantity.Should().BeGreaterThan(_filteredQuantity);
         }
 
-        [Then(@"I should see message containing '(.*)'")]
-        public void ThenIShouldSeeMessageContainingWeWereNotAbleToFindAMatch(string expected)
+        [Then(@"I should see header on the page containing ""we were not able to find a match""")]
+        public void ThenIShouldSeeMessageContainingWeWereNotAbleToFindAMatch()
         {
+            string expected = "we were not able to find a match";
             Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
             string result = _searchResultsPage.NothingFoundMessage.Text.ToLower();
             result.Should().Contain(expected.ToLower());
