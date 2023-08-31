@@ -79,11 +79,14 @@ namespace Costco.BDTTests.StepDefinitions
                 Should().
                 ContainAll(new string[] {"Item",
                                         _productPage.ItemNumber.Text,
-                                        "has a maximum order quantity of"}).
+                                        "has a maximum order quantity of"},
+                                        $"error message should say 'Item {_productPage.ItemNumber.Text} " +
+                                        $"has a maximum order quantity of'").
                 And.
-                EndWith(_scenarioContext["MaxProductQuantity"].ToString()).
+                EndWith(_scenarioContext["MaxProductQuantity"].ToString(), 
+                $"error messsage should end with '{_scenarioContext["MaxProductQuantity"]}'").
                 And.
-                MatchRegex("([A-Z][a-z]+ [0-9]+ [a-z ]+ [0-9]+$)");
+                MatchRegex("([A-Z][a-z]+ [0-9]+ [a-z ]+ [0-9]+$)", "error message should be formatted correctly.");
         }
 
         [Then(@"Error '(.*)' is displayed in the input field")]
@@ -91,13 +94,15 @@ namespace Costco.BDTTests.StepDefinitions
         {
             _productPage.ErrorMessageInsideInput.Text.Trim().
                 Should().
-                Contain(error);
+                Contain(error, $"input field should contain {error}");
         }
 
         [Then(@"I see '(.*)' in list of items added to the cart")]
         public void ThenISeeInListOfItemsAddedToTheCart(string itemName)
         {
-            _shoppingCartPage.ListOfItems.Should().NotBeEmpty().And.ContainKey(itemName);
+            _shoppingCartPage.ListOfItems.Should().NotBeEmpty("item list should not be empry").
+                And.
+                ContainKey(itemName, $"the item list should contain {itemName}");
         }
 
     }
