@@ -115,7 +115,7 @@ namespace Costco.BDTTests.StepDefinitions
         {
             Waiters.WaitForCondition(() => _tiresPage.SelectTireCenterLabel.IsDisplayed(), 5);
             bool isDisplayed =  _tiresPage.SelectTireCenterLabel.IsDisplayed();
-            isDisplayed.Should().BeTrue();
+            isDisplayed.Should().BeTrue("Tire center selection window should be displayed.");
         }
 
         private void MenuItemClick(DropdownOnClickSelectBlock menu, string item)

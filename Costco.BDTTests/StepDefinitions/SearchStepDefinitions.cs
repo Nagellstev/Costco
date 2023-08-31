@@ -4,6 +4,7 @@ using Costco.Web.Pages;
 using Costco.Utilities.Logger;
 using System.Text.RegularExpressions;
 using FluentAssertions;
+using ReportPortal.Client.Abstractions.Responses;
 
 namespace Costco.BDTTests.StepDefinitions
 {
@@ -59,7 +60,7 @@ namespace Costco.BDTTests.StepDefinitions
         {
             Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
             string header = _searchResultsPage.SearchResultsMessage.Text.ToLower();
-            header.Should().Contain(expectedHeader.ToLower());
+            header.Should().Contain(expectedHeader.ToLower(), $"Header above found goods is '{header}', it does not contain '{expectedHeader}', but it should.");
         }
 
         [When(@"I get total quantity of found goods")]
@@ -94,7 +95,7 @@ namespace Costco.BDTTests.StepDefinitions
         [Then(@"Total quantity of found goods should be greater than total quantity of filtered goods")]
         public void ThenTotalQuantityOfFoundGoodsShouldBeGreaterThanTotalQuantityOfFilteredGoods()
         {
-            _totalQuantity.Should().BeGreaterThan(_filteredQuantity);
+            _totalQuantity.Should().BeGreaterThan(_filteredQuantity, $"Total quantity of found goods should be greater than total quantity of filtered goods. Total quantity: {_totalQuantity}; filtered quantity: {_filteredQuantity}");
         }
 
         [Then(@"I should see header on the page containing ""we were not able to find a match""")]
@@ -103,7 +104,7 @@ namespace Costco.BDTTests.StepDefinitions
             string expected = "we were not able to find a match";
             Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
             string result = _searchResultsPage.NothingFoundMessage.Text.ToLower();
-            result.Should().Contain(expected.ToLower());
+            result.Should().Contain(expected.ToLower(), $"If there is nothing found, header on the page should contain '{expected}', but it does not.");
         }
 
         private int ExtractTotalQuantity(string text)
