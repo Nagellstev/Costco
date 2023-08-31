@@ -24,4 +24,4 @@ Scenario: Failed login with empty password
 	When I click the sign in/register button
 	And I enter valid username and empty password
 	And I click the sign in button
-	Then 'Password is required' error message should be displayed
+	Then I sould see 'Password is required' error message

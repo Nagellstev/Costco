@@ -58,12 +58,12 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [Then(@"I should see '(.*)' error message")]
-        public void ThenIShouldSeeErrorMessage(string error)
+        public void ThenIShouldSeeInvalidCredentialsErrorMessage(string error)
         {
             _loginPage.InvalidCredentialsError.Text.Should().Contain(error, $"because the error message should be '{error}'");
         }
-        [Then(@"'(.*)' error message should be displayed")]
-        public void ThenErrorMessageShouldBeDisplayed(string error)
+        [Then(@"I sould see '(.*)' error message")]
+        public void ThenISouldSeePaswordIsRequiredErrorMessage(string error)
         {
             _loginPage.PasswordIsRequiredError.Text.Should().Contain(error, $"because the error message should be '{error}'");
         }
