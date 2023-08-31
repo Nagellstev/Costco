@@ -17,7 +17,7 @@ Scenario: Failed login with invalid credentials
 	When I click the sign in/register button
 	And I enter invalid username and password
 	And I click the sign in button
-	Then I should see 'The email address and/or password you entered are invalid' error message
+	Then I should see 'The email address and/or password you entered are invalid' invalid credentials error message
 
 Scenario: Failed login with empty password
 	Given I am on the main page

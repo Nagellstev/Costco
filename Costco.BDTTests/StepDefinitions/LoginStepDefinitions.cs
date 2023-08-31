@@ -57,7 +57,7 @@ namespace Costco.BDTTests.StepDefinitions
             _mainPage.AccountButton.Should().NotBeNull("because the Account button should be present on the main page");
         }
 
-        [Then(@"I should see '(.*)' error message")]
+        [Then(@"I should see '(.*)' invalid credentials error message")]
         public void ThenIShouldSeeInvalidCredentialsErrorMessage(string error)
         {
             _loginPage.InvalidCredentialsError.Text.Should().Contain(error, $"because the error message should be '{error}'");
