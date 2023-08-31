@@ -73,6 +73,23 @@ steps {
         }
     }
     post{
+                stage('SearchBDT') {
+steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter Category=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post{
         always{
             jiraComment body: 'test', issueKey: '%issueKeys%'
             cleanWs()
