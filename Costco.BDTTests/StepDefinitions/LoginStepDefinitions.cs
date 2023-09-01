@@ -25,23 +25,16 @@ namespace Costco.BDTTests.StepDefinitions
             Waiters.WaitForCondition(() => _loginPage.UsernameInputField.IsEnabled());
         }
 
-        [When(@"I enter valid username and password")]
-        public void WhenIEnterValidUsernameAndPassword()
+        [When(@"I enter '(.*)' in username field")]
+        public void WhenIEnterInUsernameField(string username)
         {
-            _loginPage.UsernameInputField.SendKeys("tarasenko_vlad@inbox.ru");
-            _loginPage.PasswordInputField.SendKeys("145698Awd$");
+            _loginPage.UsernameInputField.SendKeys(username);
         }
 
-        [When(@"I enter invalid username and password")]
-        public void WhenIEnterInvalidUsernameAndPassword()
+        [When(@"I enter '(.*)' in password field")]
+        public void WhenIEnterInPasswordField(string password)
         {
-            _loginPage.UsernameInputField.SendKeys("tarasenko_glad@inbox.ru");
-            _loginPage.PasswordInputField.SendKeys("12345678");
-        }
-        [When(@"I enter valid username and empty password")]
-        public void WhenIEnterValidUsernameAndEmptyPassword()
-        {
-            _loginPage.UsernameInputField.SendKeys("tarasenko_vlad@inbox.ru");
+            _loginPage.PasswordInputField.SendKeys(password);
         }
 
         [When(@"I click the sign in button")]
