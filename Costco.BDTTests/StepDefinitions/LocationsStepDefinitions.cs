@@ -25,12 +25,12 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [When(@"I enter '(.*)' in warehouse search field")]
-        public void WhenIEnterWarehouseNameInWarehouseSearchField(string wh)
+        public void WhenIEnterWarehouseNameInWarehouseSearchField(string warehouseInput)
         {
-            _scenarioContext[warehouse] = wh;
+            _scenarioContext[warehouse] = warehouseInput;
             Waiters.WaitForCondition(() => locationsPage.WarehouseSearch.IsEnabled());
             locationsPage.WarehouseSearch.Clear();
-            locationsPage.WarehouseSearch.SendKeys(wh);
+            locationsPage.WarehouseSearch.SendKeys(warehouseInput);
         }
 
         [When(@"I click Find a Warehouse")]
@@ -49,15 +49,15 @@ namespace Costco.BDTTests.StepDefinitions
             Waiters.WaitForCondition(() => locationsPage.LocationsBlock.MyWarehouseButton.Text.Equals(_scenarioContext[warehouse]));
         }
 
-        [When(@"I remember name and address on locations page")]
-        public void WhenIRememberNameAndAddressOnLocationsPage()
+        [When(@"I get name and address of the warehouse on locations page")]
+        public void WhenIGetNameAndAddressOfTheWarehouseOnLocationsPage()
         {
             _scenarioContext[nameOnLocationsPage] = locationsPage.WarehouseName.Text;
             _scenarioContext[addressOnLocationsPage] = locationsPage.WarehouseAddress.Text;
         }
 
-        [When(@"I remember name and address on warehouse page")]
-        public void WhenIRememberNameAndAddressOnWarehousePage()
+        [When(@"I get name and address of the warehouse on warehouse page")]
+        public void WhenIGetNameAndAddressOfTheWarehouseOnWarehousePage()
         {
             Waiters.WaitUntilElementExists(warehousePage.NameLocator);
             _scenarioContext[nameOnWarehousePage] = warehousePage.Name.Text[..warehousePage.Name.Text.IndexOf(" ")];
@@ -77,11 +77,11 @@ namespace Costco.BDTTests.StepDefinitions
         }
 
         [When(@"I enter '(.*)' in the ZIP code field")]
-        public void WhenIEnterZIPCodeInTheZIPCodeField(string loc)
+        public void WhenIEnterZIPCodeInTheZIPCodeField(string locationInput)
         {
-            _scenarioContext[location] = loc;
+            _scenarioContext[location] = locationInput;
             locationsPage.LocationsBlock.ZipCodeInput.Clear();
-            locationsPage.LocationsBlock.ZipCodeInput.SendKeys(loc);
+            locationsPage.LocationsBlock.ZipCodeInput.SendKeys(locationInput);
         }
 
         [When(@"I click Change Delivery Location")]

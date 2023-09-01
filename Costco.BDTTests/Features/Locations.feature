@@ -16,9 +16,9 @@ Scenario: View Store Details
 	Given I go to the page 'warehouse-locations'
 	When I enter 'Louisville' in warehouse search field
 	And I click Find a Warehouse
-	And I remember name and address on locations page
+	And I get name and address of the warehouse on locations page
 	And I click Store Details
-	And I remember name and address on warehouse page
+	And I get name and address of the warehouse on warehouse page
 	Then Name and address should match on warehouse page and on locations page
 
 Scenario: Change Delivery Location
