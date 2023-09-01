@@ -15,7 +15,7 @@ pipeline {
                 bat 'dotnet build Costco.sln -t:restore,build -p:RestorePackagesConfig=true'
             }
         }
-        stage('Test'){
+        stage('TestDDT'){
             parallel{
                 stage('ProductPage') {
                     steps {
@@ -31,7 +31,7 @@ pipeline {
                     }
                 }
                 stage('Delivery') {
-steps {
+                    steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                         bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter Target=Delivery --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
@@ -44,7 +44,7 @@ steps {
                     }
                 }
                 stage('SearchPage') {
-steps {
+                    steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                         bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter Target=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
@@ -56,21 +56,8 @@ steps {
                         }
                     }
                 }
-                stage('SearchBDT') {
-steps {
-                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
-                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter FeatureTitle=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
-                        }
-                    }
-                    post{
-                        always {
-                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
-                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.BDTTests/bin/*/net7.0/logs/*.txt', followSymlinks: false
-                        }
-                    }
-                }
                 stage('Login') {
-steps {
+                    steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                         bat 'dotnet test Costco.Tests\\Costco.Tests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter Target=Login --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
@@ -79,6 +66,23 @@ steps {
                         always {
                             xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
                             archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
+            }
+        }
+        stage('TestBDT'){
+            parallel{
+                stage('SearchBDT') {
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter FeatureTitle=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.BDTTests/bin/*/net7.0/logs/*.txt', followSymlinks: false
                         }
                     }
                 }
