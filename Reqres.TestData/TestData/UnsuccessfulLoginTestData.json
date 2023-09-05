@@ -1,0 +1,35 @@
+{
+  "$schema": "TestDataSchema.json",
+  "TestDataArray": [
+    {
+      "Email": "",
+      "Password": "1231cityslicka",
+      "ExpectedStatusCode": 400,
+      "ExpectedMessage": "Missing email or username"
+    },
+    {
+      "Email": "eve.holt@reqres.in",
+      "Password": "",
+      "ExpectedStatusCode": 400,
+      "ExpectedMessage": "Missing password"
+    },
+    {
+      "Email": "qwertyeve.holt@reqres.in",
+      "Password": "cityslicka",
+      "ExpectedStatusCode": 400,
+      "ExpectedMessage": "User not found"
+    },
+    {
+      "Email": "eve.holt@reqres.in",
+      "Password": "1231cityslicka",
+      "ExpectedStatusCode": 400,
+      "ExpectedMessage": "Wrong password"
+    },
+    {
+      "Email": "qwertyeve.holt@reqres.in",
+      "Password": "1231cityslicka",
+      "ExpectedStatusCode": 400,
+      "ExpectedMessage": "Missing email or username"
+    }
+  ]
+}

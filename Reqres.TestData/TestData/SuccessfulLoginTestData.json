@@ -1,0 +1,10 @@
+{
+  "$schema": "TestDataSchema.json",
+  "TestDataArray": [
+    {
+      "Email": "eve.holt@reqres.in",
+      "Password": "cityslicka",
+      "ExpectedStatusCode": 200,
+      "ExpectedMessage": "token"
+    }  ]
+}
