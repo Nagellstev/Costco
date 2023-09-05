@@ -1,10 +1,6 @@
 using Costco.Core.Browser;
-using Costco.Utilities.Screenshoter;
 using Costco.Web.Pages;
-using Costco.Utilities.Logger;
 using System.Text.RegularExpressions;
-using FluentAssertions;
-using ReportPortal.Client.Abstractions.Responses;
 
 namespace Costco.BDTTests.StepDefinitions
 {
@@ -20,31 +16,8 @@ namespace Costco.BDTTests.StepDefinitions
         public SearchStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            Logger.Information($"Initializing {_scenarioContext.ScenarioInfo.Title}.");
             _mainPage = new();
             _searchResultsPage = new();
-            BrowserFactory.Browser.Maximize();
-        }
-
-        [BeforeFeature]
-        public static void Setup()
-        {
-            Logger.Init("Costco", TestSettings.LoggerPath);
-            Screenshoter.Init(TestSettings.ScreenshotPath);
-            Logger.Information("Setup complete.");
-        }
-
-        [AfterScenario]
-        public void Cleanup()
-        {
-            if (_scenarioContext.TestError != null)
-            {
-                Logger.Error($"Test '{_scenarioContext.ScenarioInfo.Title}' failed, {_scenarioContext.TestError.Message}\nException: {_scenarioContext.TestError.InnerException}");
-                Screenshoter.TakeScreenshot(Browser.Driver, _scenarioContext.ScenarioInfo.Title);
-            }
-
-            BrowserFactory.CleanUp();
-            Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
         }
 
         [When(@"I input '(.*)' to the search field and submit my search query")]
