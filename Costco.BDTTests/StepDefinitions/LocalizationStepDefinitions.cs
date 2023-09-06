@@ -1,6 +1,7 @@
 ﻿using Costco.Core.Browser;
 using Costco.Web.Pages;
 using FluentAssertions.Execution;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace Costco.BDTTests.StepDefinitions
@@ -8,12 +9,12 @@ namespace Costco.BDTTests.StepDefinitions
     [Binding]
     public sealed class LocalizationStepDefinitions
     {
-        private ScenarioContext context;
+        private ScenarioContext _scenarioContext;
         private MainPage mainPage;
 
         public LocalizationStepDefinitions(ScenarioContext scenarioContext)
         {
-            context = scenarioContext;
+            _scenarioContext = scenarioContext;
             mainPage = new();
         }
 
@@ -21,14 +22,14 @@ namespace Costco.BDTTests.StepDefinitions
         public void WhenIChooseTheCountry(string country)
         {
             mainPage.CountrySelectButton.Hover();
-            mainPage.CountrySelectList.GetElementByText(country).Click();
+            mainPage.CountrySelectList.GetElementByText(By.CssSelector("li"), country).Click();
         }
 
         [When(@"I choose the '(.*)' language")]
         public void WhenIChooseTheLanguage(string language)
         {
             mainPage.LanguageSelectButton.Hover();
-            mainPage.LanguageSelectList.GetElementByText(language).Click();
+            mainPage.LanguageSelectList.GetElementByText(By.CssSelector("li"), language).Click();
         }
 
         [Then(@"Country should be '(.*)' and language should be '(.*)'")]
@@ -36,8 +37,8 @@ namespace Costco.BDTTests.StepDefinitions
         {
             using (new AssertionScope())
             {
-                mainPage.CountrySelectButton.Text.Should().Be(country);
-                mainPage.LanguageSelectButton.Text.Should().Be(language);
+                mainPage.CountrySelectButton.Text.Should().Be(country, "country should be set");
+                mainPage.LanguageSelectButton.Text.Should().Be(language, "language should be set");
             }
         }
     }
