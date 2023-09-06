@@ -20,6 +20,7 @@ namespace Costco.BDTTests.StepDefinitions
         {
             Logger.Init("Costco", TestSettings.LoggerPath);
             Screenshoter.Init(TestSettings.ScreenshotPath);
+            Waiters.SetImplicitWait(TestSettings.TestWaits);
             Logger.Information("Setup complete.");
         }
 
