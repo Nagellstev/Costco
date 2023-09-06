@@ -1,4 +1,5 @@
 ﻿
+using Costco.BDTTests.Utilities;
 using Costco.Core.Browser;
 using Costco.Web.Pages;
 
@@ -25,16 +26,12 @@ namespace Costco.BDTTests.StepDefinitions
             Waiters.WaitForCondition(() => _loginPage.UsernameInputField.IsEnabled());
         }
 
-        [When(@"I enter '(.*)' in username field")]
-        public void WhenIEnterInUsernameField(string username)
+        [When(@"I enter credentials")]
+        public void WhenIEnterCredentials(Table table)
         {
-            _loginPage.UsernameInputField.SendKeys(username);
-        }
-
-        [When(@"I enter '(.*)' in password field")]
-        public void WhenIEnterInPasswordField(string password)
-        {
-            _loginPage.PasswordInputField.SendKeys(password);
+            var dictionary = TableExtensions.ToDictionary(table);
+            _loginPage.UsernameInputField.SendKeys(dictionary["Username"]);
+            _loginPage.PasswordInputField.SendKeys(dictionary["Password"]);
         }
 
         [When(@"I click the sign in button")]
