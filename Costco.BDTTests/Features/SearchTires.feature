@@ -9,7 +9,7 @@ Scenario: Search Tires
 	#Given I am on the main page
 	#When I change region to 'Ca'
 	#Steps above depends on Vasilii's step definitions.
-	Given I opened the page 'https://www.costco.ca/'
+	Given I opened page 'https://www.costco.ca/'
 	When I press button Tires
 	And I press button Search by size
 	And I press button Accept all cookies

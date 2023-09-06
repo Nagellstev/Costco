@@ -18,12 +18,6 @@ namespace Costco.BDTTests.StepDefinitions
             _tiresPage = new();
         }
 
-        [Given(@"I opened the page '(.*)'")]
-        public void GivenIOpenedThePage(string url)
-        {
-            BrowserFactory.Browser.GoToUrl(url);
-        }
-
         [When(@"I press button Tires")]
         public void WhenIPressButtonTires()
         {
