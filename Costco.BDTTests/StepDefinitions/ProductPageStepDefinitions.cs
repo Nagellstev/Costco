@@ -1,6 +1,7 @@
 ﻿using Costco.Web.Pages;
 using Costco.Core.Browser;
 using TechTalk.SpecFlow;
+using Costco.Web.Blocks;
 
 namespace Costco.BDTTests.StepDefinitions
 {
@@ -9,11 +10,13 @@ namespace Costco.BDTTests.StepDefinitions
     {
         private ScenarioContext _scenarioContext;
         private ProductPage _productPage;
+        private ShoppingCartPage _shoppingCartPage;
 
         public ProductPageStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
             _productPage = new();
+            _shoppingCartPage = new();
         }
 
         [When(@"I locate the promo text with number of limited items")]
@@ -22,7 +25,6 @@ namespace Costco.BDTTests.StepDefinitions
             string lowCutoff = "Limit ";
             string highCutoff = " per member";
             string promoTextMaxQuantity;
-            Waiters.WaitForCondition(_productPage.PromotionalText.IsDisplayed);
             promoTextMaxQuantity = _productPage.PromotionalText.Text;
             promoTextMaxQuantity = promoTextMaxQuantity.Substring(
                 promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
@@ -33,7 +35,6 @@ namespace Costco.BDTTests.StepDefinitions
         [When(@"I enter '(.*)' to the product amount field")]
         public void WhenIEnterToTheProductAmountField(int amount)
         {
-            Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed);
             _productPage.QuantityInput.Clear();
             _productPage.QuantityInput.SendKeys(amount.ToString());
         }
@@ -41,7 +42,6 @@ namespace Costco.BDTTests.StepDefinitions
         [When(@"I enter maximum number of limited items plus one to the product amount field")]
         public void WhenIEnterToTheProductAmountFieldMaximumNumberOfLimitedItemsPlusOne()
         {
-            Waiters.WaitForCondition(_productPage.QuantityInput.IsDisplayed);
             _productPage.QuantityInput.Clear();
             _productPage.QuantityInput.SendKeys((Convert.ToInt32(_scenarioContext["MaxProductQuantity"]) + 1).ToString());
         }
@@ -55,41 +55,55 @@ namespace Costco.BDTTests.StepDefinitions
         [When(@"I press plus stepper")]
         public void WhenIPressPlusOneStepper()
         {
-            Waiters.WaitForCondition(_productPage.PlusStepper.IsEnabled);
             _productPage.PlusStepper.Click();
         }
 
         [Then(@"Error '(.*)' is displayed below the input field")]
         public void ThenErrorIsDisplayedBelowTheInputField(string error)
         {
-            Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
             _productPage.ErrorMessageBelowInput.Text.Trim().
                 Should().
                 Contain(error);
+        }
+
+        [When(@"I press View Cart button in opened 'Added to Cart' window")]
+        public void WhenIPressViewCartInOpenedAddedToCartWindow()
+        {
+            _productPage.AddedToCartBlock.ViewCart.Click();
         }
 
         [Then(@"Maximum order quantity error is displayed below the input field")]
         public void ThenMaximumOrderQuantityErrorIsDisplayedBelowTheInputField()
         {
-            Waiters.WaitUntilElementExists(_productPage.ErrorMessageBelowInputPath);
             _productPage.ErrorMessageBelowInput.Text.Trim().
                 Should().
                 ContainAll(new string[] {"Item",
                                         _productPage.ItemNumber.Text,
-                                        "has a maximum order quantity of"}).
+                                        "has a maximum order quantity of"},
+                                        $"error message should say 'Item {_productPage.ItemNumber.Text} " +
+                                        $"has a maximum order quantity of'").
                 And.
-                EndWith(_scenarioContext["MaxProductQuantity"].ToString()).
+                EndWith(_scenarioContext["MaxProductQuantity"].ToString(), 
+                $"error messsage should end with '{_scenarioContext["MaxProductQuantity"]}'").
                 And.
-                MatchRegex("([A-Z][a-z]+ [0-9]+ [a-z ]+ [0-9]+$)");
+                MatchRegex("([A-Z][a-z]+ [0-9]+ [a-z ]+ [0-9]+$)", "error message should be formatted correctly.");
         }
 
         [Then(@"Error '(.*)' is displayed in the input field")]
         public void ThenErrorIsDisplayedInTheInputField(string error)
         {
-            Waiters.WaitForCondition(_productPage.ErrorMessageInsideInput.IsDisplayed);
             _productPage.ErrorMessageInsideInput.Text.Trim().
                 Should().
-                Contain(error);
+                Contain(error, $"input field should contain {error}");
         }
+
+        [Then(@"I see '(.*)' in list of items added to the cart")]
+        public void ThenISeeInListOfItemsAddedToTheCart(string itemName)
+        {
+            _shoppingCartPage.ListOfItems.Should().NotBeEmpty("item list should not be empry").
+                And.
+                ContainKey(itemName, $"the item list should contain {itemName}");
+        }
+
     }
 }
