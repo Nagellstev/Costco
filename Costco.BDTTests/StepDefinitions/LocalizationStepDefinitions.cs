@@ -32,17 +32,22 @@ namespace Costco.BDTTests.StepDefinitions
             mainPage.LanguageSelectList.GetElementByText(By.CssSelector("li"), language).Click();
         }
 
-        [Then(@"URL should be '(.*)' and country should be '(.*)' and language should be '(.*)'")]
-        public void ThenUrlShouldBeAndCountryShouldBeAndLanguageShouldBe(string expectedUrl, string country, string language)
+        [Then(@"URL should be '(.*)'")]
+        public void ThenUrlShouldBe(string expectedUrl)
         {
             string currentUrl = Browser.Driver.Url;
             Uri uri = new Uri(currentUrl);
             Uri trimmedUri = new UriBuilder(uri.Scheme, uri.Host).Uri;
             string trimmedUrl = trimmedUri.ToString();
 
+            trimmedUrl.Should().Be(expectedUrl, "url should correspond to the chosen country");
+        }
+
+        [Then(@"Country should be '(.*)' and language should be '(.*)'")]
+        public void ThenCountryShouldBeAndLanguageShouldBe(string country, string language)
+        {
             using (new AssertionScope())
             {
-                trimmedUrl.Should().Be(expectedUrl, "url should correspond to the chosen country");
                 mainPage.CountrySelectButton.Text.Should().Be(country, "country should be set");
                 mainPage.LanguageSelectButton.Text.Should().Be(language, "language should be set");
             }

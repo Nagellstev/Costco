@@ -7,4 +7,5 @@ Scenario: Change country and language
 	Given I am on the main page
 	When I choose the 'Canada' country
 	And I choose the 'Français' language
-	Then URL should be 'https://www.costco.ca/' and country should be 'CA' and language should be 'FR'
+	Then URL should be 'https://www.costco.ca/'
+	And Country should be 'CA' and language should be 'FR'
