@@ -89,7 +89,7 @@ stage('TestBDT'){
                 stage('ProductPageBDT') {
                     steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
-                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter FeatureTitle=ProductPage --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter FeatureTitle="Product page shopping cart" --logger:"xunit;LogFileName=TestResults.xml" --no-build'
                         }
                     }
                     post{
