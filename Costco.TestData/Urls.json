@@ -3,6 +3,6 @@
   "LoginPage": "/LogonForm",
   "WarehouseLocations": "/warehouse-locations",
   "AddToCartZeroItemsTest": "/kirkland-signature-ladies'-slub-tee%2c-2-pack.product.100670508.html",
-  "AddToCartMoreLimitedItemsThanAllowedTest": "/macbook-air-13.3-inch---apple-m1-chip-8-core-cpu%2c-7-core-gpu---8gb-memory---256gb-ssd-space-gray.product.100688258.html",
+  "AddToCartMoreLimitedItemsThanAllowedTest": "/samsung-galaxy-12.4-tab-s7-fe-wi-fi-tablet-64gb---mystic-black---includes-keyboard.product.100792001.html",
   "ExceedMaximumAmountOfItemsInCartInputFieldTest": "/charmin-ultra-soft-bath-tissue%2c-2-ply%2c-205-sheets%2c-30-rolls.product.100847281.html"
 }

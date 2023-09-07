@@ -22,8 +22,17 @@ Scenario: [Order 1000 items]
 Rule: "Special limited items can be added only in quantities not exceeding the amount designated in propotional text"
 
 	Scenario: [Order more limited items than allowed]
-	Given I go to the page 'macbook-air-13.3-inch---apple-m1-chip-8-core-cpu%2c-7-core-gpu---8gb-memory---256gb-ssd-space-gray.product.100688258.html'
+	Given I go to the page 'samsung-galaxy-12.4-tab-s7-fe-wi-fi-tablet-64gb---mystic-black---includes-keyboard.product.100792001.html'
 	When I locate the promo text with number of limited items
 	And I enter maximum number of limited items plus one to the product amount field
 	And I press add to cart button
 	Then Maximum order quantity error is displayed below the input field
+
+Rule: "Added items should appear on the shopping cart page"
+
+Scenario:  [Adding 1 item to the shopping cart]
+	Given I go to the page '.product.1179641.html'
+	When I enter '1' to the product amount field
+	And I press add to cart button
+	And I press View Cart button in opened 'Added to Cart' window
+	Then I see 'Comvita Certified UMF 5+ (MGO 83+) Raw Manuka Honey (35.2 oz)' in list of items added to the cart

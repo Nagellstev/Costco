@@ -1,4 +1,5 @@
 ﻿using Costco.Core.Elements;
+using Costco.Web.Blocks;
 using OpenQA.Selenium;
 
 namespace Costco.Web.Pages
@@ -13,6 +14,7 @@ namespace Costco.Web.Pages
         public readonly By AddToCartButtonPath = By.Id("add-to-cart-btn");
         public readonly By ErrorMessageInsideInputPath = By.Id("minQtyText-error");
         public readonly By ItemNumberPath = By.XPath("//*[@automation-id = 'itemNumber']");
+        public readonly By AddedToCartBlockPath = By.XPath("//*[@id='costcoModal']");
 
         public TextBox PromotionalText => new TextBox(PromotionalTextPath);
         public InputField QuantityInput => new InputField(QuantityInputPath);
@@ -22,5 +24,6 @@ namespace Costco.Web.Pages
         public Button AddToCartButton => new Button(AddToCartButtonPath);
         public TextBox ErrorMessageInsideInput => new TextBox(ErrorMessageInsideInputPath);
         public TextBox ItemNumber => new TextBox(ItemNumberPath);
+        public AddedToCartBlock AddedToCartBlock => new AddedToCartBlock(AddedToCartBlockPath);
     }
 }
