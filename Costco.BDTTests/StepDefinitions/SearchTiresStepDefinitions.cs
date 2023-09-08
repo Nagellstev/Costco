@@ -41,25 +41,19 @@ namespace Costco.BDTTests.StepDefinitions
         [When(@"I choose '(.*)' in Width menu")]
         public void WhenIChooseInWidthMenu(string width)
         {
-            Thread.Sleep(500);
             MenuItemClick(_tiresPage.WidthSelectBlock, width);
-            Thread.Sleep(500);
         }
 
         [When(@"I choose '(.*)' in Aspect menu")]
         public void WhenIChooseInAspectMenu(string aspect)
         {
-            Thread.Sleep(500);
             MenuItemClick(_tiresPage.AspectSelectBlock, aspect);
-            Thread.Sleep(500);
         }
 
         [When(@"I choose '(.*)' in Rim menu")]
         public void WhenIChooseInRimMenu(string rim)
         {
-            Thread.Sleep(500);
             MenuItemClick(_tiresPage.RimSelectBlock, rim);
-            Thread.Sleep(500);
         }
 
         [When(@"I input '(.*)' to postal code line")]
@@ -93,6 +87,7 @@ namespace Costco.BDTTests.StepDefinitions
             {
                 if (menu.Items[i].Text.Contains(item))
                 {
+                    Waiters.WaitForCondition(() => menu.Items[i].IsDisplayed() && menu.Items[i].IsEnabled(), 10);
                     menu.Items[i].Click();
                 }
             }
