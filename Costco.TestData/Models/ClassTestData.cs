@@ -12,6 +12,11 @@ namespace Costco.TestData.Models
 
         public ClassTestData(string testDataFile, Type testDataModel)
         {
+            if (testDataModel.GetInterface("IConvertibleTestData") == null) 
+            {
+                throw new NotSupportedException("Model must implement IConvertibleTestData interface.");
+            }
+
             TestDataFile = testDataFile;
             TestDataModel = testDataModel;
         }
