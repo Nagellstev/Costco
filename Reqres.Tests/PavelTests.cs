@@ -27,7 +27,6 @@ namespace Reqres.Tests
         ///4. Status 400.Response { "error": "Wrong password"}
         ///5. Status 400.Response { "error": "User not found"}
         /// </summary>
-        /*
         [Theory]
         [ClassTestData("UnsuccessfulLoginTestData.json", typeof(LoginDataModel))]
         public void UnsuccessfulLogin(LoginDataModel loginDataModel)
@@ -69,43 +68,43 @@ namespace Reqres.Tests
                 () => Assert.Contains(expectedMessage.ToLower(), answer.Content.ToLower())
                 );
         }
+        /*
+                [Theory]
+                [InlineData("", "cityslicka", 400, "Missing email or username")]
+                [InlineData("eve.holt@reqres.in", "", 400, "Missing password")]
+                [InlineData("qwertyeve.holt@reqres.in", "cityslicka", 400, "User not found")]
+                [InlineData("eve.holt@reqres.in", "123", 400, "Wrong password")]
+                [InlineData("qwertyeve.holt@reqres.in", "1231cityslicka", 400, "User not found")]
+                public void UnsuccessfulLogin(string email, string password, int expectedCode, string expectedMessage)
+                {
+                    builder.Headers.Add("Accept", "text/html");
+                    Client client = builder.GetClient();
+
+                    string body = "{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}";
+                    var answer = client.Post("api/login", body);
+
+                    Assert.Multiple(
+                        () => Assert.Equal(expectedCode, (int)answer.StatusCode),
+                        () => Assert.Contains(expectedMessage.ToLower(), answer.Content.ToLower())
+                        );
+                }
+
+                [Theory]
+                [InlineData("eve.holt@reqres.in", "cityslicka", 200, "token")]
+                public void SuccessfulLogin(string email, string password, int expectedCode, string expectedMessage)
+                {
+                    builder.Headers.Add("Accept", "text/html");
+                    Client client = builder.GetClient();
+
+                    string body = "{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}";
+                    var answer = client.Post("api/login", body);
+
+                    Assert.Multiple(
+                        () => Assert.Equal(expectedCode, (int)answer.StatusCode),
+                        () => Assert.Contains(expectedMessage.ToLower(), answer.Content.ToLower())
+                        );
+                }
         */
-
-        [Theory]
-        [InlineData("", "cityslicka", 400, "Missing email or username")]
-        [InlineData("eve.holt@reqres.in", "", 400, "Missing password")]
-        [InlineData("qwertyeve.holt@reqres.in", "cityslicka", 400, "User not found")]
-        [InlineData("eve.holt@reqres.in", "123", 400, "Wrong password")]
-        [InlineData("qwertyeve.holt@reqres.in", "1231cityslicka", 400, "User not found")]
-        public void UnsuccessfulLogin(string email, string password, int expectedCode, string expectedMessage)
-        {
-            builder.Headers.Add("Accept", "text/html");
-            Client client = builder.GetClient();
-
-            string body = "{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}";
-            var answer = client.Post("api/login", body);
-
-            Assert.Multiple(
-                () => Assert.Equal(expectedCode, (int)answer.StatusCode),
-                () => Assert.Contains(expectedMessage.ToLower(), answer.Content.ToLower())
-                );
-        }
-
-        [Theory]
-        [InlineData("eve.holt@reqres.in", "cityslicka", 200, "token")]
-        public void SuccessfulLogin(string email, string password, int expectedCode, string expectedMessage)
-        {
-            builder.Headers.Add("Accept", "text/html");
-            Client client = builder.GetClient();
-
-            string body = "{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}";
-            var answer = client.Post("api/login", body);
-
-            Assert.Multiple(
-                () => Assert.Equal(expectedCode, (int)answer.StatusCode),
-                () => Assert.Contains(expectedMessage.ToLower(), answer.Content.ToLower())
-                );
-        }
 
         /// <summary>
         ///EPMFARMATS-17608 API Reqres delete user
@@ -151,6 +150,5 @@ namespace Reqres.Tests
                 () => Assert.True(responseGotAt.Subtract(requestSentAt) >= delay)
                 );
         }
-
     }
 }

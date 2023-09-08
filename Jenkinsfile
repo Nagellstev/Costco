@@ -15,7 +15,7 @@ pipeline {
                 bat 'dotnet build Costco.sln -t:restore,build -p:RestorePackagesConfig=true'
             }
         }
-        stage('Test'){
+        stage('TestDDT'){
             parallel{
                 stage('ProductPage') {
                     steps {
@@ -66,6 +66,62 @@ steps {
                         always {
                             xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
                             archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.Tests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
+            }
+        }
+stage('TestBDT'){
+            parallel{
+                stage('SearchBDT') {
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter FeatureTitle=Search --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.BDTTests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
+                stage('ProductPageBDT') {
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter FeatureTitle="Product page shopping cart" --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.BDTTests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
+                stage('LocationsBDT') {
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter FeatureTitle=Locations --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.BDTTests/bin/*/net7.0/logs/*.txt', followSymlinks: false
+                        }
+                    }
+                }
+                stage('LoginBDT') {
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                        bat 'dotnet test Costco.BDTTests\\Costco.BDTTests.csproj -e: Config=%WORKSPACE%\\Costco.TestData\\Config\\%Config% --filter FeatureTitle=Login --logger:"xunit;LogFileName=TestResults.xml" --no-build'
+                        }
+                    }
+                    post{
+                        always {
+                            xunit checksName: '', tools: [xUnitDotNet(excludesPattern: '', pattern: '**/TestResults/*.xml', stopProcessingIfError: false)]
+                            archiveArtifacts allowEmptyArchive: true, artifacts: 'Costco.Tests/bin/*/net7.0/logs/screenshots/*.jpeg, Costco.BDTTests/bin/*/net7.0/logs/*.txt', followSymlinks: false
                         }
                     }
                 }
