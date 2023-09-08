@@ -6,11 +6,9 @@ I need to change region to Canada, search tires and filter results
 
 @SearchTires
 Scenario: Search Tires
-	#Given I am on the main page
-	#When I change region to 'Ca'
-	#Steps above depends on Vasilii's step definitions.
-	Given I opened page 'https://www.costco.ca/'
-	When I press button Tires
+	Given I am on the main page
+	When I choose the 'Canada' country
+	And I press button Tires
 	And I press button Search by size
 	And I press button Accept all cookies
 	And I choose '215' in Width menu
