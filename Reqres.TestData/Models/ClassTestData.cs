@@ -28,10 +28,11 @@ namespace Reqres.TestData.Models
                 "..", "..", "..", "..", "Reqres.TestData", "TestData", TestDataFile),
                 genericTestData.GetType().AssemblyQualifiedName);
 
-            List<object[]> returnData = new() { 
-                (object[])type.
-                GetProperty("TestDataArray").
-                GetValue(genericTestData) }; //the only way it casts to what we need
+            List<object[]> returnData = new();
+            foreach (var item in (object[])type.GetProperty("TestDataArray").GetValue(genericTestData))
+            {
+                returnData.Add(new object[] { item });
+            }
 
             return returnData;
         }

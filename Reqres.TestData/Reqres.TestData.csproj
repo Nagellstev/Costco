@@ -7,12 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Costco.TestData\Costco.TestData.csproj" />
     <ProjectReference Include="..\Costco.Utilities\Costco.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="TestData\SuccessfulLoginTestData.json">
+    <None Update="TestData\DeleteUserTestData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\DelayedRequestTestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestData\UnsuccessfulLoginTestData.json">

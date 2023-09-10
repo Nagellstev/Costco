@@ -3,7 +3,7 @@
   "TestDataArray": [
     {
       "Email": "",
-      "Password": "1231cityslicka",
+      "Password": "cityslicka",
       "ExpectedStatusCode": 400,
       "ExpectedMessage": "Missing email or username"
     },
@@ -21,15 +21,15 @@
     },
     {
       "Email": "eve.holt@reqres.in",
-      "Password": "1231cityslicka",
+      "Password": "123",
       "ExpectedStatusCode": 400,
       "ExpectedMessage": "Wrong password"
     },
     {
       "Email": "qwertyeve.holt@reqres.in",
-      "Password": "1231cityslicka",
+      "Password": "123",
       "ExpectedStatusCode": 400,
-      "ExpectedMessage": "Missing email or username"
+      "ExpectedMessage": "User not found"
     }
   ]
 }
