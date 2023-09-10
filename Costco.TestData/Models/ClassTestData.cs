@@ -12,6 +12,11 @@ namespace Costco.TestData.Models
 
         public ClassTestData(string testDataFile, Type testDataModel)
         {
+            if (testDataModel.GetInterface("IConvertibleTestData") == null) 
+            {
+                throw new NotSupportedException("Model must implement IConvertibleTestData interface.");
+            }
+
             TestDataFile = testDataFile;
             TestDataModel = testDataModel;
         }
@@ -28,10 +33,11 @@ namespace Costco.TestData.Models
                 "..", "..", "..", "..", "Costco.TestData", "TestData", TestDataFile),
                 genericTestData.GetType().AssemblyQualifiedName);
 
-            List<object[]> returnData = new() { 
-                (object[])type.
-                GetProperty("TestDataArray").
-                GetValue(genericTestData) }; //the only way it casts to what we need
+            List<object[]> returnData = new();
+            foreach(var item in (object[])type.GetProperty("TestDataArray").GetValue(genericTestData))
+            {
+                returnData.Add(((IConvertibleTestData)item).ConvertToInlineData());
+            }
 
             return returnData;
         }
