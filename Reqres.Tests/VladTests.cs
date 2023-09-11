@@ -46,7 +46,7 @@ namespace Reqres.Tests
             using (new AssertionScope())
             {
                 response.StatusCode.Should().Be(HttpStatusCode.NotFound);
-                 response.Content.Should().Be("{}");
+                response.Content.Should().Be("{}");
             }
         }
 
