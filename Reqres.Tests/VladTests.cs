@@ -1,6 +1,7 @@
 ﻿using Reqres.Core;
 using FluentAssertions;
 using System.Net;
+using FluentAssertions.Execution;
 
 namespace Reqres.Tests
 {
@@ -24,9 +25,11 @@ namespace Reqres.Tests
             var response = client.Get(url);
 
             //Assert
-            Assert.Multiple(
-                () => response.StatusCode.Should().Be(HttpStatusCode.NotFound),
-                () => response.Content.Should().Be("{}"));
+            using (new AssertionScope())
+            {
+                response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+                response.Content.Should().Be("{}");
+            }
         }
 
         [Fact]
@@ -40,9 +43,11 @@ namespace Reqres.Tests
             var response = client.Get(url);
 
             //Assert
-            Assert.Multiple(
-                () => response.StatusCode.Should().Be(HttpStatusCode.NotFound),
-                () => response.Content.Should().Be("{}"));
+            using (new AssertionScope())
+            {
+                response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+                 response.Content.Should().Be("{}");
+            }
         }
 
         [Fact]
@@ -60,12 +65,14 @@ namespace Reqres.Tests
             var response = client.Put(url, body);
 
             //Assert
-            Assert.Multiple(
-                () => response.StatusCode.Should().Be(HttpStatusCode.OK),
-                () => response.Content.Should().ContainAll(new string[] {
+            using (new AssertionScope())
+            {
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+                response.Content.Should().ContainAll(new string[] {
                         "\"name\":\"morpheus\"",
                         "\"job\":\"zion resident\"",
-                        "updatedAt"}));
+                        "updatedAt"});
+            }
         }
-}
+    }
 }
