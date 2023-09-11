@@ -23,25 +23,24 @@ namespace Reqres.Tests
             Client client = builder.GetClient();
 
             var response = client.Post(
-                "api/users", 
+                "api/users",
                 "{" +
                     "\"name\": \"morpheus\", " +
                     "\"job\": \"leader\"" +
                 "}");
-
-            response.StatusCode.Should().Be(HttpStatusCode.Created);
-            response.Content.Should().ContainAll(new string[] { 
-                    "\"name\":\"morpheus\"",
-                    "\"job\":\"leader\"",
-                    "id",
-                    "createdAt"});
+            Assert.Multiple(
+                () => response.StatusCode.Should().Be(HttpStatusCode.Created),
+                () => response.Content.Should().ContainAll(new string[] {
+                        "\"name\":\"morpheus\"",
+                        "\"job\":\"leader\"",
+                        "id",
+                        "createdAt"}));
         }
 
         [Fact]
         public void CreateAUserWithEmptyRequestBody()
         {
             Client client = builder.GetClient();
-
             var response = client.Post(
                 "api/users",
                 "{ }");
@@ -68,11 +67,12 @@ namespace Reqres.Tests
                 id.IndexOf(highCutoff) - id.IndexOf(lowCutoff) - lowCutoff.Length);
             response = client.Get($"https://reqres.in/api/users/{id}");
 
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            response.Content.Should().ContainAll(new string[] {
-                    "\"name\":\"morpheus\"",
-                    "\"job\":\"leader\"",
-                    "id"});
+            Assert.Multiple(
+                () => response.StatusCode.Should().Be(HttpStatusCode.OK),
+                () => response.Content.Should().ContainAll(new string[] {
+                        "\"name\":\"morpheus\"",
+                        "\"job\":\"leader\"",
+                        "id"}));
         }
     }
 }
