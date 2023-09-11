@@ -18,7 +18,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
+        [ClassTestData("Costco.TestData\\TestData\\LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
         public void LoginWithValidCredentials(LoginCredentialsModel model)
         {
             //Arrange
@@ -34,7 +34,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
+        [ClassTestData("Costco.TestData\\TestData\\LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
         public void LoginWithInvalidCredentials(LoginCredentialsModel model)
         {
             //Arrange
@@ -50,7 +50,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
+        [ClassTestData("Costco.TestData\\TestData\\LoginCredentialsTestData.json", typeof(LoginCredentialsModel))]
         public void LoginWithValidUsernameButEmptyPassword(LoginCredentialsModel model)
         {
             //Arrange
