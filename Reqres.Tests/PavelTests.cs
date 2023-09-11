@@ -1,6 +1,7 @@
 using Reqres.Core;
 using Reqres.TestData.Models;
 using FluentAssertions;
+using Costco.TestData.Models;
 
 namespace Reqres.Tests
 {
@@ -29,7 +30,7 @@ namespace Reqres.Tests
         ///5. Status 400.Response { "error": "User not found"}
         /// </summary>
         [Theory]
-        [ClassTestData("UnsuccessfulLoginTestData.json", typeof(LoginDataModel))]
+        [ClassTestData("Reqres.TestData\\TestData\\UnsuccessfulLoginTestData.json", typeof(LoginDataModel))]
         public void UnsuccessfulLogin(LoginDataModel loginDataModel)
         {
             builder.Headers.Add("Accept", "text/html");
@@ -53,7 +54,7 @@ namespace Reqres.Tests
         ///Expected result: Status 204
         /// </summary>
         [Theory]
-        [ClassTestData("DeleteUserTestData.json", typeof(DeleteUserDataModel))]
+        [ClassTestData("Reqres.TestData\\TestData\\DeleteUserTestData.json", typeof(DeleteUserDataModel))]
         public void DeleteUser(DeleteUserDataModel deleteUser)
         {
             builder.Headers.Add("Accept", "text/html");
@@ -75,7 +76,7 @@ namespace Reqres.Tests
         ///Expected result: response time minus request time should be greater than delay parameter
         /// </summary>
         [Theory]
-        [ClassTestData("DelayedRequestTestData.json", typeof(DelayedRequestDataModel))]
+        [ClassTestData("Reqres.TestData\\TestData\\DelayedRequestTestData.json", typeof(DelayedRequestDataModel))]
         public void DelayedRequest(DelayedRequestDataModel delayedRequest)
         {
             builder.Headers.Add("Accept", "text/html");
