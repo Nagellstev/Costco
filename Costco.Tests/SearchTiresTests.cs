@@ -34,8 +34,6 @@ namespace Costco.Tests
         [ClassTestData("SearchTiresTestData.json", typeof(SearchTiresDataModel))]
         public void SearchSpecificTiresTest(SearchTiresDataModel searchTiresDataModel)
         {
-            //Waiters.WaitForPageLoad();
-            //_mainPageSteps.ChooseCountry(zaqariaDataModel.Country);
             BrowserFactory.Browser.GoToUrl("https://www.costco.ca/");
 
             Waiters.WaitForPageLoad();
@@ -44,8 +42,6 @@ namespace Costco.Tests
             Waiters.WaitForPageLoad();
             _tiresPageSteps.SearchBySize();
             _tiresPageSteps.AcceptAllCookies();
-            //_tiresPageSteps.SelectTire("215", "60", "17");
-            //_tiresPageSteps.PostalCodeInput("M6B 3B1");
             _tiresPageSteps.SelectTire(searchTiresDataModel.TireWidth, searchTiresDataModel.TireAspect, searchTiresDataModel.TireRim);
             _tiresPageSteps.PostalCodeInput(searchTiresDataModel.PostalCode);
             _tiresPageSteps.FindTiresButtonClick();
