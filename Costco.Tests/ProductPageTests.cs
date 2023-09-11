@@ -17,7 +17,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        [ClassTestData("Costco.TestData\\TestData\\ProductPageTestData.json", typeof(ProductPageDataModel))]
         public void AddToCartZeroItemsTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartZeroItemsTest);
@@ -28,7 +28,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        [ClassTestData("Costco.TestData\\TestData\\ProductPageTestData.json", typeof(ProductPageDataModel))]
         public void AddToCartMoreLimitedItemsThanAllowedTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.AddToCartMoreLimitedItemsThanAllowedTest);
@@ -40,7 +40,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("ProductPageTestData.json", typeof(ProductPageDataModel))]
+        [ClassTestData("Costco.TestData\\TestData\\ProductPageTestData.json", typeof(ProductPageDataModel))]
         public void ExceedMaximumAmountOfItemsInCartInputFieldTest(ProductPageDataModel model)
         {
             BrowserFactory.Browser.GoToUrl(TestSettings.ApplicationUrl + fixture.Urls.ExceedMaximumAmountOfItemsInCartInputFieldTest);

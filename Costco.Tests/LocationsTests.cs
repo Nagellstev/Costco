@@ -19,7 +19,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("LocationsTestData.json", typeof(LocationsModel))]
+        [ClassTestData("Costco.TestData\\TestData\\LocationsTestData.json", typeof(LocationsModel))]
         public void SetWarehouseAsMyWarehouseTest(LocationsModel model)
         {
             string warehouse = model.Warehouse;
@@ -32,7 +32,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("LocationsTestData.json", typeof(LocationsModel))]
+        [ClassTestData("Costco.TestData\\TestData\\LocationsTestData.json", typeof(LocationsModel))]
         public void ViewStoreDetailsTest(LocationsModel model)
         {
             string warehouse = model.Warehouse;
@@ -51,7 +51,7 @@ namespace Costco.Tests
         }
 
         [Theory]
-        [ClassTestData("LocationsTestData.json", typeof(LocationsModel))]
+        [ClassTestData("Costco.TestData\\TestData\\LocationsTestData.json", typeof(LocationsModel))]
         public void ChangeDeliveryLocationTest(LocationsModel model)
         {
             string deliveryLocation = model.DeliveryLocation;
