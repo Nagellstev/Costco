@@ -2,8 +2,8 @@
 
 namespace Costco.TestData.Models
 {
-    public class TestDataModel<T>
+    public class TestDataModel<IConvertibleTestData>
     {
-        public T[] TestDataArray { get; init; }
+        public IConvertibleTestData[] TestDataArray { get; init; }
     }
 }

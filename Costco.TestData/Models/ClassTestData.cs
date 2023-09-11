@@ -7,12 +7,17 @@ namespace Costco.TestData.Models
 {
     public class ClassTestData: DataAttribute
     {
-        internal string TestDataFile { get; init; }
+        internal string TestDataFilePath { get; init; }
         internal Type TestDataModel { get; init; }
 
-        public ClassTestData(string testDataFile, Type testDataModel)
+        public ClassTestData(string testDataFilePath, Type testDataModel)
         {
-            TestDataFile = testDataFile;
+            if (testDataModel.GetInterface("IConvertibleTestData") == null) 
+            {
+                throw new NotSupportedException("Model must implement IConvertibleTestData interface.");
+            }
+
+            TestDataFilePath = testDataFilePath;
             TestDataModel = testDataModel;
         }
 
@@ -25,13 +30,14 @@ namespace Costco.TestData.Models
 
             FileReader reader = new();
             genericTestData = reader.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                "..", "..", "..", "..", "Costco.TestData", "TestData", TestDataFile),
+                "..", "..", "..", "..", TestDataFilePath),
                 genericTestData.GetType().AssemblyQualifiedName);
 
-            List<object[]> returnData = new() { 
-                (object[])type.
-                GetProperty("TestDataArray").
-                GetValue(genericTestData) }; //the only way it casts to what we need
+            List<object[]> returnData = new();
+            foreach(var item in (object[])type.GetProperty("TestDataArray").GetValue(genericTestData))
+            {
+                returnData.Add(((IConvertibleTestData)item).ConvertToInlineData());
+            }
 
             return returnData;
         }

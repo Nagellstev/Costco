@@ -25,7 +25,7 @@ namespace Costco.Tests
         ///result. Header of search results contains substring «vitamin»
         /// </summary>
         [Theory]
-        [ClassTestData("SearchPageTestData.json", typeof(SearchPageDataModel))]
+        [ClassTestData("Costco.TestData\\TestData\\SearchPageTestData.json", typeof(SearchPageDataModel))]
         public void SearchExistingItemTest(SearchPageDataModel searchPageDataModel)
         {
             _mainPageSteps.InputSearchQuery(searchPageDataModel.SearchExistingItem);
@@ -46,7 +46,7 @@ namespace Costco.Tests
         ///result. Total quantity is updated
         /// </summary>
         [Theory]
-        [ClassTestData("SearchPageTestData.json", typeof(SearchPageDataModel))]
+        [ClassTestData("Costco.TestData\\TestData\\SearchPageTestData.json", typeof(SearchPageDataModel))]
         public void SearchExistingItemAndSortByParametersTest(SearchPageDataModel searchPageDataModel)
         {
             _mainPageSteps.InputSearchQuery(searchPageDataModel.SearchExistingItemAndFilterByPriceSearch);
@@ -65,7 +65,7 @@ namespace Costco.Tests
         ///result. Header of search results contains substring «we were not able to find a match»
         /// </summary>
         [Theory]
-        [ClassTestData("SearchPageTestData.json", typeof(SearchPageDataModel))]
+        [ClassTestData("Costco.TestData\\TestData\\SearchPageTestData.json", typeof(SearchPageDataModel))]
         public void SearchSenselessLineTest(SearchPageDataModel searchPageDataModel)
         {
             _mainPageSteps.InputSearchQuery(searchPageDataModel.SearchSenselessLine);

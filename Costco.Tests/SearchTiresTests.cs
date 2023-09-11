@@ -31,7 +31,7 @@ namespace Costco.Tests
         /// result) Website should display number of tires found using specified sizes, in this case "Searching Tires For 285 30/R19" of sizes should be displayed        
         /// </summary>
         [Theory]
-        [ClassTestData("SearchTiresTestData.json", typeof(SearchTiresDataModel))]
+        [ClassTestData("Costco.TestData\\TestData\\SearchTiresTestData.json", typeof(SearchTiresDataModel))]
         public void SearchSpecificTiresTest(SearchTiresDataModel searchTiresDataModel)
         {
             BrowserFactory.Browser.GoToUrl("https://www.costco.ca/");
