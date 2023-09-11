@@ -46,7 +46,7 @@ namespace Reqres.Tests
         }
 
         [Fact]
-        public void UpdateUsersName()
+        public void UpdateUsersField()
         {
             //Arrange
             Client client = builder.GetClient();
