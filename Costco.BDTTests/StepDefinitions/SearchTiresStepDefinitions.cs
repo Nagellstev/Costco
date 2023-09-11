@@ -87,9 +87,17 @@ namespace Costco.BDTTests.StepDefinitions
             {
                 if (menu.Items[i].Text.Contains(item))
                 {
-                    Waiters.WaitForCondition(() => menu.Items[i].IsDisplayed() && menu.Items[i].IsEnabled(), 10);
                     menu.Items[i].Click();
                 }
+            }
+            try
+            {
+                menu.OriginalWebElement.Click();
+                Waiters.WaitForCondition(() => menu.Items.Count == 0, 1);
+            }
+            catch
+            {
+                menu.Items.Clear();
             }
         }
     }
