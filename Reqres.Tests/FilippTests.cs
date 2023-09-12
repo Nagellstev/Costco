@@ -1,10 +1,7 @@
 using Reqres.Core;
-using RestSharp;
-using System.Text.Unicode;
-using System.Text;
 using FluentAssertions;
 using System.Net;
-using Costco.Utilities.FileReader;
+using Costco.Utilities.StringExtension;
 
 namespace Reqres.Tests
 {
@@ -63,8 +60,7 @@ namespace Reqres.Tests
                 "}");      
             string id = response.Content;
 
-            id = id.Substring(id.IndexOf(lowCutoff) + lowCutoff.Length,
-                id.IndexOf(highCutoff) - id.IndexOf(lowCutoff) - lowCutoff.Length);
+            id = id.Substring(lowCutoff, highCutoff);
             response = client.Get($"https://reqres.in/api/users/{id}");
 
             Assert.Multiple(
