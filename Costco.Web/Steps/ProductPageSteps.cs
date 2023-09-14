@@ -1,6 +1,6 @@
 ﻿using Costco.Core.Browser;
 using Costco.Web.Pages;
-using Costco.Utilities.StringExtension;
+using Costco.Utilities.Extensions;
 
 namespace Costco.Web.Steps
 {
