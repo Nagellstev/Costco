@@ -2,6 +2,7 @@ using Reqres.Core;
 using Reqres.TestData.Models;
 using FluentAssertions;
 using Costco.TestData.Models;
+using FluentAssertions.Execution;
 
 namespace Reqres.Tests
 {
@@ -42,10 +43,11 @@ namespace Reqres.Tests
             int statusCode = (int)answer.StatusCode;
             string answerBody = answer.Content;
 
-            Assert.Multiple(
-                () => statusCode.Should().Be(loginDataModel.ExpectedStatusCode, $"Sent body: '{body}'. Expected status: '{loginDataModel.ExpectedStatusCode}'."),
-                () => answerBody.ToLower().Should().Contain(loginDataModel.ExpectedMessage.ToLower(), $"Sent body: '{body}'. Expected body: '{loginDataModel.ExpectedMessage}'")
-                );
+            using (new AssertionScope())
+            {
+                statusCode.Should().Be(loginDataModel.ExpectedStatusCode, $"Sent body: '{body}'. Expected status: '{loginDataModel.ExpectedStatusCode}'.");
+                answerBody.ToLower().Should().Contain(loginDataModel.ExpectedMessage.ToLower(), $"Sent body: '{body}'. Expected body: '{loginDataModel.ExpectedMessage}'");
+            }
         }
 
         /// <summary>
@@ -92,10 +94,11 @@ namespace Reqres.Tests
 
             int statusCode = (int)answer.StatusCode;
 
-            Assert.Multiple(
-                () => statusCode.Should().Be(delayedRequest.ExpectedStatusCode, $"Expected status: '{delayedRequest.ExpectedStatusCode}'."),
-                () => responseGotAt.Subtract(requestSentAt).Should().BeGreaterThanOrEqualTo(delay, $"Expected delay: '{delay}'.")
-                );
+            using (new AssertionScope())
+            {
+                statusCode.Should().Be(delayedRequest.ExpectedStatusCode, $"Expected status: '{delayedRequest.ExpectedStatusCode}'.");
+                responseGotAt.Subtract(requestSentAt).Should().BeGreaterThanOrEqualTo(delay, $"Expected delay: '{delay}'.");
+            }
         }
     }
 }
