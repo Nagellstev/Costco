@@ -22,7 +22,7 @@ namespace Reqres.Tests
         /// </summary>
         [Theory]
         [ClassTestData("Reqres.TestData\\TestData\\DeleteUserTestData.json", typeof(DeleteUserDataModel))]
-        public void DeleteUser(DeleteUserDataModel deleteUser)
+        public void DeleteUserTest(DeleteUserDataModel deleteUser)
         {
             builder.Headers.Add("Accept", "text/html");
             Client client = builder.GetClient();
