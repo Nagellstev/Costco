@@ -1,25 +1,21 @@
 ﻿using Reqres.Core;
-using RestSharp;
-using System.Text.Unicode;
-using System.Text;
 using FluentAssertions;
 using System.Net;
-using Costco.Utilities.FileReader;
 using FluentAssertions.Execution;
 
 namespace Reqres.Tests
 {
-    public class VasiliiTests : BaseTest, IClassFixture<TestFixture>
+    public class RegistrationTests : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
 
-        public VasiliiTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        public RegistrationTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {
             this.fixture = fixture;
         }
 
         [Fact]
-        public void RegisterWithEmailAndPassword()
+        public void RegisterWithEmailAndPasswordTest()
         {
             Client client = builder.GetClient();
             string url = "api/register";
@@ -40,7 +36,7 @@ namespace Reqres.Tests
         }
 
         [Fact]
-        public void FailToRegisterWithEmail()
+        public void FailToRegisterWithEmailTest()
         {
             Client client = builder.GetClient();
             string url = "api/register";
@@ -54,25 +50,6 @@ namespace Reqres.Tests
             {
                 response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
                 response.Content.Should().Contain("\"error\":\"Missing password\"");
-            }
-        }
-
-        [Fact]
-        public void LoginWithEmailAndPassword()
-        {
-            Client client = builder.GetClient();
-            string url = "api/login";
-            string body =
-                "{" +
-                    "\"email\": \"eve.holt@reqres.in\", " +
-                    "\"password\": \"cityslicka\"" +
-                "}";
-            var response = client.Post(url, body);
-
-            using (new AssertionScope())
-            {
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
-                response.Content.Should().Contain("token");
             }
         }
     }
