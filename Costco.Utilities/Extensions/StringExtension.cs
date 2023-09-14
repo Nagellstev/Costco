@@ -1,4 +1,4 @@
-﻿namespace Costco.Utilities.StringExtension
+﻿namespace Costco.Utilities.Extensions
 {
     public static class StringExtension
     {

@@ -1,21 +1,22 @@
 using Reqres.Core;
 using FluentAssertions;
 using System.Net;
-using Costco.Utilities.StringExtension;
+using Costco.Utilities.Extensions;
+using FluentAssertions.Execution;
 
 namespace Reqres.Tests
 {
-    public class FilippTests : BaseTest, IClassFixture<TestFixture>
+    public class CreateUserTests : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
 
-        public FilippTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        public CreateUserTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {
             this.fixture = fixture;
         }
 
         [Fact]
-        public void CreateAUserWithNewCredentials()
+        public void CreateAUserWithNewCredentialsTest()
         {
             Client client = builder.GetClient();
 
@@ -25,17 +26,20 @@ namespace Reqres.Tests
                     "\"name\": \"morpheus\", " +
                     "\"job\": \"leader\"" +
                 "}");
-            Assert.Multiple(
-                () => response.StatusCode.Should().Be(HttpStatusCode.Created),
-                () => response.Content.Should().ContainAll(new string[] {
+
+            using (new AssertionScope())
+            {
+                response.StatusCode.Should().Be(HttpStatusCode.Created);
+                response.Content.Should().ContainAll(new string[] {
                         "\"name\":\"morpheus\"",
                         "\"job\":\"leader\"",
                         "id",
-                        "createdAt"}));
+                        "createdAt"});
+            }
         }
 
         [Fact]
-        public void CreateAUserWithEmptyRequestBody()
+        public void CreateAUserWithEmptyRequestBodyTest()
         {
             Client client = builder.GetClient();
             var response = client.Post(
@@ -46,7 +50,7 @@ namespace Reqres.Tests
         }
 
         [Fact]
-        public void CreatedUsersAppearInTheDatabase()
+        public void CreatedUsersAppearInTheDatabaseTest()
         {
             Client client = builder.GetClient();
             string lowCutoff = "\"id\":\"";
@@ -63,12 +67,14 @@ namespace Reqres.Tests
             id = id.Substring(lowCutoff, highCutoff);
             response = client.Get($"https://reqres.in/api/users/{id}");
 
-            Assert.Multiple(
-                () => response.StatusCode.Should().Be(HttpStatusCode.OK),
-                () => response.Content.Should().ContainAll(new string[] {
+            using (new AssertionScope())
+            {
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+                response.Content.Should().ContainAll(new string[] {
                         "\"name\":\"morpheus\"",
                         "\"job\":\"leader\"",
-                        "id"}));
+                        "id"});
+            }
         }
     }
 }
