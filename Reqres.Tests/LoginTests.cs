@@ -32,7 +32,7 @@ namespace Reqres.Tests
         /// </summary>
         [Theory]
         [ClassTestData("Reqres.TestData\\TestData\\UnsuccessfulLoginTestData.json", typeof(LoginDataModel))]
-        public void UnsuccessfulLogin(LoginDataModel loginDataModel)
+        public void UnsuccessfulLoginTest(LoginDataModel loginDataModel)
         {
             builder.Headers.Add("Accept", "text/html");
             Client client = builder.GetClient();

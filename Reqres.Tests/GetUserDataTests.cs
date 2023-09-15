@@ -24,7 +24,7 @@ namespace Reqres.Tests
         /// </summary>
         [Theory]
         [ClassTestData("Reqres.TestData\\TestData\\DelayedRequestTestData.json", typeof(DelayedRequestDataModel))]
-        public void DelayedRequest(DelayedRequestDataModel delayedRequest)
+        public void DelayedRequestTest(DelayedRequestDataModel delayedRequest)
         {
             builder.Headers.Add("Accept", "text/html");
             Client client = builder.GetClient();
