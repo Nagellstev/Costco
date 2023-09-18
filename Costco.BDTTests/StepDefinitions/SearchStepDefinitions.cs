@@ -1,9 +1,6 @@
 using Costco.Core.Browser;
-using Costco.Utilities.Screenshoter;
 using Costco.Web.Pages;
-using Costco.Utilities.Logger;
 using System.Text.RegularExpressions;
-using FluentAssertions;
 
 namespace Costco.BDTTests.StepDefinitions
 {
@@ -19,31 +16,8 @@ namespace Costco.BDTTests.StepDefinitions
         public SearchStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            Logger.Information($"Initializing {_scenarioContext.ScenarioInfo.Title}.");
             _mainPage = new();
             _searchResultsPage = new();
-            BrowserFactory.Browser.Maximize();
-        }
-
-        [BeforeFeature]
-        public static void Setup()
-        {
-            Logger.Init("Costco", TestSettings.LoggerPath);
-            Screenshoter.Init(TestSettings.ScreenshotPath);
-            Logger.Information("Setup complete.");
-        }
-
-        [AfterScenario]
-        public void Cleanup()
-        {
-            if (_scenarioContext.TestError != null)
-            {
-                Logger.Error($"Test '{_scenarioContext.ScenarioInfo.Title}' failed, {_scenarioContext.TestError.Message}\nException: {_scenarioContext.TestError.InnerException}");
-                Screenshoter.TakeScreenshot(Browser.Driver, _scenarioContext.ScenarioInfo.Title);
-            }
-
-            BrowserFactory.CleanUp();
-            Logger.Information($"Disposing of {_scenarioContext.ScenarioInfo.Title}.");
         }
 
         [When(@"I input '(.*)' to the search field and submit my search query")]
@@ -59,7 +33,7 @@ namespace Costco.BDTTests.StepDefinitions
         {
             Waiters.WaitForCondition(() => _searchResultsPage.SearchResultsMessage.IsDisplayed(), 10);
             string header = _searchResultsPage.SearchResultsMessage.Text.ToLower();
-            header.Should().Contain(expectedHeader.ToLower());
+            header.Should().Contain(expectedHeader.ToLower(), $"Header above found goods is '{header}', it does not contain '{expectedHeader}', but it should.");
         }
 
         [When(@"I get total quantity of found goods")]
@@ -94,7 +68,7 @@ namespace Costco.BDTTests.StepDefinitions
         [Then(@"Total quantity of found goods should be greater than total quantity of filtered goods")]
         public void ThenTotalQuantityOfFoundGoodsShouldBeGreaterThanTotalQuantityOfFilteredGoods()
         {
-            _totalQuantity.Should().BeGreaterThan(_filteredQuantity);
+            _totalQuantity.Should().BeGreaterThan(_filteredQuantity, $"Total quantity of found goods should be greater than total quantity of filtered goods. Total quantity: {_totalQuantity}; filtered quantity: {_filteredQuantity}");
         }
 
         [Then(@"I should see header on the page containing ""we were not able to find a match""")]
@@ -103,7 +77,7 @@ namespace Costco.BDTTests.StepDefinitions
             string expected = "we were not able to find a match";
             Waiters.WaitForCondition(() => _searchResultsPage.NothingFoundMessage.IsDisplayed(), 10);
             string result = _searchResultsPage.NothingFoundMessage.Text.ToLower();
-            result.Should().Contain(expected.ToLower());
+            result.Should().Contain(expected.ToLower(), $"If there is nothing found, header on the page should contain '{expected}', but it does not.");
         }
 
         private int ExtractTotalQuantity(string text)

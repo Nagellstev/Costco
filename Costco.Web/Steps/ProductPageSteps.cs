@@ -1,5 +1,6 @@
 ﻿using Costco.Core.Browser;
 using Costco.Web.Pages;
+using Costco.Utilities.Extensions;
 
 namespace Costco.Web.Steps
 {
@@ -34,9 +35,7 @@ namespace Costco.Web.Steps
         public int GetMaximumLimitedItemsAllowed(string lowCutoff, string highCutoff)
         {
             string promoTextMaxQuantity = _productPage.PromotionalText.Text;
-            promoTextMaxQuantity = promoTextMaxQuantity.Substring(
-                promoTextMaxQuantity.IndexOf(lowCutoff) + lowCutoff.Length,
-                promoTextMaxQuantity.IndexOf(highCutoff) - promoTextMaxQuantity.IndexOf(lowCutoff) - lowCutoff.Length);
+            promoTextMaxQuantity = promoTextMaxQuantity.Substring(lowCutoff, highCutoff);
             return Int32.Parse(promoTextMaxQuantity);
         }
 

@@ -33,5 +33,10 @@ namespace Costco.Web.Steps
             _mainPage.SearchBlock.SearchField.SendKeys(input);
             _mainPage.SearchBlock.SearchField.Submit();
         }
+        public void ChooseTires()
+        {
+            //Waiters.WaitForCondition(() => _mainPage.TiresButton.IsEnabled() && _mainPage.TiresButton.IsDisplayed(), 10);
+            _mainPage.TiresButton.Click();
+        }
     }
 }
