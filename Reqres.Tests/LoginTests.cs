@@ -3,6 +3,7 @@ using Reqres.TestData.Models;
 using FluentAssertions;
 using Costco.TestData.Models;
 using FluentAssertions.Execution;
+using System.Net;
 
 namespace Reqres.Tests
 {
@@ -47,6 +48,25 @@ namespace Reqres.Tests
             {
                 statusCode.Should().Be(loginDataModel.ExpectedStatusCode, $"Sent body: '{body}'. Expected status: '{loginDataModel.ExpectedStatusCode}'.");
                 answerBody.ToLower().Should().Contain(loginDataModel.ExpectedMessage.ToLower(), $"Sent body: '{body}'. Expected body: '{loginDataModel.ExpectedMessage}'");
+            }
+        }
+
+        [Fact]
+        public void LoginWithEmailAndPasswordTest()
+        {
+            Client client = builder.GetClient();
+            string url = "api/login";
+            string body =
+                "{" +
+                    "\"email\": \"eve.holt@reqres.in\", " +
+                    "\"password\": \"cityslicka\"" +
+                "}";
+            var response = client.Post(url, body);
+
+            using (new AssertionScope())
+            {
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+                response.Content.Should().Contain("token");
             }
         }
     }
