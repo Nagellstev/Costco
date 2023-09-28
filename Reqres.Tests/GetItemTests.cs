@@ -5,17 +5,17 @@ using FluentAssertions.Execution;
 
 namespace Reqres.Tests
 {
-    public class VladTests : BaseTest, IClassFixture<TestFixture>
+    public class GetItemTests : BaseTest, IClassFixture<TestFixture>
     {
         TestFixture fixture;
 
-        public VladTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        public GetItemTests(TestFixture fixture, ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {
             this.fixture = fixture;
         }
 
         [Fact]
-        public void GetNonExistentUser()
+        public void GetNonExistentUserTest()
         {
             //Arrange
             Client client = builder.GetClient();
@@ -33,7 +33,7 @@ namespace Reqres.Tests
         }
 
         [Fact]
-        public void GetNonExistentResource()
+        public void GetNonExistentResourceTest()
         {
             //Arrange
             Client client = builder.GetClient();
@@ -47,31 +47,6 @@ namespace Reqres.Tests
             {
                 response.StatusCode.Should().Be(HttpStatusCode.NotFound);
                 response.Content.Should().Be("{}");
-            }
-        }
-
-        [Fact]
-        public void UpdateUsersField()
-        {
-            //Arrange
-            Client client = builder.GetClient();
-            string url = "api/users/2";
-            string body = "{" +
-                "\"name\": \"morpheus\", " +
-                "\"job\": \"zion resident\"" +
-            "}";
-
-            //Action
-            var response = client.Put(url, body);
-
-            //Assert
-            using (new AssertionScope())
-            {
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
-                response.Content.Should().ContainAll(new string[] {
-                        "\"name\":\"morpheus\"",
-                        "\"job\":\"zion resident\"",
-                        "updatedAt"});
             }
         }
     }
