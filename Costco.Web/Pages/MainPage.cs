@@ -15,6 +15,9 @@ namespace Costco.Web.Pages
         public readonly By CountrySelectListLocator = By.Id("country-select-popover-container");
         public readonly By LanguageSelectButtonLocator = By.Id("header-selected-language");
         public readonly By LanguageSelectListLocator = By.Id("language-select-popover-container");
+        public readonly By TiresLocator = By.XPath("//div[@id='navigation-widget']//a[contains(@href,'tires')]");
+
+        public Button TiresButton => new Button(TiresLocator);
         public Button SignInButton => new Button(SignInButtonLocator);
         public Button DisabledSignInButton => new Button(DisabledSignInButtonLocator);
         public Button AccountButton => new Button(AccountButtonLocator);

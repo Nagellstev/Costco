@@ -1,0 +1,9 @@
+{
+  "$schema": "TestDataSchema.json",
+  "TestDataArray": [
+    {
+      "UserID": 2,
+      "ExpectedStatusCode": 204
+    }
+  ]
+}
